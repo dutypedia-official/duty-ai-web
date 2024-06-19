@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand: 180 100% 35%; /* Teal Brand Color */
+
+    --background: 180 100% 100%; /* Teal Background Color */
+    --foreground: 180 84% 4.9%; /* Teal Foreground Color */
+
+    --muted: 180 40% 96.1%; /* Teal Muted Color */
+    --muted-foreground: 180 16.3% 46.9%; /* Teal Muted Foreground Color */
+
+    --popover: 180 100% 100%; /* Teal Popover Color */
+    --popover-foreground: 180 84% 4.9%; /* Teal Popover Foreground Color */
+
+    --card: 180 100% 100%; /* Teal Card Color */
+    --card-foreground: 180 84% 4.9%; /* Teal Card Foreground Color */
+
+    --border: 180 31.8% 91.4%; /* Teal Border Color */
+    --input: 180 31.8% 91.4%; /* Teal Input Color */
+
+    --primary: 180 47.4% 11.2%; /* Teal Primary Color */
+    --primary-foreground: 180 40% 98%; /* Teal Primary Foreground Color */
+
+    --secondary: 180 40% 96.1%; /* Teal Secondary Color */
+    --secondary-foreground: 180 47.4% 11.2%; /* Teal Secondary Foreground Color */
+
+    --accent: 180 40% 96.1%; /* Teal Accent Color */
+    --accent-foreground: 180 47.4% 11.2%; /* Teal Accent Foreground Color */
+
+    --destructive: 180 84.2% 60.2%; /* Teal Destructive Color */
+    --destructive-foreground: 180 40% 98%; /* Teal Destructive Foreground Color */
+
+    --ring: 180 20.2% 65.1%; /* Teal Ring Color */
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 180 84% 4.9%; /* Teal Dark Background Color */
+    --foreground: 180 40% 98%; /* Teal Dark Foreground Color */
+
+    --muted: 180 32.6% 17.5%; /* Teal Dark Muted Color */
+    --muted-foreground: 180 20.2% 65.1%; /* Teal Dark Muted Foreground Color */
+
+    --popover: 180 84% 4.9%; /* Teal Dark Popover Color */
+    --popover-foreground: 180 40% 98%; /* Teal Dark Popover Foreground Color */
+
+    --card: 180 84% 4.9%; /* Teal Dark Card Color */
+    --card-foreground: 180 40% 98%; /* Teal Dark Card Foreground Color */
+
+    --border: 180 32.6% 17.5%; /* Teal Dark Border Color */
+    --input: 180 32.6% 17.5%; /* Teal Dark Input Color */
+
+    --primary: 180 40% 98%; /* Teal Dark Primary Color */
+    --primary-foreground: 180 47.4% 11.2%; /* Teal Dark Primary Foreground Color */
+
+    --secondary: 180 32.6% 17.5%; /* Teal Dark Secondary Color */
+    --secondary-foreground: 180 40% 98%; /* Teal Dark Secondary Foreground Color */
+
+    --accent: 180 32.6% 17.5%; /* Teal Dark Accent Color */
+    --accent-foreground: 180 40% 98%; /* Teal Dark Accent Foreground Color */
+
+    --destructive: 180 62.8% 30.6%; /* Teal Dark Destructive Color */
+    --destructive-foreground: 180 85.7% 97.3%; /* Teal Dark Destructive Foreground Color */
+
+    --ring: 180 32.6% 17.5%; /* Teal Dark Ring Color */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+ol,
+ul,
+menu {
+  list-style: auto;
+}
+
+/* html {
+  scroll-behavior: smooth;
+  -ms-scroll-behavior: smooth;
+} */
+
+body {
+  font-family: var(--font-poppins);
+}
