@@ -121,11 +121,19 @@ const SigniPage = () => {
               <div className="space-y-4 text-gray-600 text-center sm:-mb-8">
                 <p className="text-xs">
                   By proceeding, you agree to our{" "}
-                  <a href="#" className="underline">
+                  <a
+                    href="https://www.dutyai.app/legal/terms-and-conditions"
+                    target="_blank"
+                    className="underline"
+                  >
                     Terms of Use
                   </a>{" "}
                   and confirm you have read our{" "}
-                  <a href="#" className="underline">
+                  <a
+                    href="https://www.dutyai.app/legal/privacy-policy"
+                    target="_blank"
+                    className="underline"
+                  >
                     Privacy and Cookie Statement
                   </a>
                   .

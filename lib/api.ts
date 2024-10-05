@@ -1,6 +1,7 @@
 import { ChatMessageProps } from "@/components/chat/chatMessage";
 import axios from "axios";
 import { getCookie } from "cookies-next";
+import { frameData } from "framer-motion";
 
 const API = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -12,33 +13,17 @@ const CHAT_API = axios.create({
   withCredentials: true,
 });
 
-API.interceptors.request.use((req: any) => {
-  req.headers.Authorization = `Bearer ${getCookie("token")}`;
-  return req;
-});
+// API.interceptors.request.use((req: any) => {
+//   req.headers.Authorization = `Bearer ${getCookie("token")}`;
+//   return req;
+// });
 
-CHAT_API.interceptors.request.use((req: any) => {
-  req.headers.Authorization = `Bearer ${getCookie("token")}`;
-  return req;
-});
+// CHAT_API.interceptors.request.use((req: any) => {
+//   req.headers.Authorization = `Bearer ${getCookie("token")}`;
+//   return req;
+// });
 
 //Auth
-export const signInMagic = (formData: { email: string; key?: string }) =>
-  API.post("/auth/magic/login", formData);
-export const signIn = (formData: { email: string; password?: string }) =>
-  API.post("/auth/login", formData);
-export const signUp = (formData: {
-  email: string;
-  password: string;
-  firstName: string;
-  lastName: string;
-}) => API.post("/auth/register", formData);
-export const validateMagicLink = (formData: { token: string }) =>
-  API.post("/auth/magic/callback", formData);
-export const validateEmailLink = (formData: { token: string }) =>
-  API.post("/auth/email/callback", formData);
-export const magicStatus = (formData: { email: string; key: string }) =>
-  API.post("/auth/magic/status", formData);
 export const signOut = () => API.post("/auth/logout");
 
 //Chat
@@ -143,3 +128,9 @@ export const apiClient = () => {
       }),
   };
 };
+
+//Noti
+export const sendPushNotifications = (formData: any) =>
+  API.post(`/noti/send-push-noti`, formData);
+export const sendAnalysis = (formData: any) =>
+  API.post(`/noti/send-analysis`, formData);

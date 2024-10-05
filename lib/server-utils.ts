@@ -11,8 +11,8 @@ export async function fetchFn(url: string, options: any) {
 
     const res = await fetch(
       process.env.NODE_ENV === "production"
-        ? `https://node.dutyai.app/ai-node${url}`
-        : `${process.env.NEXT_PUBLIC_ADMIN_URL}${url}`,
+        ? `https://api.dutyai.app${url}`
+        : `${process.env.NEXT_PUBLIC_API_URL}${url}`,
       customOptions
     );
     const data = await res.json();

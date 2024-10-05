@@ -25,8 +25,8 @@ export const uploadFiles = async (files: any[]) => {
       requestOptions
     );
     const data = await resp.json();
-    const { files } = data;
-    return files;
+    const { urls } = data;
+    return urls;
   } catch (error) {
     console.log(error);
     return false;

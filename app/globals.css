@@ -107,3 +107,8 @@ menu {
 body {
   font-family: var(--font-poppins);
 }
+
+.mdxeditor._editorRoot_uazmk_53._editorWrapper_uazmk_154
+  ._contentEditable_uazmk_379 {
+  min-height: 140px;
+}

@@ -38,9 +38,9 @@ const appLinks = [
     category: "Admin",
     links: [
       {
-        title: "Users",
+        title: "Notifications",
         href: "/hub",
-        icon: UsersRound,
+        icon: Bell,
         notificationCount: 0,
         dropdown: [],
       },
