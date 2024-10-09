@@ -117,16 +117,6 @@ export const iconbarItems = [
     label: "Forex",
     link: "/forex",
   },
-  {
-    icon: UimHistory,
-    label: "history",
-    link: "#",
-  },
-  {
-    icon: UimUser,
-    label: "profile",
-    link: "#",
-  },
 ];
 
 export const navRightItems = [

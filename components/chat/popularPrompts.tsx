@@ -58,28 +58,20 @@ const finances = [
     question: `Bangladesh stock market news`,
   },
   {
-    title: "⚡️ 52 Week High in Bangladesh",
-    question: `52 Week High in Bangladesh`,
+    title: "📱 Should I Invest in GP BD",
+    question: `Should I Invest in Grameenphone BD`,
   },
   {
-    title: "⬇️ 52 Week Low in Bangladesh",
-    question: `52 Week Low in Bangladesh`,
+    title: "💊 Should I Invest in BEXIMCO BD",
+    question: `Should I Invest in BEXIMCO BD`,
   },
   {
-    title: "💰 Top Gainers in Bangladesh",
-    question: `Top Gainers in Bangladesh`,
+    title: "🏦 Should I Invest in Brac Bank BD",
+    question: `Should I Invest in Brac Bank BD`,
   },
   {
-    title: "😢 Top Losers in Bangladesh",
-    question: `Top Losers in Bangladesh`,
-  },
-  {
-    title: "💹 Most Active in Bangladesh",
-    question: `Most Active in Bangladesh`,
-  },
-  {
-    title: "🧐 Should I Invest in Grameenpgone",
-    question: "Should I Invest in Grameenpgone",
+    title: "👚 Should I Invest in FEKDIL BD",
+    question: `Should I Invest in FEKDIL BD`,
   },
 ];
 

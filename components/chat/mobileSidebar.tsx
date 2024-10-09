@@ -6,12 +6,24 @@ import { Button } from "@/components/ui/button";
 import { LeftNav } from "@/components/chat/leftNav";
 import useDashboard from "@/lib/hooks/useDashboard";
 import { useEffect, useState } from "react";
+import useChat from "@/lib/hooks/useChat";
 
 const MobileSidebar = () => {
+  const chatStore = useChat();
   const dashboardStore = useDashboard();
   const { showMobileSidebar, setShowMobileSidebar } = dashboardStore;
   const [menuVisible, setMenuVisible] = useState(true);
+  const {
+    setPrompt,
+    setActiveConversationId,
 
+    setMessages,
+  } = chatStore;
+  const newChat = () => {
+    setMessages([]);
+    setActiveConversationId(null);
+    setPrompt("");
+  };
   return (
     <Sheet open={showMobileSidebar} onOpenChange={setShowMobileSidebar}>
       {menuVisible && (
@@ -30,6 +42,7 @@ const MobileSidebar = () => {
           <div className={`h-full rounded-md overflow-hidden`}>
             <div className="px-3">
               <Button
+                onClick={newChat}
                 size="lg"
                 variant="outline"
                 className="rounded-full gap-2"

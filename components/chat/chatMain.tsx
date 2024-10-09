@@ -350,58 +350,60 @@ export default function ChatMain() {
             <form
               onSubmit={handleSubmit}
               ref={formRef}
-              className="pb-5 px-4 sticky bottom-0 w-full bg-transparent backdrop-blur-sm backdrop-saturate-200"
+              className={cn(
+                "pb-5 px-4 sticky bottom-0 w-full bg-transparent backdrop-blur-sm backdrop-saturate-200"
+              )}
             >
-              <div className="flex items-center w-full bg-accent px-1 py-1 border border-brand rounded-full">
-                {!isSubmiting && (
-                  <Plus className="w-10 h-10 p-2.5 text-muted-foreground" />
-                )}
-                {isSubmiting && (
-                  <Loader2 className="w-10 h-10 p-2.5 text-muted-foreground animate-spin" />
-                )}
-                <Textarea
-                  ref={inputRef}
-                  disabled={isSubmiting}
-                  tabIndex={0}
-                  onKeyDown={onKeyDown}
-                  rows={1}
-                  value={prompt}
-                  onChange={(e) => setPrompt(e.target.value)}
-                  placeholder={
-                    isSubmiting
-                      ? template == "general"
-                        ? "Generating..."
-                        : timeLeft > 0
-                        ? `Fetching...${timeLeft.toFixed(1)}sec`
-                        : `Answering...`
-                      : template == "general"
-                      ? "Ask anything"
-                      : "Enter company name"
-                  }
-                  spellCheck={false}
-                  autoComplete="off"
-                  className="max-h-44 py-2 w-full bg-transparent h-full resize-none  focus-within:outline-none sm:text-sm placeholder:text-muted-foreground"
-                />
-                {!isSubmiting && (
-                  <Button
-                    className="rounded-full w-10 h-10 p-0 flex-shrink-0 text-background bg-brand hover:bg-brand/70 hover:text-white"
-                    variant="ghost"
-                    type="submit"
+              <div className="flex w-full bg-accent p-1.5 border border-brand rounded-[26px] gap-1.5">
+                <div className="flex flex-1 items-end gap-1.5 md:gap-2">
+                  {isSubmiting && (
+                    <Loader2 className="w-10 h-10 p-2.5 text-muted-foreground animate-spin" />
+                  )}
+
+                  <Textarea
+                    ref={inputRef}
                     disabled={isSubmiting}
-                  >
-                    <Send className="w-4 h-4" />
-                  </Button>
-                )}
-                {isSubmiting && (
-                  <Button
-                    onClick={handelAbort}
-                    className="rounded-full w-10 h-10 p-0 flex-shrink-0"
-                    type="button"
-                    disabled={!isSubmiting}
-                  >
-                    <X className="w-4 h-4" />
-                  </Button>
-                )}
+                    tabIndex={0}
+                    onKeyDown={onKeyDown}
+                    rows={1}
+                    value={prompt}
+                    onChange={(e) => setPrompt(e.target.value)}
+                    placeholder={
+                      isSubmiting
+                        ? template == "general"
+                          ? "Generating..."
+                          : timeLeft > 0
+                          ? `Fetching...${timeLeft.toFixed(1)}sec`
+                          : `Answering...`
+                        : template == "general"
+                        ? "Ask anything"
+                        : "Enter company name"
+                    }
+                    spellCheck={false}
+                    autoComplete="off"
+                    className="max-h-[25dvh] pl-2 py-2.5 w-full bg-transparent h-full resize-none  focus-within:outline-none sm:text-sm placeholder:text-muted-foreground"
+                  />
+                  {!isSubmiting && (
+                    <Button
+                      className="rounded-full w-10 h-10 p-0 flex-shrink-0 text-background bg-brand hover:bg-brand/70 hover:text-white"
+                      variant="ghost"
+                      type="submit"
+                      disabled={isSubmiting}
+                    >
+                      <Send className="w-4 h-4" />
+                    </Button>
+                  )}
+                  {isSubmiting && (
+                    <Button
+                      onClick={handelAbort}
+                      className="rounded-full w-10 h-10 p-0 flex-shrink-0"
+                      type="button"
+                      disabled={!isSubmiting}
+                    >
+                      <X className="w-4 h-4" />
+                    </Button>
+                  )}
+                </div>
               </div>
             </form>
           </div>

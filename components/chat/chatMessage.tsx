@@ -12,7 +12,8 @@ import FeedbackModal from "./feedbackModal";
 import ChatEnhance from "./chatEnhance";
 import useChat from "@/lib/hooks/useChat";
 import RelatedPrompts from "./relatedPrompts";
-
+import remarkGfm from "remark-gfm";
+import { toast } from "sonner";
 export interface ChatMessageProps {
   role: "system" | "user";
   query?: string;
@@ -42,7 +43,6 @@ interface CProps {
 }
 
 export const ChatMessage = ({ isLast, message }: CProps) => {
-  const { toast } = useToast();
   const chatStore = useChat();
   const { setPrompt, promptInputRef } = chatStore;
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
@@ -51,15 +51,12 @@ export const ChatMessage = ({ isLast, message }: CProps) => {
     message.feedback?.react || null
   );
   const onCopy = () => {
-    if (!message.answer) {
+    if (!message.text) {
       return;
     }
 
-    navigator.clipboard.writeText(message.answer);
-    toast({
-      description: "Message copied to clipboard.",
-      duration: 3000,
-    });
+    navigator.clipboard.writeText(message.text);
+    toast.success("Text copied to clipboard");
   };
 
   const handelFeedback = async (react: "like" | "dislike") => {
@@ -75,20 +72,11 @@ export const ChatMessage = ({ isLast, message }: CProps) => {
       if (react == "dislike") {
         setShowFeedbackModal(data.id);
       } else {
-        toast({
-          title: "Success",
-          description: "Thanks for your feedback!",
-        });
+        toast.success("Thank you for your feedback!");
       }
     } catch (error: any) {
       console.log(error);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description:
-          error.response?.data?.msg ||
-          "Can't give feedback! Please try again later.",
-      });
+      toast.error("Something went wrong!");
     } finally {
       setIsBusy(false);
     }
@@ -104,7 +92,7 @@ export const ChatMessage = ({ isLast, message }: CProps) => {
       >
         <div
           className={cn(
-            "px-3 py-1.5 prose-sm max-w-0 min-w-full md:max-w-0 md:min-w-full",
+            "px-3 py-1.5 prose max-w-0 min-w-full md:max-w-0 md:min-w-full",
             message.user?.name === "human" &&
               "bg-slate-200 rounded-t-xl font-medium",
             message.user?.name !== "human" &&
@@ -130,7 +118,7 @@ export const ChatMessage = ({ isLast, message }: CProps) => {
                 <Button className="" onClick={onCopy} size="sm" variant="ghost">
                   <Copy className="w-3 h-3" />
                 </Button>
-                <>
+                {/* <>
                   {currentReact ? (
                     currentReact === "like" ? (
                       <Button
@@ -169,9 +157,11 @@ export const ChatMessage = ({ isLast, message }: CProps) => {
                       </Button>
                     </>
                   )}
-                </>
+                </> */}
               </div>
-              <ReactMarkdown>{message.text!}</ReactMarkdown>
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {message.text!}
+              </ReactMarkdown>
               {isLast && <ChatEnhance message={message} />}
             </>
           )}

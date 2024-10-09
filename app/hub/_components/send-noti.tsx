@@ -1,6 +1,6 @@
 "use client"; // This is necessary to enable client-side rendering
 
-import { sendAnalysis, sendPushNotifications } from "@/lib/api";
+import { sendAnalysis, sendPushNotifications, updateIndex } from "@/lib/api";
 import { uploadFiles } from "@/lib/utils";
 import {
   BlockTypeSelect,
@@ -24,27 +24,27 @@ import {
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
 import { motion } from "framer-motion";
-import { BarChart2, Bell } from "lucide-react";
+import { BarChart2, Bell, Hash } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import "react-quill/dist/quill.snow.css"; // Import styles for ReactQuill
 import { toast } from "sonner";
 import InitializedMDXEditor from "./initializedMDXEditor";
 
 export default function SendNoti() {
-  const [activeForm, setActiveForm] = useState<"notification" | "analysis">(
-    "notification"
-  ); // default form
+  const [activeForm, setActiveForm] = useState<
+    "notification" | "analysis" | "index"
+  >("notification"); // default form
 
   return (
-    <div className="min-h-screen bg-gray-200 dark:bg-gray-900 flex flex-col">
+    <div className=" bg-gray-200 dark:bg-gray-900 flex flex-col">
       {/* Main Content Area with Responsive Padding */}
       <div className="flex-grow p-6 md:p-14">
         {/* Top Padding to simulate space below the nav bar */}
         <div className="bg-white dark:bg-gray-800 shadow-md p-6 mx-auto max-w-full md:max-w-4xl rounded-lg">
           {/* Button Container */}
-          <div className="flex justify-center space-x-4 mb-4">
+          <div className="flex flex-wrap justify-center gap-4 mb-4">
             <button
-              className={`flex items-center space-x-2 py-2 px-4 rounded ${
+              className={`flex items-center  space-x-2 py-2 px-4 rounded ${
                 activeForm === "notification"
                   ? "bg-cyan-400"
                   : "bg-gray-200 dark:bg-gray-700 text-black dark:text-white"
@@ -63,6 +63,16 @@ export default function SendNoti() {
               <BarChart2 className="text-xl" />
               <span>Daily Analysis</span>
             </button>
+            <button
+              className={`flex items-center space-x-2 py-2 px-4 rounded ${
+                activeForm === "index"
+                  ? "bg-cyan-400"
+                  : "bg-gray-200 dark:bg-gray-700 text-black dark:text-white"
+              }`}
+              onClick={() => setActiveForm("index")}>
+              <Hash className="text-xl" />
+              <span>Dsebd Index</span>
+            </button>
           </div>
 
           {/* Form with Animation */}
@@ -74,8 +84,10 @@ export default function SendNoti() {
             transition={{ duration: 0.5 }}>
             {activeForm === "notification" ? (
               <NotificationForm />
-            ) : (
+            ) : activeForm === "analysis" ? (
               <DailyAnalysisForm />
+            ) : (
+              <IndexForm />
             )}
           </motion.div>
         </div>
@@ -350,6 +362,47 @@ function DailyAnalysisForm() {
         } text-white`}
         disabled={!isFormComplete || isLoading}>
         {isLoading ? "Please wait" : "Send"}
+      </button>
+    </div>
+  );
+}
+
+function IndexForm() {
+  const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const isFormComplete = message.trim() !== "";
+
+  const handleSubmit = async () => {
+    try {
+      setIsLoading(true);
+      await updateIndex({
+        summary: message,
+      });
+      alert("Index updated successfully!");
+    } catch (error) {
+      console.log(error);
+      alert("Something went wrong!");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <div className="space-y-4">
+      <textarea
+        placeholder="Message"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        className="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-black dark:text-white rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 h-64"
+      />
+      <button
+        onClick={handleSubmit}
+        className={`w-full py-2 rounded-lg ${
+          isFormComplete ? "bg-cyan-400" : "bg-gray-400 cursor-not-allowed"
+        } text-white`}
+        // disabled={!isFormComplete}
+      >
+        {isLoading ? "Please wait" : "Update"}
       </button>
     </div>
   );

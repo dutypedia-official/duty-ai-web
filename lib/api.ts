@@ -134,3 +134,5 @@ export const sendPushNotifications = (formData: any) =>
   API.post(`/noti/send-push-noti`, formData);
 export const sendAnalysis = (formData: any) =>
   API.post(`/noti/send-analysis`, formData);
+export const updateIndex = (formData: any) =>
+  API.post(`/noti/update-dsebd-index`, formData);
