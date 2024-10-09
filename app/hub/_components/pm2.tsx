@@ -5,7 +5,10 @@ import { Button } from "@/components/ui/button";
 const Pm2 = () => {
   const restart = async (path: string) => {
     try {
-      const res = await fetch(`/api/restart/${path}`, { method: "POST" });
+      const res = await fetch(
+        `http://158.220.101.235/pm2/api/restart/${path}`,
+        { method: "POST" }
+      );
       const data = await res.json();
       console.log(data);
       alert("Restarted successfully!");
