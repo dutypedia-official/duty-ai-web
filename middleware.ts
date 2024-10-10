@@ -14,7 +14,7 @@ export default authMiddleware({
   async afterAuth(auth, req, evt) {
     const pathname = req.nextUrl.pathname;
     const userId = auth.userId;
-    if (pathname === "/hub-a") {
+    if (pathname === "/hub") {
       if (!userId) {
         return NextResponse.redirect(new URL("/", req.url));
       }
