@@ -39,7 +39,7 @@ const SigniPage = () => {
             <div className="p-6 sm:p-16">
               <div className="space-y-4 flex flex-col justify-center items-center text-center">
                 <img
-                  src="/logo.png"
+                  src="/logo.svg"
                   loading="lazy"
                   className="w-16"
                   alt="logo"
@@ -53,7 +53,8 @@ const SigniPage = () => {
                 <button
                   onClick={() => handleSignIn("oauth_google")}
                   className="group h-12 px-6 border-2 border-gray-300 rounded-full transition duration-300 
- hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100">
+ hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100"
+                >
                   <div className="relative flex items-center space-x-4 justify-center">
                     <img
                       src="https://tailus.io/sources/blocks/social/preview/images/google.svg"
@@ -68,7 +69,8 @@ const SigniPage = () => {
                 <button
                   onClick={() => handleSignIn("oauth_apple")}
                   className="group h-12 px-6 border-2 border-gray-300 rounded-full transition duration-300 
- hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100">
+ hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100"
+                >
                   <div className="relative flex items-center space-x-4 justify-center">
                     <img
                       src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
@@ -100,12 +102,14 @@ const SigniPage = () => {
                 <div className="flex gap-4 py-8 pb-12 justify-center">
                   <a
                     href="https://apps.apple.com/us/app/duty-ai/id6476618432?l=en-US"
-                    target="_blank">
+                    target="_blank"
+                  >
                     <img src="/apple.svg" />
                   </a>
                   <a
                     href="https://play.google.com/store/apps/details?id=com.easinarafat.dutyai"
-                    target="_blank">
+                    target="_blank"
+                  >
                     <img src="/play.svg" />
                   </a>
                 </div>
@@ -117,14 +121,16 @@ const SigniPage = () => {
                   <a
                     href="https://www.dutyai.app/legal/terms-and-conditions"
                     target="_blank"
-                    className="underline">
+                    className="underline"
+                  >
                     Terms of Use
                   </a>{" "}
                   and confirm you have read our{" "}
                   <a
                     href="https://www.dutyai.app/legal/privacy-policy"
                     target="_blank"
-                    className="underline">
+                    className="underline"
+                  >
                     Privacy and Cookie Statement
                   </a>
                   .
