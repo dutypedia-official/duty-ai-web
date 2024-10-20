@@ -22,14 +22,13 @@ const IconBar = ({ isMobile = false }) => {
   return (
     <div
       className={cn(
-        "h-screen  z-50 px-2 py-4 flex-col items-center justify-between gap-8 w-16 bg-slate-200 flex-shrink-0 sticky top-0",
+        "h-screen  z-50 px-2 py-4 flex-col items-center justify-between gap-8 w-16 bg-[#E2E8F0] dark:bg-[#1f1f1f] flex-shrink-0 sticky top-0",
         isMobile ? "flex" : "hidden sm:flex"
-      )}
-    >
+      )}>
       <div className="px-2 flex-1 flex flex-col justify-between gap-2">
         <div className="flex items-center justify-center">
           <Link href={"/"}>
-            <img src="/logo.svg" alt="logo" className="w-10 h-10" />
+            <img src="/logo.png" alt="logo" className="w-10 h-10" />
           </Link>
         </div>
         <div className="flex flex-col gap-2">
@@ -45,12 +44,11 @@ const IconBar = ({ isMobile = false }) => {
                         setPrompt("");
                       }}
                       className={cn(
-                        "p-3",
+                        "p-3 hover:bg-card",
                         pathname === item?.link &&
-                          "bg-background/80 text-background hover:bg-background/80 hover:text-background"
+                          "bg-card text-background hover:bg-card hover:text-background"
                       )}
-                      variant="ghost"
-                    >
+                      variant="ghost">
                       <item.icon className="text-brand w-6 h-6" />
                     </Button>
                   </Link>

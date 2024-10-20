@@ -8,8 +8,12 @@ interface ChatStore {
   setTemplate: (template: "general" | "scenario" | "finance" | "forex") => void;
   prompt: string;
   setPrompt: (prompt: string) => void;
+  promptCompanyName: string;
+  setPromptCompanyName: (companyName: string) => void;
   isSubmiting: boolean;
   setIsSubmiting: (isLoading: boolean) => void;
+  isAskingAi: boolean;
+  setIsAskingAi: (isAskingAi: boolean) => void;
   activeConversationId: string | null;
   setActiveConversationId: (conversationId: string | null) => void;
   submitPrompt: boolean;
@@ -34,8 +38,13 @@ const useChat = create<ChatStore>((set, get) => ({
   setTemplate: (template) => set({ template }),
   prompt: "",
   setPrompt: (prompt) => set({ prompt }),
+  promptCompanyName: "",
+  setPromptCompanyName: (companyName) =>
+    set({ promptCompanyName: companyName }),
   isSubmiting: false,
   setIsSubmiting: (isSubmiting) => set({ isSubmiting }),
+  isAskingAi: false,
+  setIsAskingAi: (isAskingAi) => set({ isAskingAi }),
   activeConversationId: null,
   setActiveConversationId: (conversationId) =>
     set({ activeConversationId: conversationId }),

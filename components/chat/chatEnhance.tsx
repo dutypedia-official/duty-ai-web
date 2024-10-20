@@ -105,8 +105,7 @@ const ChatEnhance = ({ message }: CEProps) => {
               <PopoverTrigger asChild>
                 <Button
                   size="sm"
-                  className="gap-2 flex-shrink-0 snap-start rounded-full bg-yellow-100 hover:bg-yellow-700 hover:text-yellow-50 text-yellow-900 text-xs py-1.5 h-auto font-normal"
-                >
+                  className="gap-2 flex-shrink-0 snap-start rounded-full bg-yellow-100 hover:bg-yellow-700 hover:text-yellow-50 text-yellow-900 text-xs py-1.5 h-auto font-normal">
                   {option.icon}
                   {option.title}
                 </Button>
@@ -162,8 +161,7 @@ const ChatEnhance = ({ message }: CEProps) => {
               <DropdownMenuTrigger>
                 <Button
                   size="sm"
-                  className="gap-2 flex-shrink-0 snap-start rounded-full bg-pink-100 hover:bg-pink-700 hover:text-pink-50 text-pink-900 text-xs py-1.5 h-auto font-normal"
-                >
+                  className="gap-2 flex-shrink-0 snap-start rounded-full bg-pink-100 hover:bg-pink-700 hover:text-pink-50 text-pink-900 text-xs py-1.5 h-auto font-normal">
                   {option.icon}
                   {option.title}
                 </Button>
@@ -172,8 +170,9 @@ const ChatEnhance = ({ message }: CEProps) => {
                 {option.menu.map((item, index) => (
                   <DropdownMenuItem
                     key={index}
-                    onClick={() => onPromptClick(item.prompt)}
-                  >{`${item.icon} ${item.title}`}</DropdownMenuItem>
+                    onClick={() =>
+                      onPromptClick(item.prompt)
+                    }>{`${item.icon} ${item.title}`}</DropdownMenuItem>
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
@@ -184,8 +183,7 @@ const ChatEnhance = ({ message }: CEProps) => {
             key={index}
             onClick={() => onPromptClick(option.prompt)}
             size="sm"
-            className="gap-2 flex-shrink-0 snap-start rounded-full bg-green-100 hover:bg-green-700 hover:text-green-50 text-green-900 text-xs py-1.5 h-auto font-normal"
-          >
+            className="gap-2 flex-shrink-0 snap-start rounded-full bg-[#333] hover:bg-[#333] text-white text-xs py-1.5 h-auto font-normal">
             {option.icon}
             {option.title}
           </Button>

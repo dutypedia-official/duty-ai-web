@@ -70,8 +70,8 @@ export const LeftNav = ({ onDelete }: LeftNavProps) => {
       <div className="px-4 py-4 space-y-6">
         {Array.from(Array(7).keys()).map((i) => (
           <div key={i} className="space-y-2">
-            <Skeleton className="h-4 w-[250px] bg-slate-200" />
-            <Skeleton className="h-4 w-[200px] bg-slate-200" />
+            <Skeleton className="h-4 w-[250px] bg-card-foreground" />
+            <Skeleton className="h-4 w-[200px] bg-card-foreground" />
           </div>
         ))}
       </div>
@@ -86,8 +86,7 @@ export const LeftNav = ({ onDelete }: LeftNavProps) => {
         </p> */}
         {!activeConversationId && (
           <div
-            className={`py-3 w-full cursor-pointer border border-l-0 border-r-0`}
-          >
+            className={`py-3 w-full cursor-pointer border border-l-0 border-r-0`}>
             <div className="w-full group px-2 flex items-center justify-between gap-3">
               <div className="flex flex-1 items-center justify-between gap-3">
                 <div className="w-5">
@@ -96,8 +95,7 @@ export const LeftNav = ({ onDelete }: LeftNavProps) => {
                 <div
                   className={cn(
                     "text-sm text-brand flex-1 overflow-hidden line-clamp-2 font-semibold break-all"
-                  )}
-                >
+                  )}>
                   Untitled
                 </div>
               </div>
@@ -112,8 +110,7 @@ export const LeftNav = ({ onDelete }: LeftNavProps) => {
                 activeConversationId === item.id
                   ? "border border-l-0 border-r-0"
                   : ""
-              }`}
-            >
+              }`}>
               <div className="w-full group px-2 flex items-center justify-between gap-3">
                 <div
                   onClick={() => {
@@ -121,8 +118,7 @@ export const LeftNav = ({ onDelete }: LeftNavProps) => {
                       setActiveConversationId(item.id);
                     }
                   }}
-                  className="flex flex-1 items-center justify-between gap-3"
-                >
+                  className="flex flex-1 items-center justify-between gap-3">
                   <div className="w-5">
                     {activeConversationId === item.id ? (
                       <Check
@@ -136,8 +132,7 @@ export const LeftNav = ({ onDelete }: LeftNavProps) => {
                         className={cn(
                           "opacity-10 group-hover:opacity-100 flex-shrink-0",
                           activeConversationId === item.id && "opacity-100"
-                        )}
-                      >
+                        )}>
                         {/* {i + 1} */}
                       </span>
                     )}
@@ -147,8 +142,7 @@ export const LeftNav = ({ onDelete }: LeftNavProps) => {
                       "text-sm font-medium text-muted-foreground flex-1 overflow-hidden group-hover:font-semibold break-all",
                       activeConversationId === item.id &&
                         "font-semibold text-brand"
-                    )}
-                  >
+                    )}>
                     <p className="line-clamp-1 ">{item?.name}</p>
                     <p className="text-xs text-muted-foreground/50">
                       {moment(item?.createdAt).fromNow()}
@@ -160,8 +154,7 @@ export const LeftNav = ({ onDelete }: LeftNavProps) => {
                     "opacity-10 flex-shrink-0",
                     activeConversationId === item.id && "opacity-100"
                   )}
-                  onClick={() => handelDelete(item.id)}
-                >
+                  onClick={() => handelDelete(item.id)}>
                   <Trash2 className="w-4 h-4" />
                 </a>
               </div>

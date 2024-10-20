@@ -35,7 +35,7 @@ const ProfileMenu = ({ link }: { link?: boolean }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+        <Button variant="ghost" className="relative h-10 w-10 rounded-full">
           <Avatar className="h-10 w-10 bg-accent">
             <AvatarImage src={user?.imageUrl} alt="profile" />
             <AvatarFallback>{firstName?.slice(0, 1)}</AvatarFallback>
@@ -58,8 +58,7 @@ const ProfileMenu = ({ link }: { link?: boolean }) => {
           onClick={() => {
             signOut();
             router.replace("/signin");
-          }}
-        >
+          }}>
           Log out
         </DropdownMenuItem>
       </DropdownMenuContent>

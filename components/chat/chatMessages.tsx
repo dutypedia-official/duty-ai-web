@@ -8,7 +8,7 @@ import PopularPrompts from "./popularPrompts";
 import { BeatLoader } from "react-spinners";
 import { useInView } from "framer-motion";
 
-export const ChatMessages = () => {
+export const ChatMessages = ({ mini = false }: { mini?: boolean }) => {
   const chatStore = useChat();
   const { isSubmiting, messages, activeConversationId } = chatStore;
   const scrollRef = useRef<ElementRef<"div">>(null);
@@ -52,7 +52,7 @@ export const ChatMessages = () => {
     };
   }, []);
 
-  if (messages.length === 0) {
+  if (messages.length === 0 && !mini) {
     return <PopularPrompts />;
   }
 

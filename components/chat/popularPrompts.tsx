@@ -126,18 +126,16 @@ const PopularPrompts: FunctionComponent<PopularPromptsProps> = () => {
       </p>
       <div
         className={cn(
-          "mt-8 grid gap-4 bg-white shadow p-6 rounded-xl",
+          "mt-8 grid gap-4 bg-card-foreground shadow p-6 rounded-xl",
           template == "general" && "sm:grid-cols-2"
-        )}
-      >
+        )}>
         {topPrompts.map((prompt, i) => (
           <Button
             onClick={() => onPromptClick(prompt.question)}
             size="lg"
             key={i}
-            className="rounded-md"
-            variant="outline"
-          >
+            className="rounded-md bg-card hover:bg-card"
+            variant="outline">
             <span className="line-clamp-1">{prompt.title}</span>
           </Button>
         ))}

@@ -88,17 +88,15 @@ export const ChatMessage = ({ isLast, message }: CProps) => {
         className={cn(
           "group flex w-full sm:px-4",
           message.user?.name !== "human" && !isLast && "mb-6"
-        )}
-      >
+        )}>
         <div
           className={cn(
-            "px-3 py-1.5 prose max-w-0 min-w-full md:max-w-0 md:min-w-full",
+            "px-5 py-1.5 prose max-w-0 min-w-full md:max-w-0 md:min-w-full text-foreground",
             message.user?.name === "human" &&
-              "bg-slate-200 rounded-t-xl font-medium",
+              "bg-card-foreground rounded-t-xl font-medium",
             message.user?.name !== "human" &&
-              "bg-background rounded-xl rounded-tl-none shadow"
-          )}
-        >
+              "bg-card-foreground rounded-xl rounded-t-none shadow"
+          )}>
           {message.user?.name === "human" ? (
             <div className="">
               <Pencil
@@ -159,7 +157,35 @@ export const ChatMessage = ({ isLast, message }: CProps) => {
                   )}
                 </> */}
               </div>
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={{
+                  h1: ({ node, ...props }) => (
+                    <h1 className="text-foreground" {...props} />
+                  ),
+                  h2: ({ node, ...props }) => (
+                    <h2 className="text-foreground" {...props} />
+                  ),
+                  h3: ({ node, ...props }) => (
+                    <h2 className="text-foreground" {...props} />
+                  ),
+                  h4: ({ node, ...props }) => (
+                    <h4 className="text-foreground" {...props} />
+                  ),
+                  strong: ({ node, ...props }) => (
+                    <strong
+                      className="text-foreground font-medium"
+                      {...props}
+                    />
+                  ),
+                  a: ({ node, ...props }) => (
+                    <a
+                      className="text-primary underline underline-offset-2"
+                      {...props}
+                    />
+                  ),
+                }}
+                className={"text-foreground"}>
                 {message.text!}
               </ReactMarkdown>
               {isLast && <ChatEnhance message={message} />}

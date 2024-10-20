@@ -26,7 +26,6 @@ import "@mdxeditor/editor/style.css";
 import { motion } from "framer-motion";
 import { BarChart2, Bell, Hash } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import "react-quill/dist/quill.snow.css"; // Import styles for ReactQuill
 import { toast } from "sonner";
 import InitializedMDXEditor from "./initializedMDXEditor";
 
@@ -325,7 +324,7 @@ function DailyAnalysisForm() {
         <InitializedMDXEditor
           onChange={handleEditorChange}
           editorRef={editorRef}
-          className="min-h-[300px] border border-gray-300 p-2 rounded"
+          placeholder="Write something..."
           markdown={content}
           plugins={[
             headingsPlugin(),

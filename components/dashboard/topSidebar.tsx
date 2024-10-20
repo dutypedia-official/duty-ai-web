@@ -5,12 +5,13 @@ import useNav from "@/lib/hooks/useNav";
 import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
 import MobileSidebar from "../chat/mobileSidebar";
+import { ModeToggle } from "../modeToggle";
 
 export const TopSidebar = () => {
   const { closeNav, openNav, isShowNav } = useNav();
   return (
-    <div className="sticky top-0 h-16 z-20 p-4 bg-background/70 backdrop-blur-md w-full lg:shadow-sm">
-      <div className="w-full flex justify-between">
+    <div className="sticky top-0 h-16 z-20 px-4 bg-[#E2E8F0] dark:bg-[#1f1f1f] backdrop-blur-md w-full lg:shadow-sm flex items-center">
+      <div className="w-full flex items-center justify-between">
         <MobileSidebar />
 
         <div className="">
@@ -19,7 +20,8 @@ export const TopSidebar = () => {
             onClick={isShowNav ? closeNav : openNav}
           />
         </div>
-        <div className="">
+        <div className="flex items-center gap-2">
+          <ModeToggle />
           <ProfileMenu />
         </div>
       </div>

@@ -6,67 +6,82 @@
   :root {
     --brand: 180 100% 35%; /* Teal Brand Color */
 
-    --background: 180 100% 100%; /* Teal Background Color */
-    --foreground: 180 84% 4.9%; /* Teal Foreground Color */
+    --background: 0 0% 100%; /* Teal Background Color */
+    --foreground: 224 71.4% 4.1%; /* Teal Foreground Color */
 
-    --muted: 180 40% 96.1%; /* Teal Muted Color */
-    --muted-foreground: 180 16.3% 46.9%; /* Teal Muted Foreground Color */
+    --muted: 220 14.3% 95.9%; /* Teal Muted Color */
+    --muted-foreground: 220 8.9% 46.1%; /* Teal Muted Foreground Color */
 
-    --popover: 180 100% 100%; /* Teal Popover Color */
-    --popover-foreground: 180 84% 4.9%; /* Teal Popover Foreground Color */
+    --popover: 0 0% 100%; /* Teal Popover Color */
+    --popover-foreground: 224 71.4% 4.1%; /* Teal Popover Foreground Color */
 
-    --card: 180 100% 100%; /* Teal Card Color */
-    --card-foreground: 180 84% 4.9%; /* Teal Card Foreground Color */
+    --card: #f5f5f5; /* Teal Card Color */
+    --card-foreground: #ffffff; /* Teal Card Foreground Color */
 
-    --border: 180 31.8% 91.4%; /* Teal Border Color */
-    --input: 180 31.8% 91.4%; /* Teal Input Color */
+    --border: 220 13% 91%; /* Teal Border Color */
+    --input: 220 13% 91%; /* Teal Input Color */
 
-    --primary: 180 47.4% 11.2%; /* Teal Primary Color */
-    --primary-foreground: 180 40% 98%; /* Teal Primary Foreground Color */
+    --primary: 220.9 39.3% 11%; /* Teal Primary Color */
+    --primary-foreground: 210 20% 98%; /* Teal Primary Foreground Color */
 
-    --secondary: 180 40% 96.1%; /* Teal Secondary Color */
-    --secondary-foreground: 180 47.4% 11.2%; /* Teal Secondary Foreground Color */
+    --secondary: 220 14.3% 95.9%; /* Teal Secondary Color */
+    --secondary-foreground: 220.9 39.3% 11%; /* Teal Secondary Foreground Color */
 
-    --accent: 180 40% 96.1%; /* Teal Accent Color */
-    --accent-foreground: 180 47.4% 11.2%; /* Teal Accent Foreground Color */
+    --accent: 220 14.3% 95.9%; /* Teal Accent Color */
+    --accent-foreground: 220.9 39.3% 11%; /* Teal Accent Foreground Color */
 
-    --destructive: 180 84.2% 60.2%; /* Teal Destructive Color */
-    --destructive-foreground: 180 40% 98%; /* Teal Destructive Foreground Color */
+    --destructive: 0 84.2% 60.2%; /* Teal Destructive Color */
+    --destructive-foreground: 210 20% 98%; /* Teal Destructive Foreground Color */
 
-    --ring: 180 20.2% 65.1%; /* Teal Ring Color */
+    --ring: 224 71.4% 4.1%; /* Teal Ring Color */
 
     --radius: 0.5rem;
+
+    --chart-1: 12 76% 61%;
+
+    --chart-2: 173 58% 39%;
+
+    --chart-3: 197 37% 24%;
+
+    --chart-4: 43 74% 66%;
+
+    --chart-5: 27 87% 67%;
   }
 
   .dark {
-    --background: 180 84% 4.9%; /* Teal Dark Background Color */
-    --foreground: 180 40% 98%; /* Teal Dark Foreground Color */
+    --background: 0 0% 6%; /* Teal Dark Background Color */
+    --foreground: 210 20% 98%; /* Teal Dark Foreground Color */
 
-    --muted: 180 32.6% 17.5%; /* Teal Dark Muted Color */
-    --muted-foreground: 180 20.2% 65.1%; /* Teal Dark Muted Foreground Color */
+    --muted: 215 27.9% 16.9%; /* Teal Dark Muted Color */
+    --muted-foreground: 217.9 10.6% 64.9%; /* Teal Dark Muted Foreground Color */
 
-    --popover: 180 84% 4.9%; /* Teal Dark Popover Color */
-    --popover-foreground: 180 40% 98%; /* Teal Dark Popover Foreground Color */
+    --popover: 224 71.4% 4.1%; /* Teal Dark Popover Color */
+    --popover-foreground: 210 20% 98%; /* Teal Dark Popover Foreground Color */
 
-    --card: 180 84% 4.9%; /* Teal Dark Card Color */
-    --card-foreground: 180 40% 98%; /* Teal Dark Card Foreground Color */
+    --card: #1a1a1a; /* Teal Dark Card Color */
+    --card-foreground: #1e1e1e; /* Teal Dark Card Foreground Color */
 
-    --border: 180 32.6% 17.5%; /* Teal Dark Border Color */
-    --input: 180 32.6% 17.5%; /* Teal Dark Input Color */
+    --border: 215 27.9% 16.9%; /* Teal Dark Border Color */
+    --input: 215 27.9% 16.9%; /* Teal Dark Input Color */
 
-    --primary: 180 40% 98%; /* Teal Dark Primary Color */
-    --primary-foreground: 180 47.4% 11.2%; /* Teal Dark Primary Foreground Color */
+    --primary: 210 20% 98%; /* Teal Dark Primary Color */
+    --primary-foreground: 220.9 39.3% 11%; /* Teal Dark Primary Foreground Color */
 
-    --secondary: 180 32.6% 17.5%; /* Teal Dark Secondary Color */
-    --secondary-foreground: 180 40% 98%; /* Teal Dark Secondary Foreground Color */
+    --secondary: 215 27.9% 16.9%; /* Teal Dark Secondary Color */
+    --secondary-foreground: 210 20% 98%; /* Teal Dark Secondary Foreground Color */
 
-    --accent: 180 32.6% 17.5%; /* Teal Dark Accent Color */
-    --accent-foreground: 180 40% 98%; /* Teal Dark Accent Foreground Color */
+    --accent: 215 27.9% 16.9%; /* Teal Dark Accent Color */
+    --accent-foreground: 210 20% 98%; /* Teal Dark Accent Foreground Color */
 
-    --destructive: 180 62.8% 30.6%; /* Teal Dark Destructive Color */
-    --destructive-foreground: 180 85.7% 97.3%; /* Teal Dark Destructive Foreground Color */
+    --destructive: 0 62.8% 30.6%; /* Teal Dark Destructive Color */
+    --destructive-foreground: 210 20% 98%; /* Teal Dark Destructive Foreground Color */
 
-    --ring: 180 32.6% 17.5%; /* Teal Dark Ring Color */
+    --ring: 216 12.2% 83.9%; /* Teal Dark Ring Color */
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
   }
 }
 
@@ -108,7 +123,85 @@ body {
   font-family: var(--font-poppins);
 }
 
-.mdxeditor._editorRoot_uazmk_53._editorWrapper_uazmk_154
-  ._contentEditable_uazmk_379 {
-  min-height: 140px;
+/* editor */
+._editorWrapper_uazmk_154 {
+  @apply border border-input shadow-sm rounded;
+}
+
+._toolbarRoot_uazmk_160 {
+  @apply !bg-white dark:!bg-gray-700;
+}
+
+._toolbarRoot_uazmk_160 svg {
+  @apply !text-foreground;
+}
+
+._toolbarToggleItem_uazmk_206:hover,
+._toolbarButton_uazmk_237:hover {
+  @apply !bg-secondary;
+}
+
+._linkDialogPopoverContent_uazmk_600,
+._tableColumnEditorPopoverContent_uazmk_601,
+._dialogContent_uazmk_602 {
+  @apply !bg-background;
+}
+
+._dialogOverlay_uazmk_871 {
+  @apply !bg-background;
+}
+
+._contentEditable_uazmk_379 {
+  @apply !text-foreground min-h-60;
+}
+
+._linkDialogPopoverContent_uazmk_600,
+._tableColumnEditorPopoverContent_uazmk_601,
+._dialogContent_uazmk_602 {
+  @apply !border-border;
+}
+
+._textInput_uazmk_1186 {
+  @apply !bg-background !text-foreground !border-border;
+}
+
+._formField_uazmk_1200 {
+  @apply !text-foreground;
+}
+
+._primaryButton_uazmk_506 {
+  @apply !bg-gray-400 !text-white !font-semibold !border-gray-400;
+}
+
+._secondaryButton_uazmk_507 {
+  @apply !bg-secondary !text-secondary-foreground !border-secondary !font-semibold;
+}
+
+._toolbarToggleItem_uazmk_206[data-state="on"],
+._toolbarButton_uazmk_237[data-state="on"],
+._toolbarToggleItem_uazmk_206:active,
+._toolbarButton_uazmk_237:active {
+  @apply !bg-background;
+}
+
+._code_1tncs_52 {
+  @apply !bg-secondary dark:!bg-secondary !text-primary;
+}
+
+._toolbarNodeKindSelectTrigger_uazmk_305,
+._toolbarButtonSelectTrigger_uazmk_306,
+._selectTrigger_uazmk_307 {
+  @apply !bg-transparent;
+}
+
+._toolbarNodeKindSelectTrigger_uazmk_305,
+._toolbarButtonSelectTrigger_uazmk_306,
+._selectTrigger_uazmk_307 {
+  @apply !text-foreground;
+}
+
+._toolbarNodeKindSelectTrigger_uazmk_305[data-state="open"],
+._toolbarButtonSelectTrigger_uazmk_306[data-state="open"],
+._selectTrigger_uazmk_307[data-state="open"] {
+  @apply !bg-background;
 }

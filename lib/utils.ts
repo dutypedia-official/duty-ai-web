@@ -1,5 +1,7 @@
 import { toast } from "@/components/ui/use-toast";
 import { type ClassValue, clsx } from "clsx";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
@@ -169,3 +171,16 @@ export async function fetchFnClient(url: string, options: any) {
     throw new Error(error.message);
   }
 }
+
+export const useColorScheme = () => {
+  const { theme, systemTheme } = useTheme();
+  const [currentTheme, setCurrentTheme] = useState<string | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    setCurrentTheme(theme === "system" ? systemTheme : theme);
+  }, [theme, systemTheme]);
+
+  return currentTheme;
+};

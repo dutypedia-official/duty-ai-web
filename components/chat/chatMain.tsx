@@ -2,7 +2,15 @@
 import { LeftNav } from "@/components/chat/leftNav";
 import { useEnterSubmit } from "@/lib/hooks/useEnterSubmit";
 import useNav from "@/lib/hooks/useNav";
-import { Dot, ListPlus, Loader2, Plus, Send, X } from "lucide-react";
+import {
+  ChevronLeft,
+  Dot,
+  ListPlus,
+  Loader2,
+  Plus,
+  Send,
+  X,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import Textarea from "react-textarea-autosize";
 import { toast } from "@/components/ui/use-toast";
@@ -24,22 +32,26 @@ import { cn, duckSearch } from "@/lib/utils";
 import { useAuth, useUser } from "@clerk/nextjs";
 import { fetchEventSource } from "@microsoft/fetch-event-source";
 import { useRouter } from "next/navigation";
+import useUi from "@/lib/hooks/useUi";
 
-export default function ChatMain() {
+export default function ChatMain({ mini = false }: { mini?: boolean }) {
   const { getToken } = useAuth();
   const [timeLeft, setTimeLeft] = useState(30);
+  const { setAskAiShow } = useUi();
 
   const chatStore = useChat();
   const {
     template,
     prompt,
     setPrompt,
+    promptCompanyName,
     activeConversationId,
     setActiveConversationId,
     submitPrompt,
     setSubmitPrompt,
     isSubmiting,
     setIsSubmiting,
+    setIsAskingAi,
     setPromptInputRef,
     messages,
     setMessages,
@@ -91,6 +103,7 @@ export default function ChatMain() {
     if (!prompt) return;
     setTimeLeft(30);
     setIsSubmiting(true);
+    setIsAskingAi(true);
     let tId = null;
     const userMessage: ChatMessageProps = {
       role: "user",
@@ -221,6 +234,7 @@ export default function ChatMain() {
     } finally {
       setIsSubmiting(false);
       setSubmitPrompt(false);
+      setIsAskingAi(false);
     }
   };
 
@@ -300,61 +314,87 @@ export default function ChatMain() {
 
   return (
     <>
-      <div
-        className={`hidden h-screen sticky top-0 pb-4 flex-shrink-0 lg:block duration-300 border-r ${
-          isShowNav ? "w-80" : "w-0"
-        }`}
-      >
-        <div className={`h-full rounded-md overflow-hidden`}>
-          <div className="px-3 shadow-sm h-16 flex items-center justify-between">
-            <h1 className="text-base font-medium">
-              Chat -{" "}
-              <span className="text-muted-foreground capitalize text-sm font-normal">
-                ({template})
-              </span>
-            </h1>
+      {!mini && (
+        <div
+          className={`hidden h-screen sticky top-0 pb-4 flex-shrink-0 lg:block duration-300 border-r shadow-sm bg-background ${
+            isShowNav ? "w-80" : "w-0"
+          }`}>
+          <div className={`h-full rounded-md overflow-hidden`}>
+            <div className="px-3 shadow-sm h-16 flex items-center justify-between bg-card-foreground">
+              <h1 className="text-base font-medium">
+                Chat -{" "}
+                <span className="text-muted-foreground capitalize text-sm font-normal">
+                  ({template})
+                </span>
+              </h1>
+            </div>
+            <div className="p-3">
+              <Button
+                onClick={newChat}
+                size="lg"
+                variant="outline"
+                className="rounded-md gap-2 w-full bg-card-foreground">
+                <ListPlus />
+                New Chat
+              </Button>
+            </div>
+            <LeftNav
+              onDelete={() => {
+                newChat();
+              }}
+            />
           </div>
-          <div className="p-3">
-            <Button
-              onClick={newChat}
-              size="lg"
-              variant="outline"
-              className="rounded-md gap-2 w-full"
-            >
-              <ListPlus />
-              New Chat
-            </Button>
-          </div>
-          <LeftNav
-            onDelete={() => {
-              newChat();
-            }}
-          />
         </div>
-      </div>
-      <div tabIndex={0} className="w-full relative flex-1">
-        <TopSidebar />
+      )}
+      <div
+        tabIndex={0}
+        className={cn(
+          "w-full relative",
+          mini
+            ? "bg-card rounded-lg w-full lg:w-[28rem] overflow-auto h-[calc(100vh-6.5rem)]"
+            : "flex-1"
+        )}>
+        {!mini && <TopSidebar />}
         <div className="w-full flex">
           <div className="flex-1 pt-3">
-            <div className="min-h-[calc(100vh-64px)]">
+            <div
+              className={cn(
+                "w-full max-w-screen-md mx-auto",
+                mini ? "min-h-[calc(100vh-12rem)]" : "min-h-[calc(100vh-64px)]"
+              )}>
               {isFetchingNewMessages ? (
                 <div className="p-4">
                   <BeatLoader color="hsl(var(--primary))" size={5} />
                 </div>
               ) : (
                 <div className="px-3 sm:px-0">
-                  <ChatMessages />
+                  {mini && (
+                    <div className="flex p-5 sticky top-0 bg-card/20 backdrop-blur-sm">
+                      <div className="w-10">
+                        <div
+                          className="rounded-full shadow-md w-8 h-8 flex items-center justify-center cursor-pointer"
+                          onClick={() => setAskAiShow(false)}>
+                          <ChevronLeft className="w-5 h-5" />
+                        </div>
+                      </div>
+                      <div className="flex-1 w-full flex items-center justify-center text-center">
+                        <h1 className="line-clamp-1">{promptCompanyName}</h1>
+                      </div>
+                      <div className="w-10"></div>
+                    </div>
+                  )}
+                  <ChatMessages mini={mini} />
                 </div>
               )}
             </div>
+
             <form
               onSubmit={handleSubmit}
               ref={formRef}
               className={cn(
-                "pb-5 px-4 sticky bottom-0 w-full bg-transparent backdrop-blur-sm backdrop-saturate-200"
-              )}
-            >
-              <div className="flex w-full bg-accent p-1.5 border border-brand rounded-[26px] gap-1.5">
+                "pb-5 px-4 sticky bottom-0 bg-transparent backdrop-blur-sm backdrop-saturate-200 w-full mx-auto"
+              )}>
+              <div className="flex w-full bg-card-foreground p-1.5 border border-brand rounded-[26px] gap-1.5 max-w-screen-md mx-auto">
                 <div className="flex flex-1 items-end gap-1.5 md:gap-2">
                   {isSubmiting && (
                     <Loader2 className="w-10 h-10 p-2.5 text-muted-foreground animate-spin" />
@@ -388,8 +428,7 @@ export default function ChatMain() {
                       className="rounded-full w-10 h-10 p-0 flex-shrink-0 text-background bg-brand hover:bg-brand/70 hover:text-white"
                       variant="ghost"
                       type="submit"
-                      disabled={isSubmiting}
-                    >
+                      disabled={isSubmiting}>
                       <Send className="w-4 h-4" />
                     </Button>
                   )}
@@ -398,8 +437,7 @@ export default function ChatMain() {
                       onClick={handelAbort}
                       className="rounded-full w-10 h-10 p-0 flex-shrink-0"
                       type="button"
-                      disabled={!isSubmiting}
-                    >
+                      disabled={!isSubmiting}>
                       <X className="w-4 h-4" />
                     </Button>
                   )}
@@ -407,9 +445,6 @@ export default function ChatMain() {
               </div>
             </form>
           </div>
-          <div
-            className={`hidden py-4 flex-shrink-0 xl:block w-72 h-screen`}
-          ></div>
         </div>
       </div>
     </>

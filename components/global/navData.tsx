@@ -1,9 +1,5 @@
 import CompleteLogo from "@/components/icons/CompleteLogo";
 import UimCommentAltMessage from "@/components/icons/UimCommentAltMessage";
-import UimGraduation from "@/components/icons/UimGraduation";
-import UimHistory from "@/components/icons/UimHistory";
-import UimSearch from "@/components/icons/UimSearch";
-import UimUser from "@/components/icons/UimUser";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/utils";
 import {
@@ -17,9 +13,9 @@ import {
   MessageSquarePlus,
   Scale,
 } from "lucide-react";
+import { FaRegChartBar } from "react-icons/fa";
+
 import Link from "next/link";
-import UimTachometerFast from "../icons/UimTachometerFast";
-import UimNotes from "../icons/UimNotes";
 
 export const navLeftItems = [
   {
@@ -110,6 +106,12 @@ export const iconbarItems = [
     active: true,
     label: "Finance",
     link: "/finance",
+  },
+  {
+    icon: FaRegChartBar,
+    active: true,
+    label: "Stock",
+    link: "/stock",
   },
   {
     icon: Euro,
