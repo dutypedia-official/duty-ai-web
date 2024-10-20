@@ -53,6 +53,7 @@ export const ListItem = ({
     setPrompt,
     setSubmitPrompt,
     setPromptCompanyName,
+    isSubmiting,
   } = useChat();
   const { getToken } = useAuth();
   const client = apiClient();
@@ -233,7 +234,8 @@ export const ListItem = ({
                 className={cn(
                   "text-[#2ECC71] text-sm",
                   !isPositive && "text-[#FF000F]"
-                )}>
+                )}
+              >
                 {change}
               </p>
             </div>
@@ -252,7 +254,8 @@ export const ListItem = ({
                 className={cn(
                   "text-[#2ECC71] text-sm",
                   !isPositive && "text-[#FF000F]"
-                )}>
+                )}
+              >
                 {changePer}
               </p>
             </div>
@@ -269,7 +272,8 @@ export const ListItem = ({
                 className={cn(
                   "text-[#2ECC71] text-sm",
                   !isPositive && "text-[#FF000F]"
-                )}>
+                )}
+              >
                 {change}
               </p>
             </div>
@@ -307,7 +311,8 @@ export const ListItem = ({
         <a
           href={`https://www.tradingview.com/chart/?symbol=DSEBD:${name}&utm_source=www.tradingview.com&utm_medium=widget&utm_campaign=chart&utm_term=DSEBD:${name}&theme=${colorScheme}`}
           target="_blank"
-          rel="noopener noreferrer">
+          rel="noopener noreferrer"
+        >
           <Button className="hover:bg-[#EAEDED] bg-[#EAEDED] hover:dark:bg-[#333333] dark:bg-[#333333] border border-[#EAEDED] dark:border-[#333333] text-[#757575] dark:text-white font-normal min-w-max text-[10px] sm:text-sm h-0 w-0 p-4">
             <MdOutlineShowChart className="w-4 h-4 text-[#5188D4] dark:text-white mr-0.5" />
             Chart
@@ -325,8 +330,9 @@ export const ListItem = ({
 
         <Button
           onClick={askAiFn}
-          disabled={isAskingAi}
-          className="disabled:bg-gray-100 hover:bg-[#EAEDED] bg-[#EAEDED] hover:dark:bg-[#333333] dark:bg-[#333333] border border-[#EAEDED] dark:border-[#333333] text-[#757575] dark:text-white font-normal min-w-max text-[10px] sm:text-sm h-0 w-0 p-4">
+          disabled={isSubmiting}
+          className="disabled:bg-gray-100 hover:bg-[#EAEDED] bg-[#EAEDED] hover:dark:bg-[#333333] dark:bg-[#333333] border border-[#EAEDED] dark:border-[#333333] text-[#757575] dark:text-white font-normal min-w-max text-[10px] sm:text-sm h-0 w-0 p-4"
+        >
           <PiMagicWandFill className="w-4 h-4 text-[#5188D4] dark:text-white mr-0.5" />
           Ask AI
         </Button>

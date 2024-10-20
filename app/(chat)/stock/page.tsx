@@ -22,6 +22,7 @@ import { PiMagicWandFill } from "react-icons/pi";
 import ChatMain from "@/components/chat/chatMain";
 import { ModeToggle } from "@/components/modeToggle";
 import { Skeleton } from "@/components/ui/skeleton";
+import useChat from "@/lib/hooks/useChat";
 
 export default function page() {
   const { closeNav, openNav, isShowNav } = useNav();
@@ -55,7 +56,8 @@ export default function page() {
   const initialStocks = !activeFilter
     ? marketData
     : marketData.filter((stock: any) => stock[activeFilter] == true) || [];
-
+  const chatStore = useChat();
+  const { setTemplate } = chatStore;
   const fetchStockData = async () => {
     try {
       const { data: mData } = await client.get(
@@ -122,6 +124,13 @@ export default function page() {
       : initialStocks?.filter((stock: any) =>
           stock.symbol.toLowerCase().includes(searchTerm.toLowerCase())
         );
+
+  useEffect(() => {
+    setTemplate("finance");
+    return () => {
+      setTemplate("general");
+    };
+  }, []);
 
   return (
     <div className="w-full bg-[#F0F2F5] dark:bg-[#0F0F0F]">
