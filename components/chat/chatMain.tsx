@@ -285,10 +285,7 @@ export default function ChatMain({ mini = false }: { mini?: boolean }) {
   }, [template]);
 
   useEffect(() => {
-    if (submitPrompt) {
-      if (isSubmiting) {
-        return;
-      }
+    if (submitPrompt && !isSubmiting && prompt) {
       handleSubmit(new Event("submit") as any);
       setSubmitPrompt(false);
     }

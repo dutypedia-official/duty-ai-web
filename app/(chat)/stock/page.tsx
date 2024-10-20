@@ -190,8 +190,11 @@ export default function page() {
             </div>
           </div>
 
+          <div className={cn(askAiShow ? "hidden 2xl:block" : "hidden")}>
+            <ChatMain mini={true} />
+          </div>
           <div className="hidden 2xl:block">
-            {askAiShow ? <ChatMain mini={true} /> : <MarketOverview />}
+            {!askAiShow && <MarketOverview />}
           </div>
         </div>
       </div>
