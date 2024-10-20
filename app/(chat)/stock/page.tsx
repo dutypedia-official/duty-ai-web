@@ -1,80 +1,34 @@
 "use client";
+import ChatMain from "@/components/chat/chatMain";
 import MobileSidebar from "@/components/chat/mobileSidebar";
 import ProfileMenu from "@/components/global/profileMenu";
-import useNav from "@/lib/hooks/useNav";
-import { cn } from "@/lib/utils";
-import { Menu, SendHorizonal } from "lucide-react";
+import { ModeToggle } from "@/components/modeToggle";
+import { Skeleton } from "@/components/ui/skeleton";
+import { apiClient } from "@/lib/api";
+import useStockData from "@/lib/hooks/useStockData";
+import useUi from "@/lib/hooks/useUi";
+import { useAuth } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
 import { Filters } from "./_components/filters";
 import MarketOverview from "./_components/market-overview";
 import { Overview } from "./_components/overview";
 import { StockList } from "./_components/stock-list";
-import { TopNoti } from "./_components/top-noti";
-import useUi from "@/lib/hooks/useUi";
-import { apiClient } from "@/lib/api";
-import useStockData from "@/lib/hooks/useStockData";
-import { useRouter } from "next/navigation";
-import { useAuth } from "@clerk/nextjs";
-import { toast } from "@/components/ui/use-toast";
-import { SetAlarm } from "./_components/set-alarm";
-import { Button } from "@/components/ui/button";
-import { PiMagicWandFill } from "react-icons/pi";
-import ChatMain from "@/components/chat/chatMain";
-import { ModeToggle } from "@/components/modeToggle";
-import { Skeleton } from "@/components/ui/skeleton";
 
 export default function page() {
-  const { closeNav, openNav, isShowNav } = useNav();
-
-  const {
-    refreash,
-    setRefreash,
-    screenRefresh,
-    setScreenRefresh,
-    mainServerAvailable,
-    askAiShow,
-    refreashFav,
-  } = useUi();
+  const { askAiShow, refreashFav } = useUi();
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading2, setIsLoading2] = useState(true);
 
-  const {
-    marketData,
-    setMarketData,
-    favorites,
-    setFavorites,
-    setIsLoading,
-    isLoading,
-  } = useStockData();
+  const { marketData, favorites, setFavorites, isLoading } = useStockData();
 
   const [activeFilter, setActiveFilter] = useState("");
   const [alerms, setAlerms] = useState([]);
   const { getToken } = useAuth();
   const client = apiClient();
-  const router = useRouter();
+
   const initialStocks = !activeFilter
     ? marketData
     : marketData.filter((stock: any) => stock[activeFilter] == true) || [];
-
-  const fetchStockData = async () => {
-    try {
-      const { data: mData } = await client.get(
-        "/tools/get-stock-market",
-        null,
-        {}
-        // mainServerAvailable
-      );
-      setMarketData(mData);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(!isLoading);
-    }
-  };
-
-  useEffect(() => {
-    fetchStockData();
-  }, []);
 
   const fetchFavs = async () => {
     try {
@@ -125,15 +79,10 @@ export default function page() {
 
   return (
     <div className="w-full bg-[#F0F2F5] dark:bg-[#0F0F0F]">
-      <div className="sticky top-0 h-16 z-20 px-4 bg-card-foreground backdrop-blur-md w-full lg:shadow-sm flex items-center">
-        <div className="w-full flex items-center justify-between">
+      <div className="sticky top-0 h-16 z-20 px-4 bg-[#fff] dark:bg-card-foreground backdrop-blur-md w-full lg:shadow-sm flex items-center">
+        <div className="w-full flex items-center justify-end">
           <MobileSidebar />
-          <div className="">
-            <Menu
-              className={cn("w-7 h-7 cursor-pointer", "hidden lg:flex")}
-              onClick={isShowNav ? closeNav : openNav}
-            />
-          </div>
+
           <div className="flex items-center gap-2">
             {/* <TopNoti /> */}
             <ModeToggle />

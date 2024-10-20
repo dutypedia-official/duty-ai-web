@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import useMediaQuery from "@/lib/hooks/useMediaQuery";
 import { cn } from "@/lib/utils";
 import { Search } from "lucide-react";
 
@@ -22,11 +23,27 @@ export const Filters = ({
   activeFilter: any;
   setActiveFilter: any;
 }) => {
+  const isBiggerScreen = useMediaQuery("(min-width: 1920px)");
+
   const filterBtn = [
-    { name: "❤️ Favorite", value: "favorite" },
+    { name: "❤️ Favorite", value: "❤️ favorite" },
     { name: "All", value: "" },
-    { name: "Biggest losers", value: "biggestLosers" },
-    { name: "Most active", value: "mostActive" },
+    {
+      name: "Top gainers",
+      value: "topGainer",
+    },
+    {
+      name: "Biggest losers",
+      value: "biggestLosers",
+    },
+    {
+      name: "Most active",
+      value: "mostActive",
+    },
+    {
+      name: "Best performing",
+      value: "bestPerforming",
+    },
   ];
   return (
     <div className="flex justify-between gap-5 bg-card-foreground rounded-md p-5 lg:p-0">
@@ -41,9 +58,11 @@ export const Filters = ({
           <Search className="absolute top-1/2 right-5 -translate-y-1/2 w-4 h-4 dark:text-[#34495E]" />
         </div>
       </div>
-      <div className="block lg:hidden">
-        <Select onValueChange={(value) => setActiveFilter(value)}>
-          <SelectTrigger className="w-40 capitalize bg-card">
+      <div className={cn("block", isBiggerScreen && "hidden")}>
+        <Select
+          defaultValue=""
+          onValueChange={(value) => setActiveFilter(value)}>
+          <SelectTrigger className="w-40 capitalize">
             <SelectValue placeholder={activeFilter} className="capitalize" />
           </SelectTrigger>
           <SelectContent className="bg-card">
@@ -60,7 +79,7 @@ export const Filters = ({
           </SelectContent>
         </Select>
       </div>
-      <div className="hidden lg:flex gap-4 flex-wrap">
+      <div className={cn("hidden gap-4 flex-wrap", isBiggerScreen && "flex")}>
         {/* <Button
           className={cn(
             "text-white border border-[#B0BEC5] bg-[#E0E0E0] dark:bg-transparent"

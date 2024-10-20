@@ -22,7 +22,7 @@ const IconBar = ({ isMobile = false }) => {
   return (
     <div
       className={cn(
-        "h-screen  z-50 px-2 py-4 flex-col items-center justify-between gap-8 w-16 bg-[#E2E8F0] dark:bg-[#1f1f1f] flex-shrink-0 sticky top-0",
+        "h-screen  z-50 px-2 py-4 flex-col items-center justify-between gap-8 w-16 bg-[#fff] dark:bg-[#1f1f1f] flex-shrink-0 sticky top-0",
         isMobile ? "flex" : "hidden sm:flex"
       )}>
       <div className="px-2 flex-1 flex flex-col justify-between gap-2">

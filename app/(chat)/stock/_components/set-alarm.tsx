@@ -17,6 +17,8 @@ export const SetAlarm = ({
   loading,
   handelSetAlerm,
   handelDeleteAlerm,
+  visible,
+  setVisible,
 }: {
   targetPrice: any;
   setTargetPrice: any;
@@ -24,15 +26,17 @@ export const SetAlarm = ({
   loading: any;
   handelSetAlerm: () => void;
   handelDeleteAlerm: () => void;
+  visible: any;
+  setVisible: any;
 }) => {
   return (
-    <AlertDialog>
+    <AlertDialog onOpenChange={setVisible} open={visible}>
       <AlertDialogTrigger asChild>
         <Button className="hover:bg-[#EAEDED] bg-[#EAEDED] hover:dark:bg-[#333333] dark:bg-[#333333] border border-[#EAEDED] dark:border-[#333333] text-[#757575] dark:text-white font-normal min-w-max text-[10px] sm:text-sm h-0 w-0 p-4">
           {currentAlerm ? (
-            <MdOutlineEditNotifications className="w-4 h-4 text-[#5188D4] dark:text-white mr-0.5" />
+            <MdOutlineEditNotifications className="w-4 h-4 text-red-500 mr-0.5" />
           ) : (
-            <BellPlus className="w-4 h-4 text-[#5188D4] dark:text-white mr-0.5" />
+            <BellPlus className="w-4 h-4 text-[#5188D4] mr-0.5" />
           )}
           {currentAlerm ? "Edit Alerm" : "Set Alarm"}
         </Button>
@@ -56,6 +60,7 @@ export const SetAlarm = ({
             disabled={
               loading ||
               parseFloat(targetPrice) < 1 ||
+              !targetPrice ||
               parseFloat(targetPrice) == currentAlerm?.price
             }
             className="text-white">
@@ -64,6 +69,7 @@ export const SetAlarm = ({
           {currentAlerm && (
             <Button
               onClick={handelDeleteAlerm}
+              disabled={loading}
               variant={"destructive"}
               size={"lg"}
               className="text-white">

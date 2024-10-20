@@ -40,7 +40,6 @@ const MarketOverview = ({ sidebar = false }: { sidebar?: boolean }) => {
     try {
       const { data } = await client.get(`/tools/get-dsebd-index`);
       setIndexData(data);
-      console.log(data);
     } catch (error) {
       console.log(error);
     }

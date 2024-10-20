@@ -70,8 +70,8 @@ export const LeftNav = ({ onDelete }: LeftNavProps) => {
       <div className="px-4 py-4 space-y-6">
         {Array.from(Array(7).keys()).map((i) => (
           <div key={i} className="space-y-2">
-            <Skeleton className="h-4 w-[250px] bg-card-foreground" />
-            <Skeleton className="h-4 w-[200px] bg-card-foreground" />
+            <Skeleton className="h-4 w-[250px] bg-card" />
+            <Skeleton className="h-4 w-[200px] bg-card" />
           </div>
         ))}
       </div>
@@ -151,8 +151,9 @@ export const LeftNav = ({ onDelete }: LeftNavProps) => {
                 </div>
                 <a
                   className={cn(
-                    "opacity-10 flex-shrink-0",
-                    activeConversationId === item.id && "opacity-100"
+                    "opacity-10 dark:opacity-50 text-foreground flex-shrink-0",
+                    activeConversationId === item.id &&
+                      "opacity-100 dark:opacity-100"
                   )}
                   onClick={() => handelDelete(item.id)}>
                   <Trash2 className="w-4 h-4" />

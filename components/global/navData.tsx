@@ -16,6 +16,7 @@ import {
 import { FaRegChartBar } from "react-icons/fa";
 
 import Link from "next/link";
+import { StockIcon } from "../icons/StockIcon";
 
 export const navLeftItems = [
   {
@@ -102,7 +103,7 @@ export const iconbarItems = [
     link: "/",
   },
   {
-    icon: LineChart,
+    icon: StockIcon,
     active: true,
     label: "Finance",
     link: "/finance",
