@@ -40,25 +40,7 @@ export default function page() {
     : marketData.filter((stock: any) => stock[activeFilter] == true) || [];
   const chatStore = useChat();
   const { setTemplate } = chatStore;
-  const fetchStockData = async () => {
-    try {
-      const { data: mData } = await client.get(
-        "/tools/get-stock-market",
-        null,
-        {}
-        // mainServerAvailable
-      );
-      setMarketData(mData);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(!isLoading);
-    }
-  };
-
-  useEffect(() => {
-    fetchStockData();
-  }, []);
+ 
 
   const fetchFavs = async () => {
     try {
