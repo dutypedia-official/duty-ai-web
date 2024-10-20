@@ -195,7 +195,7 @@ export const ListItem = ({
   };
 
   return (
-    <div className="flex flex-col xl:flex-row xl:justify-between gap-3 rounded-xl lg:rounded-none p-3 lg:py-3 bg-card lg:bg-transparent lg:dark:bg-transparent">
+    <div className="flex flex-col xl:flex-row xl:justify-between gap-3 rounded-xl lg:rounded-none p-3 lg:py-3 bg-card-foreground lg:bg-transparent lg:dark:bg-transparent">
       <div className="flex flex-col xl:flex-row xl:items-center gap-3 w-full">
         <div className="flex items-start justify-between lg:justify-normal">
           <div className="flex items-center lg:w-40">

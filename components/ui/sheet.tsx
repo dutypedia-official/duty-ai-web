@@ -81,7 +81,7 @@ const SheetContent = React.forwardRef<
       className={cn(sheetVariants({ side }), className)}
       {...props}>
       {children}
-      <SheetClose />
+      <SheetClose className="invisible" />
     </SheetPrimitive.Content>
   </SheetPortal>
 ));
