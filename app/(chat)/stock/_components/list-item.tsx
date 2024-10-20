@@ -51,6 +51,7 @@ export const ListItem = ({
     setPrompt,
     setSubmitPrompt,
     setPromptCompanyName,
+    isSubmiting,
   } = useChat();
   const { getToken } = useAuth();
   const client = apiClient();
@@ -325,9 +326,9 @@ export const ListItem = ({
 
         <Button
           onClick={askAiFn}
-          disabled={isAskingAi}
+          disabled={isSubmiting}
           className="disabled:bg-gray-100 hover:bg-[#EAEDED] bg-[#EAEDED] hover:dark:bg-[#333333] dark:bg-[#333333] border border-[#EAEDED] dark:border-[#333333] text-[#757575] dark:text-white font-normal min-w-max text-[10px] sm:text-sm h-0 w-0 p-4">
-          <PiMagicWandFill className="w-4 h-4 text-[#5188D4] mr-0.5" />
+          <PiMagicWandFill className="w-4 h-4 text-[#5188D4]mr-0.5" />
           Ask AI
         </Button>
 

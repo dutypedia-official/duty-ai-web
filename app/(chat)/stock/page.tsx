@@ -5,6 +5,7 @@ import ProfileMenu from "@/components/global/profileMenu";
 import { ModeToggle } from "@/components/modeToggle";
 import { Skeleton } from "@/components/ui/skeleton";
 import { apiClient } from "@/lib/api";
+import useChat from "@/lib/hooks/useChat";
 import useStockData from "@/lib/hooks/useStockData";
 import useUi from "@/lib/hooks/useUi";
 import { useAuth } from "@clerk/nextjs";
@@ -13,13 +14,21 @@ import { Filters } from "./_components/filters";
 import MarketOverview from "./_components/market-overview";
 import { Overview } from "./_components/overview";
 import { StockList } from "./_components/stock-list";
+import { cn } from "@/lib/utils";
 
 export default function page() {
   const { askAiShow, refreashFav } = useUi();
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading2, setIsLoading2] = useState(true);
 
-  const { marketData, favorites, setFavorites, isLoading } = useStockData();
+  const {
+    marketData,
+    setMarketData,
+    setIsLoading,
+    favorites,
+    setFavorites,
+    isLoading,
+  } = useStockData();
 
   const [activeFilter, setActiveFilter] = useState("");
   const [alerms, setAlerms] = useState([]);
@@ -29,6 +38,27 @@ export default function page() {
   const initialStocks = !activeFilter
     ? marketData
     : marketData.filter((stock: any) => stock[activeFilter] == true) || [];
+  const chatStore = useChat();
+  const { setTemplate } = chatStore;
+  const fetchStockData = async () => {
+    try {
+      const { data: mData } = await client.get(
+        "/tools/get-stock-market",
+        null,
+        {}
+        // mainServerAvailable
+      );
+      setMarketData(mData);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(!isLoading);
+    }
+  };
+
+  useEffect(() => {
+    fetchStockData();
+  }, []);
 
   const fetchFavs = async () => {
     try {
@@ -76,6 +106,13 @@ export default function page() {
       : initialStocks?.filter((stock: any) =>
           stock.symbol.toLowerCase().includes(searchTerm.toLowerCase())
         );
+
+  useEffect(() => {
+    setTemplate("finance");
+    return () => {
+      setTemplate("general");
+    };
+  }, []);
 
   return (
     <div className="w-full bg-[#F0F2F5] dark:bg-[#0F0F0F]">
@@ -130,8 +167,11 @@ export default function page() {
             </div>
           </div>
 
+          <div className={cn(askAiShow ? "hidden 2xl:block" : "hidden")}>
+            <ChatMain mini={true} />
+          </div>
           <div className="hidden 2xl:block">
-            {askAiShow ? <ChatMain mini={true} /> : <MarketOverview />}
+            {!askAiShow && <MarketOverview />}
           </div>
         </div>
       </div>
