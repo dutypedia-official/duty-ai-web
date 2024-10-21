@@ -41,7 +41,7 @@ export const UsersTable = ({
   const { replace, refresh } = useRouter();
   const [isDownloadPending, startDownloadTransition] = useTransition();
 
-  const params = new URLSearchParams(searchParams);
+  const params = new URLSearchParams(searchParams.toString());
   const pathname = usePathname();
 
   const handleClick = () => {
@@ -89,8 +89,7 @@ export const UsersTable = ({
                     replace(`${pathname}?${params.toString()}`, {
                       scroll: false,
                     });
-                  }}
-                >
+                  }}>
                   <SelectTrigger>
                     <SelectValue placeholder="Sort by..." />
                   </SelectTrigger>
@@ -102,8 +101,7 @@ export const UsersTable = ({
                 <div
                   className={cn(
                     "flex h-10 items-center border rounded-md transition-all duration-300"
-                  )}
-                >
+                  )}>
                   <Input
                     type="text"
                     defaultValue={searchParams.get("q")?.toString()}
