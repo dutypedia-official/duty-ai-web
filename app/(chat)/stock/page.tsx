@@ -17,18 +17,11 @@ import { StockList } from "./_components/stock-list";
 import { cn } from "@/lib/utils";
 
 export default function page() {
-  const { askAiShow, refreashFav } = useUi();
+  const { askAiShow, refreashFav, refreash, mainServerAvailable } = useUi();
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading2, setIsLoading2] = useState(true);
 
-  const {
-    marketData,
-    setMarketData,
-    setIsLoading,
-    favorites,
-    setFavorites,
-    isLoading,
-  } = useStockData();
+  const { marketData, favorites, setFavorites, isLoading } = useStockData();
 
   const [activeFilter, setActiveFilter] = useState("");
   const [alerms, setAlerms] = useState([]);
@@ -40,52 +33,18 @@ export default function page() {
     : marketData.filter((stock: any) => stock[activeFilter] == true) || [];
   const chatStore = useChat();
   const { setTemplate } = chatStore;
-  const fetchStockData = async () => {
-    try {
-      const { data: mData } = await client.get(
-        "/tools/get-stock-market",
-        null,
-        {}
-        // mainServerAvailable
-      );
-      setMarketData(mData);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(!isLoading);
-    }
-  };
 
-  useEffect(() => {
-    fetchStockData();
-  }, []);
-
-  const fetchFavs = async () => {
+  const fetchAlerms = async () => {
     try {
       const token = await getToken();
       const { data } = await client.get(
-        "/tools/get-favs",
+        "/noti/get-alerms",
         token,
-        {}
-        // mainServerAvailable
+        {},
+        //@ts-ignore
+        mainServerAvailable
       );
-      setFavorites(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchFavs();
-  }, []);
-
-  const fetchData = async () => {
-    try {
-      const token = await getToken();
-      const { data } = await client.get("/tools/get-favs", token);
-      const { data: alermData } = await client.get("/noti/get-alerms", token);
-      setAlerms(alermData);
-      setFavorites(data);
+      setAlerms(data);
     } catch (error) {
       console.log(error);
     } finally {
@@ -93,9 +52,29 @@ export default function page() {
     }
   };
 
+  const fetchFavs = async () => {
+    try {
+      const token = await getToken();
+      const { data } = await client.get(
+        "/tools/get-favs",
+        token,
+        {},
+        //@ts-ignore
+        mainServerAvailable
+      );
+      setFavorites(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    fetchData();
-  }, [refreashFav]);
+    fetchAlerms();
+  }, [refreash]);
+
+  useEffect(() => {
+    fetchFavs();
+  }, []);
 
   // Filter stocks based on the search term
   const filteredStocks =
@@ -117,8 +96,8 @@ export default function page() {
   return (
     <div className="w-full bg-[#F0F2F5] dark:bg-[#0F0F0F]">
       <div className="sticky top-0 h-16 z-20 px-4 bg-[#fff] dark:bg-card-foreground backdrop-blur-md w-full lg:shadow-sm flex items-center">
-        <div className="w-full flex items-center justify-end">
-          <MobileSidebar />
+        <div className="w-full flex items-center justify-between lg:justify-end">
+          <MobileSidebar hide={true} />
 
           <div className="flex items-center gap-2">
             {/* <TopNoti /> */}
@@ -137,9 +116,14 @@ export default function page() {
                 activeFilter={activeFilter}
                 setActiveFilter={setActiveFilter}
               />
-              <div className="w-full max-h-[calc(100vh-13.5rem)] overflow-auto">
+              <div
+                className={cn(
+                  "w-full max-h-[calc(100vh-13.5rem)] overflow-auto ",
+                  (isLoading || isLoading2) &&
+                    "bg-card-foreground lg:bg-transparent rounded-md"
+                )}>
                 {isLoading || isLoading2 ? (
-                  Array.from(Array(20).keys()).map((i) => (
+                  Array.from(Array(10).keys()).map((i) => (
                     <div key={i} className="my-5 flex gap-5">
                       <Skeleton className="h-10 flex-1 bg-card" />
                       <Skeleton className="h-10 w-24 bg-card" />

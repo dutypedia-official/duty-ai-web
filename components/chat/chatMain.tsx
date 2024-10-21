@@ -320,8 +320,7 @@ export default function ChatMain({ mini = false }: { mini?: boolean }) {
         <div
           className={`hidden h-screen sticky top-0 pb-4 flex-shrink-0 lg:block duration-300 border-r shadow-sm bg-background ${
             isShowNav ? "w-80" : "w-0"
-          }`}
-        >
+          }`}>
           <div className={`h-full rounded-md overflow-hidden`}>
             <div className="px-3 shadow-sm h-16 flex items-center justify-between bg-card-foreground">
               <h1 className="text-base font-medium">
@@ -336,8 +335,7 @@ export default function ChatMain({ mini = false }: { mini?: boolean }) {
                 onClick={newChat}
                 size="lg"
                 variant="outline"
-                className="rounded-md gap-2 w-full bg-card-foreground"
-              >
+                className="rounded-md gap-2 w-full bg-card-foreground">
                 <ListPlus />
                 New Chat
               </Button>
@@ -357,8 +355,7 @@ export default function ChatMain({ mini = false }: { mini?: boolean }) {
           mini
             ? "bg-card rounded-lg w-full lg:w-[28rem] overflow-auto h-[calc(100vh-6.5rem)]"
             : "flex-1"
-        )}
-      >
+        )}>
         {!mini && <TopSidebar />}
         <div className="w-full flex">
           <div className="flex-1 pt-3">
@@ -366,8 +363,7 @@ export default function ChatMain({ mini = false }: { mini?: boolean }) {
               className={cn(
                 "w-full max-w-screen-md mx-auto",
                 mini ? "min-h-[calc(100vh-12rem)]" : "min-h-[calc(100vh-64px)]"
-              )}
-            >
+              )}>
               {isFetchingNewMessages ? (
                 <div className="p-4">
                   <BeatLoader color="hsl(var(--primary))" size={5} />
@@ -377,12 +373,13 @@ export default function ChatMain({ mini = false }: { mini?: boolean }) {
                   {mini && (
                     <div className="flex p-5 sticky top-0 bg-card/20 backdrop-blur-sm">
                       <div className="w-10">
-                        <div
-                          className="rounded-full shadow-md w-8 h-8 flex items-center justify-center cursor-pointer"
-                          onClick={() => setAskAiShow(false)}
-                        >
-                          <ChevronLeft className="w-5 h-5" />
-                        </div>
+                        {!isSubmiting && (
+                          <div
+                            className="rounded-full shadow-md w-8 h-8 flex items-center justify-center cursor-pointer"
+                            onClick={() => setAskAiShow(false)}>
+                            <ChevronLeft className="w-5 h-5" />
+                          </div>
+                        )}
                       </div>
                       <div className="flex-1 w-full flex items-center justify-center text-center">
                         <h1 className="line-clamp-1">{promptCompanyName}</h1>
@@ -400,8 +397,7 @@ export default function ChatMain({ mini = false }: { mini?: boolean }) {
               ref={formRef}
               className={cn(
                 "pb-5 px-4 sticky bottom-0 bg-transparent backdrop-blur-sm backdrop-saturate-200 w-full mx-auto"
-              )}
-            >
+              )}>
               <div className="flex w-full bg-card-foreground p-1.5 border border-brand rounded-[26px] gap-1.5 max-w-screen-md mx-auto">
                 <div className="flex flex-1 items-end gap-1.5 md:gap-2">
                   {isSubmiting && (
@@ -436,8 +432,7 @@ export default function ChatMain({ mini = false }: { mini?: boolean }) {
                       className="rounded-full w-10 h-10 p-0 flex-shrink-0 text-background bg-brand hover:bg-brand/70 hover:text-white"
                       variant="ghost"
                       type="submit"
-                      disabled={isSubmiting}
-                    >
+                      disabled={isSubmiting}>
                       <Send className="w-4 h-4" />
                     </Button>
                   )}
@@ -446,8 +441,7 @@ export default function ChatMain({ mini = false }: { mini?: boolean }) {
                       onClick={handelAbort}
                       className="rounded-full w-10 h-10 p-0 flex-shrink-0"
                       type="button"
-                      disabled={!isSubmiting}
-                    >
+                      disabled={!isSubmiting}>
                       <X className="w-4 h-4" />
                     </Button>
                   )}

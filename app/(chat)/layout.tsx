@@ -3,6 +3,7 @@ import IconBar from "@/components/dashboard/iconBar";
 import { apiClient } from "@/lib/api";
 import useChat from "@/lib/hooks/useChat";
 import useStockData from "@/lib/hooks/useStockData";
+import useUi from "@/lib/hooks/useUi";
 import { usePathname } from "next/navigation";
 import { ReactNode, useEffect } from "react";
 
@@ -11,14 +12,16 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   const { setMarketData, setIsLoading, isLoading } = useStockData();
   const pathname = usePathname();
   const { setIsAskingAi, setIsSubmiting } = useChat();
+  const { setAskAiShow, mainServerAvailable } = useUi();
 
   const fetchStockData = async () => {
     try {
       const { data: mData } = await client.get(
         "/tools/get-stock-market",
         null,
-        {}
-        // mainServerAvailable
+        {},
+        //@ts-ignore
+        mainServerAvailable
       );
       setMarketData(mData);
     } catch (error) {
@@ -33,6 +36,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
+    setAskAiShow(false);
     setIsAskingAi(false);
     setIsSubmiting(false);
   }, [pathname]);

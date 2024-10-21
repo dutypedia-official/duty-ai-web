@@ -43,6 +43,7 @@ export const ListItem = ({
     setRefreash,
     mainServerAvailable,
     setAskAiShow,
+    askAiShow,
   } = useUi();
   const { setIsAskingAi, isAskingAi } = useChat();
   const {
@@ -52,6 +53,8 @@ export const ListItem = ({
     setSubmitPrompt,
     setPromptCompanyName,
     isSubmiting,
+    setIsSubmiting,
+    setMessages,
   } = useChat();
   const { getToken } = useAuth();
   const client = apiClient();
@@ -137,8 +140,9 @@ export const ListItem = ({
       await client.delete(
         `/noti/delete-alerm/${currentAlerm.id}`,
         token,
-        {}
-        // mainServerAvailable
+        {},
+        //@ts-ignore
+        mainServerAvailable
       );
       toast({
         title: "Alarm deleted successfully",
