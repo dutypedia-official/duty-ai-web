@@ -26,7 +26,7 @@ export const Filters = ({
   const isBiggerScreen = useMediaQuery("(min-width: 1920px)");
 
   const filterBtn = [
-    { name: "❤️ Favorite", value: "❤️ favorite" },
+    { name: "❤️ Favorite", value: "favorite" },
     { name: "All", value: "" },
     {
       name: "Top gainers",

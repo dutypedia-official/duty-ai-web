@@ -5,7 +5,6 @@ import ProfileMenu from "@/components/global/profileMenu";
 import { ModeToggle } from "@/components/modeToggle";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { cookies, headers } from "next/headers";
 import SidebarItems from "./_components/sidebar-items";
 
 export default async function Dashboard({
@@ -13,9 +12,6 @@ export default async function Dashboard({
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = cookies();
-  const headersList = headers();
-
   return (
     <div className="grid grid-cols-1 min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-background md:block">

@@ -33,7 +33,7 @@ export const MessagesTable = ({
   const [focus, setFocus] = useState(false);
   const { replace, refresh } = useRouter();
   const [isDownloadPending, startDownloadTransition] = useTransition();
-  const params = new URLSearchParams(searchParams);
+  const params = new URLSearchParams(searchParams.toString());
   const pathname = usePathname();
 
   const handleClick = () => {
@@ -81,8 +81,7 @@ export const MessagesTable = ({
                 className={cn(
                   "flex h-10 items-center border rounded-md transition-all duration-300",
                   focus ? "w-52 lg:w-72" : "w-32"
-                )}
-              >
+                )}>
                 <Button variant={"ghost"} onClick={handleClick}>
                   <Search className="w-4 h-4" />
                 </Button>

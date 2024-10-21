@@ -43,8 +43,9 @@ export const ListItem = ({
     setRefreash,
     mainServerAvailable,
     setAskAiShow,
+    askAiShow,
   } = useUi();
-  const { setIsAskingAi, isAskingAi } = useChat();
+  const { setIsAskingAi, setChatMiniOpen } = useChat();
   const {
     setTemplate,
     setActiveConversationId,
@@ -52,6 +53,8 @@ export const ListItem = ({
     setSubmitPrompt,
     setPromptCompanyName,
     isSubmiting,
+    setIsSubmiting,
+    setMessages,
   } = useChat();
   const { getToken } = useAuth();
   const client = apiClient();
@@ -137,8 +140,9 @@ export const ListItem = ({
       await client.delete(
         `/noti/delete-alerm/${currentAlerm.id}`,
         token,
-        {}
-        // mainServerAvailable
+        {},
+        //@ts-ignore
+        mainServerAvailable
       );
       toast({
         title: "Alarm deleted successfully",
@@ -154,24 +158,13 @@ export const ListItem = ({
   };
 
   const askAiFn = () => {
-    try {
-      if (isLargerScreen) {
-        setAskAiShow(true);
-        setTemplate("finance");
-        setActiveConversationId(null);
-        setPromptCompanyName(name);
-        setPrompt(`DSEBD:${name} bangladesh`);
-        setSubmitPrompt(true);
-      } else {
-        setTemplate("finance");
-        setActiveConversationId(null);
-        setPrompt(`DSEBD:${name} bangladesh`);
-        setSubmitPrompt(true);
-        router.push("/finance");
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    setAskAiShow(true);
+    setTemplate("finance");
+    setActiveConversationId(null);
+    setPromptCompanyName(name);
+    setPrompt(`DSEBD:${name} bangladesh`);
+    setSubmitPrompt(true);
+    setChatMiniOpen(true);
   };
 
   useEffect(() => {
@@ -179,6 +172,7 @@ export const ListItem = ({
     setPrompt("");
     setActiveConversationId(null);
     setIsAskingAi(false);
+    setChatMiniOpen(false);
   }, []);
 
   const Fav = () => {

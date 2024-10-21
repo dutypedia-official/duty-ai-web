@@ -41,7 +41,7 @@ export const UsersTable = ({
   const { replace, refresh } = useRouter();
   const [isDownloadPending, startDownloadTransition] = useTransition();
 
-  const params = new URLSearchParams(searchParams);
+  const params = new URLSearchParams(searchParams.toString());
   const pathname = usePathname();
 
   const handleClick = () => {
