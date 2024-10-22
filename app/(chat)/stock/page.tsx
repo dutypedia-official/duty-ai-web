@@ -17,9 +17,10 @@ import { StockList } from "./_components/stock-list";
 import { cn } from "@/lib/utils";
 import { StockChatMini } from "./_components/stock-chat-mini";
 import useMediaQuery from "@/lib/hooks/useMediaQuery";
+import { TabContent } from "./_components/tab-content";
 
 export default function page() {
-  const { askAiShow, refreash, mainServerAvailable } = useUi();
+  const { refreash, mainServerAvailable } = useUi();
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading2, setIsLoading2] = useState(true);
 
@@ -156,22 +157,10 @@ export default function page() {
             </div>
           </div>
 
-          <div className={cn(askAiShow ? "hidden 2xl:block" : "hidden")}>
-            <ChatMain mini={true} />
-          </div>
-          <div className="hidden 2xl:block">
-            {!askAiShow && <MarketOverview />}
-          </div>
+          {/* {chatMiniOpen && <ChatMain mini={true} />} */}
+          <TabContent />
         </div>
       </div>
-
-      <div className="fixed 2xl:hidden bottom-40 right-0">
-        <Overview />
-      </div>
-
-      {!isLargerScreen && (
-        <StockChatMini open={chatMiniOpen} setOpen={setChatMiniOpen} />
-      )}
     </div>
   );
 }

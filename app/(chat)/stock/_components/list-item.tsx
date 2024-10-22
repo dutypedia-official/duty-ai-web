@@ -42,10 +42,9 @@ export const ListItem = ({
     refreash,
     setRefreash,
     mainServerAvailable,
-    setAskAiShow,
-    askAiShow,
+    setActiveTab,
   } = useUi();
-  const { setIsAskingAi, setChatMiniOpen } = useChat();
+  const { setIsAskingAi, setChatMiniOpen, setChatMiniSlide } = useChat();
   const {
     setTemplate,
     setActiveConversationId,
@@ -158,22 +157,22 @@ export const ListItem = ({
   };
 
   const askAiFn = () => {
-    setAskAiShow(true);
     setTemplate("finance");
     setActiveConversationId(null);
     setPromptCompanyName(name);
     setPrompt(`DSEBD:${name} bangladesh`);
     setSubmitPrompt(true);
     setChatMiniOpen(true);
+    setChatMiniSlide(true);
+    setActiveTab("aiChat");
   };
 
-  useEffect(() => {
-    setAskAiShow(false);
-    setPrompt("");
-    setActiveConversationId(null);
-    setIsAskingAi(false);
-    setChatMiniOpen(false);
-  }, []);
+  // useEffect(() => {
+  //   setPrompt("");
+  //   setActiveConversationId(null);
+  //   setIsAskingAi(false);
+  //   setChatMiniOpen(false);
+  // }, []);
 
   const Fav = () => {
     return (

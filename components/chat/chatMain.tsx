@@ -43,7 +43,6 @@ export default function ChatMain({
 }) {
   const { getToken } = useAuth();
   const [timeLeft, setTimeLeft] = useState(30);
-  const { setAskAiShow } = useUi();
 
   const chatStore = useChat();
   const {
@@ -65,7 +64,7 @@ export default function ChatMain({
     updateMessage,
     removeMessage,
     setRelatedPrompts,
-    setChatMiniOpen,
+    setChatMiniSlide,
   } = chatStore;
   const { formRef, onKeyDown } = useEnterSubmit();
   const client = apiClient();
@@ -361,7 +360,7 @@ export default function ChatMain({
           "w-full relative",
           mini
             ? slide
-              ? "bg-card-foreground rounded-lg w-full lg:w-[28rem] overflow-auto h-screen"
+              ? "bg-card-foreground rounded-lg w-full lg:w-[28rem] overflow-auto h-full"
               : "bg-card-foreground rounded-lg w-full lg:w-[28rem] overflow-auto h-[calc(100vh-6.5rem)]"
             : "flex-1"
         )}>
@@ -373,7 +372,7 @@ export default function ChatMain({
                 "w-full max-w-screen-md mx-auto",
                 mini
                   ? slide
-                    ? "min-h-[calc(100vh-0.5rem)]"
+                    ? "min-h-[calc(100vh-10.5rem)]"
                     : "min-h-[calc(100vh-12rem)]"
                   : "min-h-[calc(100vh-64px)]"
               )}>
@@ -390,8 +389,7 @@ export default function ChatMain({
                           <div
                             className="rounded-full shadow-md w-8 h-8 flex items-center justify-center cursor-pointer"
                             onClick={() => {
-                              setAskAiShow(false);
-                              setChatMiniOpen(false);
+                              setChatMiniSlide(false);
                             }}>
                             <ChevronLeft className="w-5 h-5" />
                           </div>
@@ -441,7 +439,9 @@ export default function ChatMain({
                     }
                     spellCheck={false}
                     autoComplete="off"
-                    className="max-h-[25dvh] pl-2 py-2.5 w-full bg-transparent h-full resize-none  focus-within:outline-none sm:text-sm placeholder:text-muted-foreground"
+                    className={cn(
+                      "max-h-[25dvh] pl-2 py-2.5 w-full bg-transparent h-full resize-none  focus-within:outline-none sm:text-sm placeholder:text-muted-foreground"
+                    )}
                   />
                   {!isSubmiting && (
                     <Button

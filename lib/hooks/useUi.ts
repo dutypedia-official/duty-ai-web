@@ -8,8 +8,8 @@ interface Store {
   setScreenRefresh: (screenRefresh: boolean) => void;
   mainServerAvailable: boolean;
   setMainServerAvailable: (mainServerAvailable: boolean) => void;
-  askAiShow: boolean;
-  setAskAiShow: (show: boolean) => void;
+  activeTab: any;
+  setActiveTab: (activeTab: any) => void;
 }
 
 const useUi = create<Store>((set, get) => ({
@@ -22,8 +22,8 @@ const useUi = create<Store>((set, get) => ({
   mainServerAvailable: false,
   setMainServerAvailable: (mainServerAvailable: boolean) =>
     set({ mainServerAvailable }),
-  askAiShow: false,
-  setAskAiShow: (show: boolean) => set({ askAiShow: show }),
+  activeTab: "index",
+  setActiveTab: (activeTab: string) => set({ activeTab }),
 }));
 
 export default useUi;

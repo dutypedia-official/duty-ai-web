@@ -23,15 +23,16 @@ export const Overview = () => {
   if (isDesktop) {
     return (
       <Sheet onOpenChange={setOpen} open={open}>
-        <SheetTrigger onMouseEnter={() => setOpen(true)}>
-          <div className="h-44 bg-card-foreground flex items-center justify-center rounded-l-xl">
-            <FaCaretLeft className="text-[#757575] dark:text-white" />
+        <SheetTrigger onMouseEnter={() => setOpen(true)} asChild>
+          <div className="fixed right-0 top-0 h-screen flex items-center justify-center">
+            <div className="h-44 bg-card-foreground flex items-center justify-center rounded-l-xl">
+              <FaCaretLeft className="text-[#757575] dark:text-white" />
+            </div>
           </div>
         </SheetTrigger>
         <SheetContent className="p-0 w-full max-w-full sm:max-w-[28rem] rounded-none">
           <div className="absolute z-10 h-screen flex items-center justify-center">
             <div
-              onMouseEnter={() => setOpen(false)}
               onClick={() => {
                 setOpen(false);
               }}

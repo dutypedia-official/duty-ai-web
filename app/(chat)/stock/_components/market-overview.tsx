@@ -155,63 +155,57 @@ const MarketOverview = ({ sidebar = false }: { sidebar?: boolean }) => {
   }, []);
 
   return (
-    <div
-      className={cn(
-        "overflow-auto bg-card-foreground p-5 w-full lg:w-[28rem] ",
-        sidebar ? "h-full" : "max-h-[calc(100vh-6.5rem)] rounded-lg"
-      )}>
-      <div className={cn("flex flex-col gap-5")}>
-        <ChartSlider tabs={tabs} />
-        <div className="p-3 rounded-lg bg-card flex flex-col gap-5">
-          <h1 className="text-base lg:text-xl">Market Overview</h1>
-          {overviewData?.map((item: any, i: number) => {
-            return (
-              <div key={i} className="flex justify-between gap-5">
-                <div className="w-2/3">
-                  <h4 className="text-sm text-[#34495E] dark:text-[#E0E0E0]">
-                    {item?.title}
-                  </h4>
-                  <p className="text-[10px] text-[#787878] dark:text-[#E0E0E0]">
-                    {item?.subtitle}
-                  </p>
-                </div>
-                <div className="w-1/3 flex flex-col items-end justify-start">
-                  <p
-                    className={cn(
-                      "text-sm text-[#2ECC71]",
-                      item?.value?.startsWith("-") && "text-[#FF0000]"
-                    )}>
-                    {item?.value}
-                  </p>
-                </div>
+    <div className={cn("flex flex-col gap-5 px-5 pb-5")}>
+      <ChartSlider tabs={tabs} />
+      <div className="p-3 rounded-lg bg-card flex flex-col gap-5">
+        <h1 className="text-base lg:text-xl">Market Overview</h1>
+        {overviewData?.map((item: any, i: number) => {
+          return (
+            <div key={i} className="flex justify-between gap-5">
+              <div className="w-2/3">
+                <h4 className="text-sm text-[#34495E] dark:text-[#E0E0E0]">
+                  {item?.title}
+                </h4>
+                <p className="text-[10px] text-[#787878] dark:text-[#E0E0E0]">
+                  {item?.subtitle}
+                </p>
               </div>
-            );
-          })}
-        </div>
-        {indexData?.summary && (
-          <div className="p-3 rounded-lg bg-card flex flex-col gap-5">
-            <h1 className="text-xl text-[#3DC000] dark:text-[#FFD700]">
-              Ai summery
-            </h1>
-            <div className="">
-              <p
-                ref={summaryRef}
-                className={`text-[#424242] dark:text-[#E0E0E0] text-sm font-normal ${
-                  isExpanded ? "" : "line-clamp-6"
-                }`}>
-                {indexData?.summary}
-              </p>
-              {isTruncated && (
-                <span
-                  onClick={handleReadMoreToggle}
-                  className="text-[#E71919] text-sm font-semibold cursor-pointer">
-                  {isExpanded ? "Show Less" : "Read More"}
-                </span>
-              )}
+              <div className="w-1/3 flex flex-col items-end justify-start">
+                <p
+                  className={cn(
+                    "text-sm text-[#2ECC71]",
+                    item?.value?.startsWith("-") && "text-[#FF0000]"
+                  )}>
+                  {item?.value}
+                </p>
+              </div>
             </div>
-          </div>
-        )}
+          );
+        })}
       </div>
+      {indexData?.summary && (
+        <div className="p-3 rounded-lg bg-card flex flex-col gap-5">
+          <h1 className="text-xl text-[#3DC000] dark:text-[#FFD700]">
+            Ai summery
+          </h1>
+          <div className="">
+            <p
+              ref={summaryRef}
+              className={`text-[#424242] dark:text-[#E0E0E0] text-sm font-normal ${
+                isExpanded ? "" : "line-clamp-6"
+              }`}>
+              {indexData?.summary}
+            </p>
+            {isTruncated && (
+              <span
+                onClick={handleReadMoreToggle}
+                className="text-[#E71919] text-sm font-semibold cursor-pointer">
+                {isExpanded ? "Show Less" : "Read More"}
+              </span>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

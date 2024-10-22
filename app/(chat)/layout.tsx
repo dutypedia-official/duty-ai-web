@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   const { setMarketData, setIsLoading, isLoading } = useStockData();
   const pathname = usePathname();
   const { setIsAskingAi, setIsSubmiting } = useChat();
-  const { setAskAiShow, mainServerAvailable } = useUi();
+  const { mainServerAvailable } = useUi();
 
   const fetchStockData = async () => {
     try {
@@ -36,7 +36,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    setAskAiShow(false);
     setIsAskingAi(false);
     setIsSubmiting(false);
   }, [pathname]);

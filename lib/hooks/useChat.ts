@@ -31,6 +31,8 @@ interface ChatStore {
   updateMessage: (id: string, message: ChatMessageProps) => void;
   chatMiniOpen: boolean;
   setChatMiniOpen: (chatMiniOpen: boolean) => void;
+  chatMiniSlide: boolean;
+  setChatMiniSlide: (chatMiniSlide: boolean) => void;
 }
 
 const useChat = create<ChatStore>((set, get) => ({
@@ -70,6 +72,8 @@ const useChat = create<ChatStore>((set, get) => ({
   setRelatedPrompts: (prompts) => set({ relatedPrompts: prompts }),
   chatMiniOpen: false,
   setChatMiniOpen: (chatMiniOpen) => set({ chatMiniOpen }),
+  chatMiniSlide: false,
+  setChatMiniSlide: (chatMiniSlide) => set({ chatMiniSlide }),
 }));
 
 export default useChat;
