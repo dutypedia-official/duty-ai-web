@@ -10,6 +10,8 @@ interface Store {
   setMainServerAvailable: (mainServerAvailable: boolean) => void;
   activeTab: any;
   setActiveTab: (activeTab: any) => void;
+  activeF: string;
+  setActiveF: (activeF: any) => void;
 }
 
 const useUi = create<Store>((set, get) => ({
@@ -24,6 +26,8 @@ const useUi = create<Store>((set, get) => ({
     set({ mainServerAvailable }),
   activeTab: "index",
   setActiveTab: (activeTab: string) => set({ activeTab }),
+  activeF: "",
+  setActiveF: (activeF: string) => set({ activeF }),
 }));
 
 export default useUi;

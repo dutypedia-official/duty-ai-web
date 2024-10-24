@@ -20,9 +20,10 @@ import useMediaQuery from "@/lib/hooks/useMediaQuery";
 import { TabContent } from "./_components/tab-content";
 
 export default function page() {
-  const { refreash, mainServerAvailable } = useUi();
+  const { refreash, mainServerAvailable, setActiveF } = useUi();
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading2, setIsLoading2] = useState(true);
+  const [isLoading3, setIsLoading3] = useState(true);
 
   const { marketData, favorites, setFavorites, isLoading } = useStockData();
 
@@ -65,6 +66,8 @@ export default function page() {
       setFavorites(data);
     } catch (error) {
       console.log(error);
+    } finally {
+      setIsLoading3(false);
     }
   };
 
@@ -120,14 +123,18 @@ export default function page() {
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
                 activeFilter={activeFilter}
-                setActiveFilter={setActiveFilter}
+                setActiveFilter={(data: string) => {
+                  setActiveFilter(data);
+                  setActiveF(data);
+                }}
               />
               <div
                 className={cn(
                   "w-full max-h-[calc(100vh-13.5rem)] overflow-auto ",
                   (isLoading || isLoading2) &&
                     "bg-card-foreground lg:bg-transparent rounded-md"
-                )}>
+                )}
+              >
                 {isLoading || isLoading2 ? (
                   Array.from(Array(10).keys()).map((i) => (
                     <div key={i} className="my-5 flex gap-5">

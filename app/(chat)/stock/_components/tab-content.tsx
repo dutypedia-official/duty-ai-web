@@ -37,7 +37,8 @@ export const TabContent = ({ open, setOpen }: any) => {
                   ? "bg-[#00796B]"
                   : "bg-[#E0E0E0] dark:bg-[#333333]"
               }`}
-              onClick={() => setActiveTab(tab?.name)}>
+              onClick={() => setActiveTab(tab?.name)}
+            >
               {tab.label}
             </button>
           ))}
@@ -56,7 +57,8 @@ export const TabContent = ({ open, setOpen }: any) => {
           <div
             onMouseEnter={() => setChatMiniSlide(true)}
             onClick={() => setChatMiniSlide(true)}
-            className="h-44 bg-card-foreground flex items-center justify-center rounded-l-xl">
+            className="h-44 bg-card-foreground flex items-center justify-center rounded-l-xl"
+          >
             <FaCaretLeft className="text-[#757575] dark:text-white" />
           </div>
         </div>
@@ -67,7 +69,8 @@ export const TabContent = ({ open, setOpen }: any) => {
             onClick={() => {
               setChatMiniSlide(false);
             }}
-            className="h-44 z-20 flex items-center bg-card-foreground rounded-l-xl -translate-x-4">
+            className="h-44 z-20 flex items-center bg-card-foreground rounded-l-xl -translate-x-4"
+          >
             <FaCaretRight className="text-[#757575] dark:text-white" />
           </div>
         </div>
@@ -82,15 +85,20 @@ export const TabContent = ({ open, setOpen }: any) => {
                       ? "bg-[#00796B]"
                       : "bg-[#E0E0E0] dark:bg-[#333333]"
                   }`}
-                  onClick={() => setActiveTab(tab?.name)}>
+                  onClick={() => setActiveTab(tab?.name)}
+                >
                   {tab.label}
                 </button>
               ))}
             </div>
             <div className={cn(activeTab !== "aiChat" && "mt-4")}>
               {/* Render the content based on the active tab */}
-              {activeTab === "index" && <MarketOverview />}
-              {activeTab === "aiChat" && <ChatMain mini={true} slide={true} />}
+              <div className={cn(activeTab !== "index" ? "hidden" : "")}>
+                <MarketOverview />
+              </div>
+              <div className={cn(activeTab !== "aiChat" ? "hidden" : "")}>
+                <ChatMain mini={true} slide={true} />
+              </div>
             </div>
           </div>
         </ScrollArea>

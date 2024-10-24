@@ -30,6 +30,7 @@ export const StockList = ({
   favorites,
   alerms,
   onFavList = false,
+  activeFilter,
 }: any) => {
   if (!filteredStocks?.length)
     return (
