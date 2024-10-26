@@ -350,92 +350,84 @@ export const LandingPage = () => {
       </div>
 
       <div className="relative">
-        <div className="relative">
-          <div className="px-3 lg:py-40 container mx-auto w-full max-w-screen-xl">
-            <div className="flex flex-col gap-16 lg:gap-24">
-              <h1 className="text-2xl lg:text-7xl font-bold max-w-72 lg:max-w-screen-md lg:mx-auto lg:leading-[5.5rem] mx-auto lg:text-center">
-                Smarter, Faster, and
-                <div className="bg-[#00729C] text-[#00FF85] rounded-full lg:rounded-3xl inline-flex text-base lg:text-4xl mt-2 py-0 px-3 lg:px-6 lg:py-4 font-light lg:font-normal lg:-translate-y-3 leading-10">
-                  Profitable
-                </div>{" "}
-                Market Moves!
-              </h1>
-              <div className="flex flex-col lg:flex-row justify-between lg:gap-16">
-                <div className="lg:w-1/2">
-                  <div className="max-w-xl mx-auto lg:ml-0 flex flex-col gap-3 bg-[#0F1012] border border-[#202020] rounded-3xl py-6 px-3 relative">
-                    <Image
-                      src={"/magic.svg"}
-                      alt="check"
-                      width={34}
-                      height={34}
-                      className="hidden lg:block absolute right-2 top-2 aspect-[34/34] object-contain"
-                    />
-                    {list?.map((item: any, i: number) => {
-                      return (
-                        <div key={i} className="flex items-center">
-                          <div className="w-10 h-10 rounded-full relative">
-                            <Image
-                              src={"/check.svg"}
-                              alt="check"
-                              fill
-                              className="absolute object-contain w-full h-full"
-                            />
-                          </div>
-                          <div className="relative ">
-                            <p className="text-gradient text-xs sm:text-xl py-2 px-3 border rounded-full">
-                              {item?.name}
-                            </p>
-                          </div>
+        <div className="px-3 lg:py-40 container mx-auto w-full max-w-screen-xl">
+          <div className="flex flex-col gap-16 lg:gap-24">
+            <h1 className="text-2xl lg:text-7xl font-bold max-w-72 lg:max-w-screen-md lg:mx-auto lg:leading-[5.5rem] mx-auto lg:text-center">
+              Smarter, Faster, and
+              <div className="bg-[#00729C] text-[#00FF85] rounded-full lg:rounded-3xl inline-flex text-base lg:text-4xl mt-2 py-0 px-3 lg:px-6 lg:py-4 font-light lg:font-normal lg:-translate-y-3 leading-10">
+                Profitable
+              </div>{" "}
+              Market Moves!
+            </h1>
+            <div className="flex flex-col lg:flex-row justify-between lg:gap-16">
+              <div className="lg:w-1/2">
+                <div className="max-w-xl mx-auto lg:ml-0 flex flex-col gap-3 bg-[#0F1012] border border-[#202020] rounded-3xl py-6 px-3 relative">
+                  <Image
+                    src={"/magic.svg"}
+                    alt="check"
+                    width={34}
+                    height={34}
+                    className="hidden lg:block absolute right-2 top-2 aspect-[34/34] object-contain"
+                  />
+                  {list?.map((item: any, i: number) => {
+                    return (
+                      <div key={i} className="flex items-center">
+                        <div className="w-10 h-10 rounded-full relative">
+                          <Image
+                            src={"/check.svg"}
+                            alt="check"
+                            fill
+                            className="absolute object-contain w-full h-full"
+                          />
                         </div>
-                      );
-                    })}
-                  </div>
+                        <div className="relative ">
+                          <p className="text-gradient text-xs sm:text-xl py-2 px-3 border rounded-full">
+                            {item?.name}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
+              </div>
 
-                {isLG && (
-                  <div className="relative w-full lg:w-1/2 aspect-[585/498]">
-                    <Image
-                      src={"/graph-summary.svg"}
-                      alt="graph"
-                      fill
-                      className="absolute object-contain w-full h-full"
-                    />
-                  </div>
-                )}
-              </div>
+              {isLG && (
+                <div className="relative w-full lg:w-1/2 aspect-[585/498]">
+                  <Image
+                    src={"/graph-summary.svg"}
+                    alt="graph"
+                    fill
+                    className="absolute object-contain w-full h-full"
+                  />
+                </div>
+              )}
             </div>
-            <div className="absolute bottom-0 left-0 w-full">
-              <div className="relative w-full aspect-[1512/840]">
-                <Image
-                  src={"/market.svg"}
-                  alt="bg"
-                  fill
-                  className="absolute object-cover w-full h-full bottom-0"
-                />
-              </div>
-              {/* <div className="relative w-full aspect-[1512/840]">
-                <Image
-                  src={"/market.svg"}
-                  alt="bg"
-                  fill
-                  className="absolute object-contain w-full h-full bottom-0"
-                />
-              </div> */}
+          </div>
+          <div className="absolute bottom-0 left-0 w-full">
+            <div className="relative w-full aspect-[1512/840]">
+              <Image
+                src={"/market.svg"}
+                alt="bg"
+                fill
+                className="absolute object-cover w-full h-full bottom-0"
+              />
             </div>
           </div>
         </div>
-
-        {!isLG && (
-          <div className="relative w-full aspect-[320/362] mt-6">
-            <Image
-              src={"/graph-summary-mb.svg"}
-              alt="graph"
-              fill
-              className="absolute object-contain w-full h-full"
-            />
-          </div>
-        )}
+        {/* <div className="hidden lg:block bg-[#020007] absolute w-full h-0 left-0 -bottom-40 opacity-20 border-[82px]"></div> */}
       </div>
+
+      {!isLG && (
+        <div className="relative w-full aspect-[320/362] mt-6">
+          <Image
+            src={"/graph-summary-mb.svg"}
+            alt="graph"
+            fill
+            className="absolute object-contain w-full h-full"
+          />
+        </div>
+      )}
+      {/* <div className="block lg:hidden bg-[#020007]  w-full h-0 left-0 -bottom-40 opacity-45 border-[26px]"></div> */}
 
       <div
         id="apps"
@@ -523,7 +515,6 @@ export const LandingPage = () => {
           </Link>
         </div>
       </div>
-
       <div className="px-3 mb-5 mt-10 lg:py-40 container mx-auto w-full max-w-xl lg:max-w-screen-xl">
         <div className="lg:hidden">
           <div className="relative w-full aspect-[289/207]">
@@ -610,7 +601,6 @@ export const LandingPage = () => {
           </div>
         </div>
       </div>
-
       <Footer />
     </div>
   );

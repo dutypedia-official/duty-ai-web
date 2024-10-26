@@ -6,7 +6,7 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
   const Logo = (className: any) => {
     return (
-      <div className="w-20 h-16 lg:w-40 relative mx-auto">
+      <div className="w-24 lg:w-40 aspect-[76.57/22.57] lg:aspect-[202/60] relative mx-auto">
         <Image
           src={"/duty-ai.svg"}
           alt="logo"
@@ -17,46 +17,57 @@ export const Footer = () => {
     );
   };
 
-  const Links = () => {
-    return (
-      <div className="flex justify-center gap-3 lg:gap-5 text-sm font-normal">
-        <Link href="signin" className="text-gradient">
-          Login
-        </Link>
-        <Link href="/about" className="text-gradient">
-          About Us
-        </Link>
-        <Link href="/legal/terms-and-conditions" className="text-gradient">
-          Privacy
-        </Link>
-        <Link href="/legal/privacy-policy" className="text-gradient">
-          Term
-        </Link>
-      </div>
-    );
-  };
-
   return (
-    <div className="">
-      <div className="container mx-auto max-w-screen-xl">
-        <footer className="flex flex-col lg:hidden gap-3 pb-5">
-          <div className="">
+    <div className="pb-5">
+      <div className="py-5 relative z-50">
+        <div className="flex flex-col lg:hidden gap-3">
+          <div className="mb-2">
             <Logo />
           </div>
-          <Links />
+          <div className="flex justify-center text-sm font-normal relative z-10">
+            <Link href="signin">
+              <p className="text-gradient cursor-pointer px-2">Login</p>
+            </Link>
+            <Link href="/about">
+              <p className="text-gradient cursor-pointer px-2">About Us</p>
+            </Link>
+            <Link href="/legal/terms-and-conditions">
+              <p className="text-gradient cursor-pointer px-2">Privacy</p>
+            </Link>
+            <Link href="/legal/privacy-policy">
+              <p className="text-gradient cursor-pointer px-2">Term</p>
+            </Link>
+          </div>
           <div className="text-gradient text-base text-center mt-3">
             All Right Reserved Duty {currentYear}
           </div>
-        </footer>
-        <footer className="hidden lg:flex flex-row justify-between items-center gap-3 pb-5">
-          <div className="">
+        </div>
+        <div className="hidden lg:grid grid-cols-3 gap-2 container mx-auto max-w-screen-xl">
+          <div className="flex justify-start">
             <Logo />
           </div>
-          <div className="text-gradient text-base lg:text-xl text-center">
-            All Right Reserved Duty {currentYear}
+          <div className="flex items-center justify-center">
+            <p className="text-gradient text-base lg:text-xl text-center">
+              All Right Reserved Duty {currentYear}
+            </p>
           </div>
-          <Links />
-        </footer>
+          <div className="flex justify-end">
+            <div className="flex justify-center items-center text-sm font-normal relative z-10">
+              <Link href="signin">
+                <p className="text-gradient cursor-pointer px-2">Login</p>
+              </Link>
+              <Link href="/about">
+                <p className="text-gradient cursor-pointer px-2">About Us</p>
+              </Link>
+              <Link href="/legal/terms-and-conditions">
+                <p className="text-gradient cursor-pointer px-2">Privacy</p>
+              </Link>
+              <Link href="/legal/privacy-policy">
+                <p className="text-gradient cursor-pointer px-2">Term</p>
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

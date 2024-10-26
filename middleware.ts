@@ -16,20 +16,15 @@ export default authMiddleware({
   async afterAuth(auth, req, evt) {
     const pathname = req.nextUrl.pathname;
     const userId = auth.userId;
-    if (pathname === "/hub") {
-      if (!userId) {
-        return NextResponse.redirect(new URL("/", req.url));
-      }
-      if (
-        ![
-          "user_2iMy3ihejgSkgc5SxdW9RjoLsC2",
-          "user_2iMJrsiGrb5eKSI43KWz5OAvZoA",
-        ].includes(userId)
-      ) {
-        return NextResponse.redirect(new URL("/", req.url));
-      }
+
+    const isPublicRoute = publicRoutes.includes(pathname);
+
+    if (!userId && !isPublicRoute) {
+      // If not logged in and trying to access a non-public route, redirect to /signin
+      return NextResponse.redirect(new URL("/signin", req.url));
     }
-    if (pathname === "/") {
+
+    if (pathname === "/hub") {
       if (!userId) {
         return NextResponse.redirect(new URL("/", req.url));
       }
