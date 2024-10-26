@@ -44,9 +44,12 @@ export const TabContent = ({ open, setOpen }: any) => {
           ))}
         </div>
         <div className="mt-4">
-          {/* Render the content based on the active tab */}
-          {activeTab === "index" && <MarketOverview />}
-          {activeTab === "aiChat" && <ChatMain mini={true} />}
+          <div className={cn("", { hidden: activeTab === "index" })}>
+            <MarketOverview />
+          </div>
+          <div className={cn("", { hidden: activeTab === "aiChat" })}>
+            <ChatMain mini={true} />
+          </div>
         </div>
       </div>
     </div>
