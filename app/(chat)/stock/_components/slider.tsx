@@ -6,7 +6,7 @@ import { cn, useColorScheme } from "@/lib/utils";
 import { ArrowDown, ArrowUp } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const SlideContent = ({ item }: { item: any }) => {
   const [isLoading, setIsLoading] = useState(true); // Loading state
@@ -39,7 +39,9 @@ const SlideContent = ({ item }: { item: any }) => {
   }
   return (
     <div
-      className={cn("rounded-lg flex-shrink-0 relative w-40 aspect-[152/176]")}>
+      className={cn(
+        "snap-start rounded-lg flex-shrink-0 relative w-40 aspect-[152/176] select-none"
+      )}>
       {/* {colorScheme === "dark" ? (
         isNeg ? (
           <NDark />
@@ -117,8 +119,60 @@ const SlideContent = ({ item }: { item: any }) => {
 };
 
 export const ChartSlider = ({ tabs }: { tabs: any }) => {
+  const scrollContainerRef = useRef<any>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
+  const handleMouseDown = (e: any) => {
+    const container = scrollContainerRef.current;
+    setIsDragging(true);
+    setStartX(e.pageX - container.offsetLeft);
+    setScrollLeft(container.scrollLeft);
+  };
+
+  const handleMouseMove = (e: any) => {
+    if (!isDragging) return; // If not dragging, do nothing
+    e.preventDefault();
+    const container = scrollContainerRef.current;
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX) * 1.5; // Adjust the scroll speed
+    container.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleMouseUpOrLeave = () => {
+    setIsDragging(false);
+  };
+
+  const handleTouchStart = (e: any) => {
+    const container = scrollContainerRef.current;
+    setIsDragging(true);
+    setStartX(e.touches[0].pageX - container.offsetLeft);
+    setScrollLeft(container.scrollLeft);
+  };
+
+  const handleTouchMove = (e: any) => {
+    if (!isDragging) return;
+    const container = scrollContainerRef.current;
+    const x = e.touches[0].pageX - container.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    container.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
   return (
-    <div className="flex gap-5 overflow-x-auto">
+    <div
+      ref={scrollContainerRef}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUpOrLeave}
+      onMouseLeave={handleMouseUpOrLeave}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      className="flex gap-5 touch-pan-x overflow-x-scroll whitespace-nowrap cursor-grab">
       {tabs?.map((item: any, i: number) => {
         return <SlideContent item={item} key={i} />;
       })}

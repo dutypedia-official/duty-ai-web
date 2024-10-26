@@ -24,6 +24,7 @@ export const Filters = ({
   setActiveFilter: any;
 }) => {
   const isBiggerScreen = useMediaQuery("(min-width: 1920px)");
+  const isDesktop = useMediaQuery("(min-width: 425px)");
 
   const filterBtn = [
     { name: "❤️ Favorite", value: "favorite" },
@@ -62,8 +63,11 @@ export const Filters = ({
         <Select
           defaultValue=""
           onValueChange={(value) => setActiveFilter(value)}>
-          <SelectTrigger className="w-40 capitalize">
-            <SelectValue placeholder={activeFilter} className="capitalize" />
+          <SelectTrigger
+            className={cn("w-40 capitalize", !isDesktop && "w-10")}>
+            {!isDesktop ? null : (
+              <SelectValue placeholder={activeFilter} className="capitalize" />
+            )}
           </SelectTrigger>
           <SelectContent className="bg-card">
             {filterBtn?.map((item, i) => {

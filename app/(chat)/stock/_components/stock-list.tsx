@@ -2,6 +2,8 @@
 
 import useUi from "@/lib/hooks/useUi";
 import { ListItem } from "./list-item";
+import useStockData from "@/lib/hooks/useStockData";
+import { Button } from "@/components/ui/button";
 
 export const getPrice = (item: any) => {
   //Check if the time is between 10 am to 2pm
@@ -30,7 +32,10 @@ export const StockList = ({
   favorites,
   alerms,
   onFavList = false,
+  activeFilter,
 }: any) => {
+  const { hasMore, currentPage, setCurrentPage } = useStockData();
+
   if (!filteredStocks?.length)
     return (
       <div className="flex items-center justify-center">
@@ -57,6 +62,17 @@ export const StockList = ({
           />
         );
       })}
+
+      {hasMore && (
+        <div className="flex items-center justify-center">
+          <Button
+            onClick={() => setCurrentPage(currentPage + 1)}
+            disabled={!hasMore}
+          >
+            Load More
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

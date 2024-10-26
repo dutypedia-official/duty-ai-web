@@ -93,6 +93,55 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .text-gradient {
+    background: linear-gradient(to right, #2286de, #3aaf75);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-linear {
+    background: linear-gradient(to right, #ffd700, #f0f2f5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .bg-linear-m {
+    position: absolute;
+    width: 375.15px;
+    height: 316px;
+    left: -55px;
+    top: -119px;
+    background: linear-gradient(
+      180deg,
+      rgba(70, 77, 248, 0.288) 27.04%,
+      rgba(70, 77, 248, 0.2) 135.31%
+    );
+    filter: blur(155.665px);
+    border-radius: 311.33px;
+  }
+
+  .bg-linear-pc {
+    position: absolute;
+    width: 1205px;
+    height: 1015px;
+    left: 289px;
+    top: -645px;
+
+    background: linear-gradient(
+      180deg,
+      rgba(70, 77, 248, 0.288) 27.04%,
+      rgba(70, 77, 248, 0.2) 135.31%
+    );
+    filter: blur(500px);
+    border-radius: 1000px;
+
+    /* Inside auto layout */
+    flex: none;
+    order: 4;
+    flex-grow: 0;
+    z-index: 4;
+  }
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

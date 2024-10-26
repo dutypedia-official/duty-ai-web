@@ -16,6 +16,13 @@ module.exports = {
       },
     },
     extend: {
+      screens: {
+        iSE: "320px",
+        i13Mini: "375px",
+        i14: "390px",
+        i14P: "428px",
+        i16: "430px",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

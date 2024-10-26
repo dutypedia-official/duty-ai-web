@@ -37,15 +37,15 @@ export const ListItem = ({
   const [visible, setVisible] = useState(false);
   const router = useRouter();
   const {
+    activeF,
     setRefreashFav,
     refreashFav,
     refreash,
     setRefreash,
     mainServerAvailable,
-    setAskAiShow,
-    askAiShow,
+    setActiveTab,
   } = useUi();
-  const { setIsAskingAi, setChatMiniOpen } = useChat();
+  const { setIsAskingAi, setChatMiniOpen, setChatMiniSlide } = useChat();
   const {
     setTemplate,
     setActiveConversationId,
@@ -59,13 +59,15 @@ export const ListItem = ({
   const { getToken } = useAuth();
   const client = apiClient();
   const currentAlerm = alerms?.find((alerm: any) => alerm.symbol === name);
-  const isFav = favs?.find((fav: any) => fav.symbol === name);
+  const isFav = favs?.find((fav: any) => fav.symbol == name);
   const [targetPrice, setTargetPrice] = useState(
     currentAlerm ? `${currentAlerm.price}` : ""
   );
   const [isFavorite, setIsFavorite] = useState(
-    onFavList ? true : isFav ? true : false
+    onFavList ? true : isFav ? true : activeF == "favorite" ? true : false
   );
+  console.log(isFavorite, "onFavList");
+
   const isLargerScreen = useMediaQuery("(min-width: 1536px)");
 
   const toggleFavorite = async () => {
@@ -158,27 +160,27 @@ export const ListItem = ({
   };
 
   const askAiFn = () => {
-    setAskAiShow(true);
     setTemplate("finance");
     setActiveConversationId(null);
     setPromptCompanyName(name);
     setPrompt(`DSEBD:${name} bangladesh`);
     setSubmitPrompt(true);
     setChatMiniOpen(true);
+    setChatMiniSlide(true);
+    setActiveTab("aiChat");
   };
 
-  useEffect(() => {
-    setAskAiShow(false);
-    setPrompt("");
-    setActiveConversationId(null);
-    setIsAskingAi(false);
-    setChatMiniOpen(false);
-  }, []);
+  // useEffect(() => {
+  //   setPrompt("");
+  //   setActiveConversationId(null);
+  //   setIsAskingAi(false);
+  //   setChatMiniOpen(false);
+  // }, []);
 
   const Fav = () => {
     return (
       <button onClick={toggleFavorite} className="flex items-center">
-        {isFavorite ? (
+        {isFavorite || activeF == "favorite" ? (
           <FaHeart className="text-[#CE1300] w-5 h-5" />
         ) : (
           <FaRegHeart className="text-[#CE1300] w-5 h-5" />
@@ -226,7 +228,8 @@ export const ListItem = ({
                 className={cn(
                   "text-[#2ECC71] text-sm",
                   !isPositive && "text-[#FF000F]"
-                )}>
+                )}
+              >
                 {change}
               </p>
             </div>
@@ -245,7 +248,8 @@ export const ListItem = ({
                 className={cn(
                   "text-[#2ECC71] text-sm",
                   !isPositive && "text-[#FF000F]"
-                )}>
+                )}
+              >
                 {changePer}
               </p>
             </div>
@@ -262,7 +266,8 @@ export const ListItem = ({
                 className={cn(
                   "text-[#2ECC71] text-sm",
                   !isPositive && "text-[#FF000F]"
-                )}>
+                )}
+              >
                 {change}
               </p>
             </div>
@@ -300,7 +305,8 @@ export const ListItem = ({
         <a
           href={`https://www.tradingview.com/chart/?symbol=DSEBD:${name}&utm_source=www.tradingview.com&utm_medium=widget&utm_campaign=chart&utm_term=DSEBD:${name}&theme=${colorScheme}`}
           target="_blank"
-          rel="noopener noreferrer">
+          rel="noopener noreferrer"
+        >
           <Button className="hover:bg-[#EAEDED] bg-[#EAEDED] hover:dark:bg-[#333333] dark:bg-[#333333] border border-[#EAEDED] dark:border-[#333333] text-[#757575] dark:text-white font-normal min-w-max text-[10px] sm:text-sm h-0 w-0 p-4">
             <MdOutlineShowChart className="w-4 h-4 text-[#5188D4] dark:text-white mr-0.5" />
             Chart
@@ -321,7 +327,8 @@ export const ListItem = ({
         <Button
           onClick={askAiFn}
           disabled={isSubmiting}
-          className="disabled:bg-gray-100 hover:bg-[#EAEDED] bg-[#EAEDED] hover:dark:bg-[#333333] dark:bg-[#333333] border border-[#EAEDED] dark:border-[#333333] text-[#757575] dark:text-white font-normal min-w-max text-[10px] sm:text-sm h-0 w-0 p-4">
+          className="disabled:bg-gray-100 hover:bg-[#EAEDED] bg-[#EAEDED] hover:dark:bg-[#333333] dark:bg-[#333333] border border-[#EAEDED] dark:border-[#333333] text-[#757575] dark:text-white font-normal min-w-max text-[10px] sm:text-sm h-0 w-0 p-4"
+        >
           <PiMagicWandFill className="w-4 h-4 text-[#5188D4]mr-0.5" />
           Ask AI
         </Button>

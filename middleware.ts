@@ -5,12 +5,14 @@ import { getAuth } from "@clerk/nextjs/server";
 // See https://clerk.com/docs/references/nextjs/auth-middleware
 // for more information about configuring your Middleware
 
+const publicRoutes = [
+  "/",
+  "/signin",
+  "/legal/terms-and-conditions",
+  "/legal/privacy-policy",
+];
 export default authMiddleware({
-  publicRoutes: [
-    "/signin",
-    "/legal/terms-and-conditions",
-    "/legal/privacy-policy",
-  ],
+  publicRoutes,
   async afterAuth(auth, req, evt) {
     const pathname = req.nextUrl.pathname;
     const userId = auth.userId;
@@ -29,7 +31,15 @@ export default authMiddleware({
     }
     if (pathname === "/") {
       if (!userId) {
-        return NextResponse.redirect(new URL("/signin", req.url));
+        return NextResponse.redirect(new URL("/", req.url));
+      }
+      if (
+        ![
+          "user_2iMy3ihejgSkgc5SxdW9RjoLsC2",
+          "user_2iMJrsiGrb5eKSI43KWz5OAvZoA",
+        ].includes(userId)
+      ) {
+        return NextResponse.redirect(new URL("/", req.url));
       }
     }
 
