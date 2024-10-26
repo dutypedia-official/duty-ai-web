@@ -9,7 +9,14 @@ import { ReactNode, useEffect } from "react";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   const client = apiClient();
-  const { setMarketData, setIsLoading, isLoading } = useStockData();
+  const {
+    setMarketData,
+    setIsLoading,
+    isLoading,
+    currentPage,
+    marketData,
+    setHasMore,
+  } = useStockData();
   const pathname = usePathname();
   const { setIsAskingAi, setIsSubmiting } = useChat();
   const { mainServerAvailable } = useUi();
@@ -17,23 +24,29 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   const fetchStockData = async () => {
     try {
       const { data: mData } = await client.get(
-        "/tools/get-stock-market",
+        `/tools/get-stock-market/${currentPage}`,
         null,
         {},
         //@ts-ignore
         mainServerAvailable
       );
-      setMarketData(mData);
+      setMarketData(
+        [...marketData, ...mData].filter(
+          (v, i, a) => a.findIndex((t) => t.id === v.id) === i
+        )
+      );
+
+      setHasMore(mData.length > 0);
     } catch (error) {
       console.log(error);
     } finally {
-      setIsLoading(!isLoading);
+      setIsLoading(false);
     }
   };
 
   useEffect(() => {
     fetchStockData();
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     setIsAskingAi(false);
