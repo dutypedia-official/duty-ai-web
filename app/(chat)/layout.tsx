@@ -4,10 +4,12 @@ import { apiClient } from "@/lib/api";
 import useChat from "@/lib/hooks/useChat";
 import useStockData from "@/lib/hooks/useStockData";
 import useUi from "@/lib/hooks/useUi";
+import { useAuth } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { ReactNode, useEffect } from "react";
 
 export default function RootLayout({ children }: { children: ReactNode }) {
+  const { isSignedIn } = useAuth();
   const client = apiClient();
   const { setMarketData, setIsLoading, isLoading } = useStockData();
   const pathname = usePathname();
@@ -42,10 +44,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
   return (
     <div className="relative w-full">
-      <div className="flex bg-background relative">
-        <IconBar />
-        {children}
-      </div>
+      {isSignedIn ? (
+        <div className="flex bg-background relative">
+          <IconBar />
+          {children}
+        </div>
+      ) : (
+        children
+      )}
     </div>
   );
 }
