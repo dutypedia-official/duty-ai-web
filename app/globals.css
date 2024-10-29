@@ -96,12 +96,14 @@
 
   .text-gradient {
     background: linear-gradient(to right, #2286de, #3aaf75);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .text-linear {
     background: linear-gradient(to right, #ffd700, #f0f2f5);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -125,8 +127,8 @@
     position: absolute;
     width: 1205px;
     height: 1015px;
-    left: 289px;
-    top: -645px;
+    left: 20%;
+    top: -120%;
 
     background: linear-gradient(
       180deg,

@@ -58,6 +58,14 @@ export const LandingPage = () => {
       name: "Active Trader",
     },
   ];
+
+  const suggestion = [
+    "GP স্টক টি আগামীকাল কত টাকায় যাবে",
+    "রবি স্টক টি কি কিনব",
+    "রবি স্টক টি কি কিনব",
+    "৫ টি সেরা স্টক এর নাম বল",
+  ];
+
   const list = [
     {
       name: "99.99% accuracy Prediction ",
@@ -214,7 +222,7 @@ export const LandingPage = () => {
                     </div>
                   </div>
 
-                  <div className="md:hidden absolute w-full h-full p-8 top-0 left-0">
+                  <div className="md:hidden absolute w-full h-full px-3 pt-5 sm:p-8 top-0 left-0">
                     <div className="relative z-10 top-10 sm:top-20 flex flex-col gap-10 sm:gap-20">
                       <h1 className="sm:px-8 leading-10 font-bold text-2xl text-center w-full md:max-w-md mx-auto">
                         Instant Stock Predictions Enter a Company, Get{" "}
@@ -249,13 +257,29 @@ export const LandingPage = () => {
                   </div>
 
                   <div className="w-full mx-auto absolute left-16 md:left-auto bottom-0">
-                    <div className="w-full h-8 xl:h-auto -mt-10 i13Mini:-mt-20 relative z-10 aspect-[822/45] ">
-                      <Image
-                        src={"/stock-history.svg"}
-                        alt="history"
-                        fill
-                        className="absolute object-contain w-full h-full"
-                      />
+                    <div className="relative hidden md:flex justify-center gap-5 w-full mx-auto text-center sm:-mt-10 i13Mini:-mt-20 md:-mt-28">
+                      {suggestion?.map((item: any, i: number) => {
+                        return (
+                          <Link
+                            key={i}
+                            href={"/signin"}
+                            className="text-xs p-3 rounded-md border border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
+                            {item}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                    <div className="relative md:hidden flex justify-center gap-5 w-full mx-auto text-center -mt-10 iSE:-mt-20 i13Mini:-mt-20 md:-mt-28">
+                      {suggestion.slice(0, 2)?.map((item: any, i: number) => {
+                        return (
+                          <Link
+                            key={i}
+                            href={"/signin"}
+                            className="text-xs p-3 rounded-md border-[0.02px] border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
+                            {item}
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
@@ -263,7 +287,7 @@ export const LandingPage = () => {
 
               <div className="relative aspect-[1280/547.74] hidden xl:block">
                 <div className="absolute right-10">
-                  <div className="w-72 relative aspect-[314/41] lg:bottom-3 xl:bottom-2">
+                  <div className="w-72 relative aspect-[314/41] lg:bottom-3 xl:bottom-2 2xl:bottom-0">
                     <Image
                       src={"/apps-rating.svg"}
                       alt="rating"
@@ -281,46 +305,66 @@ export const LandingPage = () => {
 
                 <div
                   className={cn(
-                    "relative z-50 flex flex-col w-full h-full mx-auto",
-                    isBig
-                      ? "gap-16 top-36 max-w-screen-md"
-                      : "gap-5 lg:gap-8 xl:gap-12 lg:top-20 xl:top-24 max-w-screen-sm"
+                    "relative z-50",
+                    isBig ? "top-36" : "lg:top-20 xl:top-24 "
                   )}>
-                  <h1
-                    className={cn(
-                      "leading-10 font-bold text-4xl text-center",
-                      isBig ? "text-5xl leading-[4rem] " : "xl:leading-[3rem] "
-                    )}>
-                    Instant Stock Predictions Enter a Company, Get{" "}
-                    <span className="text-linear font-normal">Buy/Sell</span>{" "}
-                    Signals.
-                  </h1>
                   <div
                     className={cn(
-                      "relative w-full max-w-lg mx-auto",
-                      isBig && "max-w-2xl"
+                      "flex flex-col w-full h-full mx-auto",
+                      isBig
+                        ? "gap-16 max-w-screen-md"
+                        : "gap-5 lg:gap-8 xl:gap-12 max-w-screen-sm"
                     )}>
-                    <div className="relative w-36 aspect-[169/40] ml-4">
-                      <Image
-                        src={"/accurate.svg"}
-                        alt="accurate"
-                        fill
-                        className="absolute object-contain w-full h-full"
-                      />
-                    </div>
-                    <div className="relative">
-                      <Input
-                        className="w-full h-12 xl:h-14 bg-[#1E1D1D] border border-[#3A3A3A] rounded-lg pr-14"
-                        placeholder="Type a company name"
-                      />
-                      <div className="absolute right-5 top-0 h-full flex items-center justify-end">
-                        <IoMdSend
-                          onClick={() => {
-                            router.push("/signin");
-                          }}
-                          className="relative z-50 text-2xl text-[#3BAFDA] cursor-pointer"
+                    <h1
+                      className={cn(
+                        "leading-10 font-bold text-4xl text-center",
+                        isBig
+                          ? "text-5xl leading-[4rem] "
+                          : "xl:leading-[3rem] "
+                      )}>
+                      Instant Stock Predictions Enter a Company, Get{" "}
+                      <span className="text-linear font-normal">Buy/Sell</span>{" "}
+                      Signals.
+                    </h1>
+                    <div
+                      className={cn(
+                        "relative w-full max-w-lg mx-auto",
+                        isBig && "max-w-2xl"
+                      )}>
+                      <div className="relative w-36 aspect-[169/40] ml-4">
+                        <Image
+                          src={"/accurate.svg"}
+                          alt="accurate"
+                          fill
+                          className="absolute object-contain w-full h-full"
                         />
                       </div>
+                      <div className="relative">
+                        <Input
+                          className="w-full h-12 xl:h-14 bg-[#1E1D1D] border border-[#3A3A3A] rounded-lg pr-14"
+                          placeholder="Type a company name"
+                        />
+                        <div className="absolute right-5 top-0 h-full flex items-center justify-end">
+                          <IoMdSend
+                            onClick={() => {
+                              router.push("/signin");
+                            }}
+                            className="relative z-50 text-2xl text-[#3BAFDA] cursor-pointer"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="relative flex justify-center gap-5 w-full mx-auto text-center">
+                      {suggestion?.map((item: any, i: number) => {
+                        return (
+                          <Link
+                            key={i}
+                            href={"/signin"}
+                            className="text-sm p-3 rounded-md border border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
+                            {item}
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
@@ -350,171 +394,174 @@ export const LandingPage = () => {
       </div>
 
       <div className="relative">
-        <div className="px-3 lg:py-40 container mx-auto w-full max-w-screen-xl">
-          <div className="flex flex-col gap-16 lg:gap-24">
-            <h1 className="text-2xl lg:text-7xl font-bold max-w-72 lg:max-w-screen-md lg:mx-auto lg:leading-[5.5rem] mx-auto lg:text-center">
-              Smarter, Faster, and
-              <div className="bg-[#00729C] text-[#00FF85] rounded-full lg:rounded-3xl inline-flex text-base lg:text-4xl mt-2 py-0 px-3 lg:px-6 lg:py-4 font-light lg:font-normal lg:-translate-y-3 leading-10">
-                Profitable
-              </div>{" "}
-              Market Moves!
-            </h1>
-            <div className="flex flex-col lg:flex-row justify-between lg:gap-16">
-              <div className="lg:w-1/2">
-                <div className="max-w-xl mx-auto lg:ml-0 flex flex-col gap-3 bg-[#0F1012] border border-[#202020] rounded-3xl py-6 px-3 relative">
-                  <Image
-                    src={"/magic.svg"}
-                    alt="check"
-                    width={34}
-                    height={34}
-                    className="hidden lg:block absolute right-2 top-2 aspect-[34/34] object-contain"
-                  />
-                  {list?.map((item: any, i: number) => {
-                    return (
-                      <div key={i} className="flex items-center">
-                        <div className="w-10 h-10 rounded-full relative">
-                          <Image
-                            src={"/check.svg"}
-                            alt="check"
-                            fill
-                            className="absolute object-contain w-full h-full"
-                          />
+        <div className="relative">
+          <div className="px-3 lg:py-40 container mx-auto w-full max-w-screen-xl">
+            <div className="flex flex-col gap-16 lg:gap-24">
+              <h1 className="text-2xl lg:text-7xl font-bold max-w-72 lg:max-w-screen-md lg:mx-auto lg:leading-[5.5rem] mx-auto lg:text-center">
+                Smarter, Faster, and
+                <div className="bg-[#00729C] text-[#00FF85] rounded-full lg:rounded-3xl inline-flex text-base lg:text-4xl mt-2 py-0 px-3 lg:px-6 lg:py-4 font-light lg:font-normal lg:-translate-y-3 leading-10">
+                  Profitable
+                </div>{" "}
+                Market Moves!
+              </h1>
+              <div className="flex flex-col lg:flex-row justify-between lg:gap-16">
+                <div className="lg:w-1/2">
+                  <div className="max-w-xl mx-auto lg:ml-0 flex flex-col gap-3 bg-[#0F1012] border border-[#202020] rounded-3xl py-6 px-3 relative">
+                    <Image
+                      src={"/magic.svg"}
+                      alt="check"
+                      width={34}
+                      height={34}
+                      className="hidden lg:block absolute right-2 top-2 aspect-[34/34] object-contain"
+                    />
+                    {list?.map((item: any, i: number) => {
+                      return (
+                        <div key={i} className="flex items-center">
+                          <div className="w-10 h-10 rounded-full relative">
+                            <Image
+                              src={"/check.svg"}
+                              alt="check"
+                              fill
+                              className="absolute object-contain w-full h-full"
+                            />
+                          </div>
+                          <div className="relative ">
+                            <p className="text-gradient text-xs sm:text-xl py-2 px-3 border rounded-full">
+                              {item?.name}
+                            </p>
+                          </div>
                         </div>
-                        <div className="relative ">
-                          <p className="text-gradient text-xs sm:text-xl py-2 px-3 border rounded-full">
-                            {item?.name}
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
+
+                {isLG && (
+                  <div className="relative w-full lg:w-1/2 aspect-[585/498]">
+                    <Image
+                      src={"/graph-summary.svg"}
+                      alt="graph"
+                      fill
+                      className="absolute object-contain w-full h-full"
+                    />
+                  </div>
+                )}
               </div>
-
-              {isLG && (
-                <div className="relative w-full lg:w-1/2 aspect-[585/498]">
-                  <Image
-                    src={"/graph-summary.svg"}
-                    alt="graph"
-                    fill
-                    className="absolute object-contain w-full h-full"
-                  />
-                </div>
-              )}
             </div>
-          </div>
-          <div className="absolute bottom-0 left-0 w-full">
-            <div className="relative w-full aspect-[1512/840]">
-              <Image
-                src={"/market.svg"}
-                alt="bg"
-                fill
-                className="absolute object-cover w-full h-full bottom-0"
-              />
+            <div className="absolute bottom-20 left-0 w-full">
+              <div className="relative w-full aspect-[1512/840]">
+                <Image
+                  src={"/market.svg"}
+                  alt="bg"
+                  fill
+                  className="absolute object-cover w-full h-full bottom-0"
+                />
+              </div>
             </div>
           </div>
         </div>
-        {/* <div className="hidden lg:block bg-[#020007] absolute w-full h-0 left-0 -bottom-40 opacity-20 border-[82px]"></div> */}
-      </div>
 
-      {!isLG && (
-        <div className="relative w-full aspect-[320/362] mt-6">
-          <Image
-            src={"/graph-summary-mb.svg"}
-            alt="graph"
-            fill
-            className="absolute object-contain w-full h-full"
-          />
-        </div>
-      )}
-      {/* <div className="block lg:hidden bg-[#020007]  w-full h-0 left-0 -bottom-40 opacity-45 border-[26px]"></div> */}
-
-      <div
-        id="apps"
-        className="relative -scroll-mt-16 bg-[#000] px-3 pt-8 pb-10 lg:py-40 flex flex-col gap-10">
-        <div
-          className={cn(
-            "absolute flex-grow-0 w-[772px] h-[689px] lg:w-[1510px] lg:h-[1140px] bg-[#464DF8] lg:bg-transparent bg-gradient-to-b from-[#464DF8] to-[#464DF8)] opacity-40 blur-[500px] rounded-[1000px] -top-[126.73px] left-[193px] z-50"
-          )}
-        />
-        <h1 className="text-xl md:text-3xl font-bold max-w-60 md:max-w-96 md:leading-10 mx-auto text-center lg:hidden">
-          Stay ahead with real-time updates—download our app now!
-        </h1>
-        <div className="px-5 grid lg:grid-cols-2 lg:gap-16 container mx-auto w-full max-w-screen-xl relative">
-          <Image
-            src={"/app-store-pc-bg.svg"}
-            alt="bg"
-            fill
-            className="absolute object-cover w-full h-full"
-          />
-          <div className="relative w-full aspect-[266.74/240.26] max-w-xl lg:max-w-none mx-auto lg:ml-0">
+        {!isLG && (
+          <div className="relative w-full aspect-[320/362] mt-6 mb-6">
             <Image
-              src={"/mobile-app.svg"}
-              alt="app"
+              src={"/graph-summary-mb.svg"}
+              alt="graph"
               fill
               className="absolute object-contain w-full h-full"
             />
           </div>
-          <div className="hidden lg:flex flex-col gap-10 relative z-50">
-            <h2 className="text-[3.13rem] font-bold max-w-xl">
-              Stay ahead with real-time updates—download our app now!
-            </h2>
-            <div className="w-full flex items-center gap-4">
-              <Link href={"https://apps.apple.com/us/app/duty-ai/id6476618432"}>
-                <div className="relative w-48 aspect-[191.75/51.39]">
-                  <Image
-                    src={"/apple-app.svg"}
-                    alt="app"
-                    fill
-                    className="absolute object-contain w-full"
-                  />
-                </div>
-              </Link>
-              <Link
-                href={
-                  "https://play.google.com/store/apps/details?id=com.easinarafat.dutyai&hl=en&pli=1"
-                }>
-                <div className="relative w-48 aspect-[188.93/51.39]">
-                  <Image
-                    src={"/google-app.svg"}
-                    alt="app"
-                    fill
-                    className="absolute object-contain w-full"
-                  />
-                </div>
-              </Link>
+        )}
+
+        <div
+          className={cn(
+            "absolute flex-grow-0 w-[772px] h-[689px] lg:w-[1510px] lg:h-[1140px] bg-[#464DF8] lg:bg-transparent bg-gradient-to-b from-[#464DF8] to-[#464DF8)] opacity-40 blur-[500px] rounded-[1000px] bottom-10 lg:-bottom-[10%] left-1/2 lg:left-auto lg:-right-[40%] z-50"
+          )}
+        />
+
+        <div
+          id="apps"
+          className="relative -scroll-mt-16 bg-[#000] px-3 pt-8 pb-10 lg:py-40 flex flex-col gap-10">
+          <h1 className="text-xl md:text-3xl font-bold max-w-60 md:max-w-96 md:leading-10 mx-auto text-center lg:hidden">
+            Stay ahead with real-time updates—download our app now!
+          </h1>
+          <div className="px-5 grid lg:grid-cols-2 lg:gap-16 container mx-auto w-full max-w-screen-xl relative">
+            <Image
+              src={"/app-store-pc-bg.svg"}
+              alt="bg"
+              fill
+              className="absolute object-cover w-full h-full"
+            />
+            <div className="relative w-full aspect-[266.74/240.26] max-w-xl lg:max-w-none mx-auto lg:ml-0">
+              <Image
+                src={"/mobile-app.svg"}
+                alt="app"
+                fill
+                className="absolute object-contain w-full h-full"
+              />
+            </div>
+            <div className="hidden lg:flex flex-col gap-10 relative z-50">
+              <h2 className="text-[3.13rem] font-bold max-w-xl">
+                Stay ahead with real-time updates—download our app now!
+              </h2>
+              <div className="w-full flex items-center gap-4">
+                <Link
+                  href={"https://apps.apple.com/us/app/duty-ai/id6476618432"}>
+                  <div className="relative w-48 aspect-[191.75/51.39]">
+                    <Image
+                      src={"/apple-app.svg"}
+                      alt="app"
+                      fill
+                      className="absolute object-contain w-full"
+                    />
+                  </div>
+                </Link>
+                <Link
+                  href={
+                    "https://play.google.com/store/apps/details?id=com.easinarafat.dutyai&hl=en&pli=1"
+                  }>
+                  <div className="relative w-48 aspect-[188.93/51.39]">
+                    <Image
+                      src={"/google-app.svg"}
+                      alt="app"
+                      fill
+                      className="absolute object-contain w-full"
+                    />
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="w-full grid grid-cols-2 gap-4 lg:hidden max-w-xl lg:max-w-none mx-auto lg:ml-0">
-          <Link
-            target="_blank"
-            href={"https://apps.apple.com/us/app/duty-ai/id6476618432"}>
-            <div className="relative w-full aspect-[138.06/37]">
-              <Image
-                src={"/apple-app.svg"}
-                alt="app"
-                fill
-                className="absolute object-contain w-full"
-              />
-            </div>
-          </Link>
-          <Link
-            target="_blank"
-            href={
-              "https://play.google.com/store/apps/details?id=com.easinarafat.dutyai&hl=en&pli=1"
-            }>
-            <div className="relative w-full aspect-[136.03/37]">
-              <Image
-                src={"/google-app.svg"}
-                alt="app"
-                fill
-                className="absolute object-contain w-full"
-              />
-            </div>
-          </Link>
+          <div className="w-full grid grid-cols-2 gap-4 lg:hidden max-w-xl lg:max-w-none mx-auto lg:ml-0">
+            <Link
+              target="_blank"
+              href={"https://apps.apple.com/us/app/duty-ai/id6476618432"}>
+              <div className="relative w-full aspect-[138.06/37]">
+                <Image
+                  src={"/apple-app.svg"}
+                  alt="app"
+                  fill
+                  className="absolute object-contain w-full"
+                />
+              </div>
+            </Link>
+            <Link
+              target="_blank"
+              href={
+                "https://play.google.com/store/apps/details?id=com.easinarafat.dutyai&hl=en&pli=1"
+              }>
+              <div className="relative w-full aspect-[136.03/37]">
+                <Image
+                  src={"/google-app.svg"}
+                  alt="app"
+                  fill
+                  className="absolute object-contain w-full"
+                />
+              </div>
+            </Link>
+          </div>
         </div>
       </div>
+
       <div className="px-3 mb-5 mt-10 lg:py-40 container mx-auto w-full max-w-xl lg:max-w-screen-xl">
         <div className="lg:hidden">
           <div className="relative w-full aspect-[289/207]">

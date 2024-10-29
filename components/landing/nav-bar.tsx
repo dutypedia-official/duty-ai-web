@@ -6,7 +6,7 @@ import { LOGO } from "../icons/LOGO";
 
 export const NavBar = () => {
   return (
-    <div className="flex justify-between items-center py-2 lg:py-0 px-3 lg:bg-[#1F1F1F] lg:border-b border-[#3A3A3A] lg:sticky lg:top-0 z-50">
+    <div className="flex justify-between items-center py-2 lg:py-0 px-3 lg:bg-[#1F1F1F] lg:border-b border-[#3A3A3A] lg:sticky lg:top-0">
       <div className="">
         <div className="w-28 h-16 relative">
           <Image
