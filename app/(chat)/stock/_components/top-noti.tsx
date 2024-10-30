@@ -61,7 +61,7 @@ export const TopNoti = () => {
     <>
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
-          <div className="w-10 h-10 flex flex-col items-center justify-center">
+          <div className="w-10 h-10 flex flex-col items-center justify-center cursor-pointer">
             <Bell className="w-5 h-5 text-foreground" />
           </div>
         </DropdownMenuTrigger>

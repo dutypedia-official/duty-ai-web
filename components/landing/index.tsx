@@ -269,7 +269,7 @@ export const LandingPage = () => {
                         );
                       })}
                     </div>
-                    <div className="relative md:hidden flex justify-center gap-5 w-full mx-auto text-center -mt-10 iSE:-mt-20 i13Mini:-mt-20 md:-mt-28">
+                    <div className="relative md:hidden flex justify-start overscroll-x-auto gap-5 w-full mx-auto text-center -mt-10 iSE:-mt-20 i13Mini:-mt-20 md:-mt-28">
                       {suggestion.slice(0, 2)?.map((item: any, i: number) => {
                         return (
                           <Link

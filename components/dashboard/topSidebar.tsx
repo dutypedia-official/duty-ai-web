@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { Menu } from "lucide-react";
 import MobileSidebar from "../chat/mobileSidebar";
 import { ModeToggle } from "../modeToggle";
+import { TopNoti } from "@/app/(chat)/stock/_components/top-noti";
 
 export const TopSidebar = () => {
   const { closeNav, openNav, isShowNav } = useNav();
@@ -21,6 +22,7 @@ export const TopSidebar = () => {
           />
         </div>
         <div className="flex items-center gap-2">
+          <TopNoti />
           <ModeToggle />
           <ProfileMenu />
         </div>
