@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import { StockChatMini } from "./_components/stock-chat-mini";
 import useMediaQuery from "@/lib/hooks/useMediaQuery";
 import { TabContent } from "./_components/tab-content";
+import { TopNoti } from "./_components/top-noti";
 
 export default function page() {
   const { refreash, mainServerAvailable, setActiveF } = useUi();
@@ -109,7 +110,7 @@ export default function page() {
           <MobileSidebar hide={true} />
 
           <div className="flex items-center gap-2">
-            {/* <TopNoti /> */}
+            <TopNoti />
             <ModeToggle />
             <ProfileMenu />
           </div>
@@ -133,8 +134,7 @@ export default function page() {
                   "w-full max-h-[calc(100vh-13.5rem)] overflow-auto ",
                   (isLoading || isLoading2) &&
                     "bg-card-foreground lg:bg-transparent rounded-md"
-                )}
-              >
+                )}>
                 {isLoading || isLoading2 ? (
                   Array.from(Array(10).keys()).map((i) => (
                     <div key={i} className="my-5 flex gap-5">
