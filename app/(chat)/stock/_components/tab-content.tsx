@@ -27,7 +27,7 @@ export const TabContent = ({ open, setOpen }: any) => {
   console.log(isLargerScreen);
   return isLargerScreen ? (
     <div className="w-full max-w-full sm:max-w-[28rem]">
-      <div className="overflow-y-auto bg-card-foreground max-h-[calc(100vh-6.5rem)] rounded-lg w-full">
+      <div className="overflow-y-auto bg-card-foreground max-h-[calc(100vh-6.5rem)] rounded-lg w-full border dark:border-[#2F2525]">
         <div className="flex justify-center py-5 sticky top-0 bg-card-foreground z-10">
           {tabs.map((tab, index) => (
             <button
@@ -37,17 +37,16 @@ export const TabContent = ({ open, setOpen }: any) => {
                   ? "bg-[#00796B]"
                   : "bg-[#E0E0E0] dark:bg-[#333333]"
               }`}
-              onClick={() => setActiveTab(tab?.name)}
-            >
+              onClick={() => setActiveTab(tab?.name)}>
               {tab.label}
             </button>
           ))}
         </div>
         <div className="mt-4">
-          <div className={cn("", { hidden: activeTab === "index" })}>
+          <div className={cn("", { hidden: activeTab !== "index" })}>
             <MarketOverview />
           </div>
-          <div className={cn("", { hidden: activeTab === "aiChat" })}>
+          <div className={cn("", { hidden: activeTab !== "aiChat" })}>
             <ChatMain mini={true} />
           </div>
         </div>
@@ -60,21 +59,19 @@ export const TabContent = ({ open, setOpen }: any) => {
           <div
             onMouseEnter={() => setChatMiniSlide(true)}
             onClick={() => setChatMiniSlide(true)}
-            className="h-44 bg-card-foreground flex items-center justify-center rounded-l-xl"
-          >
-            <FaCaretLeft className="text-[#757575] dark:text-white" />
+            className="h-44 bg-[#00B0FF] flex items-center justify-center rounded-l-xl">
+            <FaCaretLeft className="text-white" />
           </div>
         </div>
       </SheetTrigger>
       <SheetContent className="p-0 w-full max-w-full sm:max-w-[28rem] rounded-none">
-        <div className="absolute z-10 h-screen flex items-center justify-center">
+        <div className="absolute z-10 h-screen flex items-center justify-center left-5 sm:left-0">
           <div
             onClick={() => {
               setChatMiniSlide(false);
             }}
-            className="h-44 z-20 flex items-center bg-card-foreground rounded-l-xl -translate-x-4"
-          >
-            <FaCaretRight className="text-[#757575] dark:text-white" />
+            className="h-44 z-20 flex items-center bg-[#00B0FF] rounded-l-xl -translate-x-4">
+            <FaCaretRight className="text-white" />
           </div>
         </div>
         <ScrollArea className="h-screen overflow-y-auto">
@@ -88,8 +85,7 @@ export const TabContent = ({ open, setOpen }: any) => {
                       ? "bg-[#00796B]"
                       : "bg-[#E0E0E0] dark:bg-[#333333]"
                   }`}
-                  onClick={() => setActiveTab(tab?.name)}
-                >
+                  onClick={() => setActiveTab(tab?.name)}>
                   {tab.label}
                 </button>
               ))}

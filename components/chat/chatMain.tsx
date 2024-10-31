@@ -324,7 +324,7 @@ export default function ChatMain({
     <>
       {!mini && (
         <div
-          className={`hidden h-screen sticky top-0 pb-4 flex-shrink-0 lg:block duration-300 border-r shadow-sm bg-background ${
+          className={`hidden h-screen sticky top-0 pb-4 flex-shrink-0 lg:block duration-300 border-r shadow-sm bg-background dark:bg-[#1E1E1E]  ${
             isShowNav ? "w-80" : "w-0"
           }`}>
           <div className={`h-full rounded-md overflow-hidden`}>

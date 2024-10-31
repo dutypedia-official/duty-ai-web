@@ -96,6 +96,22 @@ export const LandingPage = () => {
     },
   ];
 
+  const MobileSlider = () => {
+    return (
+      <div className="flex flex-row flex-nowrap items-center justify-start gap-5 overflow-x-auto bottom-[28vh] iSE:bottom-[24vh] i13Mini:bottom-[24vh] absolute z-10 md:hidden pl-5">
+        {suggestion?.map((item: any, i: number) => {
+          return (
+            <Link
+              key={i}
+              href={"/signin"}
+              className="cursor-pointer text-sm p-3 rounded-md border border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
+              {item}
+            </Link>
+          );
+        })}
+      </div>
+    );
+  };
   return (
     <div className="bg-gradient-to-l from-[#0A0A0A] to-[#0D0D0D] w-full min-h-screen overflow-x-hidden">
       <motion.div
@@ -119,6 +135,7 @@ export const LandingPage = () => {
           <div className={cn("bg-linear-m md:bg-linear-pc z-10")} />
         </div>
 
+        <MobileSlider />
         <div className="flex xl:items-center justify-center w-full min-h-[calc(100vh-5rem)] max-h-calc(100vh-5rem)] md:min-h-screen md:max-h-screen md:h-screen mx-auto max-w-[1920px]">
           <div className="xl:px-3 mx-auto w-full lg:mt-5 xl:-mt-16">
             <div className="w-full h-full relative px-5">
@@ -218,68 +235,55 @@ export const LandingPage = () => {
                             />
                           </div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="md:hidden absolute w-full h-full px-3 pt-5 sm:p-8 top-0 left-0">
-                    <div className="relative z-10 top-10 sm:top-20 flex flex-col gap-10 sm:gap-20">
-                      <h1 className="sm:px-8 leading-10 font-bold text-2xl text-center w-full md:max-w-md mx-auto">
-                        Instant Stock Predictions Enter a Company, Get{" "}
-                        <span className="text-linear font-normal">
-                          Buy/Sell
-                        </span>{" "}
-                        Signals.
-                      </h1>
-                      <div className="relative w-full mx-auto">
-                        <div className="relative w-36 aspect-[124/28] ml-3">
-                          <Image
-                            src={"/accurate-mb.svg"}
-                            alt="accurate"
-                            fill
-                            className="absolute object-contain w-full h-full"
-                          />
-                        </div>
-                        <Textarea
-                          className="w-full bg-[#1E1D1D] border border-[#3A3A3A] rounded-lg z-10 relative max-h-20 resize-y pr-10"
-                          placeholder="Type a company name"
-                        />
-                        <div className="absolute right-5 -top-4 h-full flex items-end justify-end">
-                          <IoMdSend
-                            onClick={() => {
-                              router.push("/signin");
-                            }}
-                            className="text-2xl text-[#3BAFDA] z-10 cursor-pointer"
-                          />
+                        <div className="flex flex-row flex-nowrap items-center justify-center mt-10 gap-5">
+                          {suggestion?.map((item: any, i: number) => {
+                            return (
+                              <Link
+                                key={i}
+                                href={"/signin"}
+                                className="cursor-pointer text-sm p-3 rounded-md border border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
+                                {item}
+                              </Link>
+                            );
+                          })}
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="w-full mx-auto absolute left-16 md:left-auto bottom-0">
-                    <div className="relative hidden md:flex justify-center gap-5 w-full mx-auto text-center sm:-mt-10 i13Mini:-mt-20 md:-mt-28">
-                      {suggestion?.map((item: any, i: number) => {
-                        return (
-                          <Link
-                            key={i}
-                            href={"/signin"}
-                            className="text-xs p-3 rounded-md border border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
-                            {item}
-                          </Link>
-                        );
-                      })}
-                    </div>
-                    <div className="relative md:hidden flex justify-start overscroll-x-auto gap-5 w-full mx-auto text-center -mt-10 iSE:-mt-20 i13Mini:-mt-20 md:-mt-28">
-                      {suggestion.slice(0, 2)?.map((item: any, i: number) => {
-                        return (
-                          <Link
-                            key={i}
-                            href={"/signin"}
-                            className="text-xs p-3 rounded-md border-[0.02px] border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
-                            {item}
-                          </Link>
-                        );
-                      })}
+                  <div className="md:hidden absolute w-full h-full pt-5 sm:p-8 top-0 left-0">
+                    <div className="px-3">
+                      <div className="relative z-10 top-10 sm:top-20 flex flex-col gap-10 sm:gap-20">
+                        <h1 className="sm:px-8 leading-10 font-bold text-2xl text-center w-full md:max-w-md mx-auto">
+                          Instant Stock Predictions Enter a Company, Get{" "}
+                          <span className="text-linear font-normal">
+                            Buy/Sell
+                          </span>{" "}
+                          Signals.
+                        </h1>
+                        <div className="relative w-full mx-auto">
+                          <div className="relative w-36 aspect-[124/28] ml-3">
+                            <Image
+                              src={"/accurate-mb.svg"}
+                              alt="accurate"
+                              fill
+                              className="absolute object-contain w-full h-full"
+                            />
+                          </div>
+                          <Textarea
+                            className="w-full bg-[#1E1D1D] border border-[#3A3A3A] rounded-lg z-10 relative max-h-20 resize-y pr-10"
+                            placeholder="Type a company name"
+                          />
+                          <div className="absolute right-5 -top-4 h-full flex items-end justify-end">
+                            <IoMdSend
+                              onClick={() => {
+                                router.push("/signin");
+                              }}
+                              className="text-2xl text-[#3BAFDA] z-10 cursor-pointer"
+                            />
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -353,18 +357,18 @@ export const LandingPage = () => {
                           />
                         </div>
                       </div>
-                    </div>
-                    <div className="relative flex justify-center gap-5 w-full mx-auto text-center">
-                      {suggestion?.map((item: any, i: number) => {
-                        return (
-                          <Link
-                            key={i}
-                            href={"/signin"}
-                            className="text-sm p-3 rounded-md border border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
-                            {item}
-                          </Link>
-                        );
-                      })}
+                      <div className="flex flex-row flex-nowrap items-center justify-center mt-10 gap-5">
+                        {suggestion?.map((item: any, i: number) => {
+                          return (
+                            <Link
+                              key={i}
+                              href={"/signin"}
+                              className="cursor-pointer text-sm p-3 rounded-md border border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
+                              {item}
+                            </Link>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
                 </div>

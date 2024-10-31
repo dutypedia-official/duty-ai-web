@@ -52,7 +52,7 @@ export const Filters = ({
         <div className="w-full sm:w-64 relative">
           <Input
             placeholder="Search"
-            className="rounded-3xl text-sm placeholder:text-sm w-full pl-5 pr-10 bg-card dark:border-[#333333]"
+            className="rounded-3xl text-sm placeholder:text-sm w-full pl-5 pr-10 bg-card dark:bg-[#1F1F1F] dark:border-[#333333]"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -84,12 +84,6 @@ export const Filters = ({
         </Select>
       </div>
       <div className={cn("hidden gap-4 flex-wrap", isBiggerScreen && "flex")}>
-        {/* <Button
-          className={cn(
-            "text-white border border-[#B0BEC5] bg-[#E0E0E0] dark:bg-transparent"
-          )}>
-          ❤️ Favorite
-        </Button> */}
         {filterBtn?.map((item, i) => {
           return (
             <Button
@@ -97,7 +91,7 @@ export const Filters = ({
               onClick={() => setActiveFilter(item.value)}
               className={cn(
                 "text-white border border-[#B0BEC5]",
-                activeFilter != item.value && "bg-[#E0E0E0] dark:bg-transparent"
+                activeFilter != item.value && "bg-[#E0E0E0] dark:bg-[#1F1F1F]"
               )}>
               {item?.name}
             </Button>

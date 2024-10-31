@@ -58,7 +58,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <div className="relative w-full">
       {isSignedIn ? (
-        <div className="flex bg-background relative">
+        <div className="flex bg-background dark:bg-[#1E1E1E] relative">
           <IconBar />
           {children}
         </div>

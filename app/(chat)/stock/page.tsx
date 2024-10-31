@@ -104,7 +104,7 @@ export default function page() {
   const isLargerScreen = useMediaQuery("(min-width: 1536px)");
 
   return (
-    <div className="w-full bg-[#F0F2F5] dark:bg-[#0F0F0F]">
+    <div className="w-full bg-card-foreground dark:bg-[#1E1E1E]">
       <div className="sticky top-0 h-16 z-20 px-4 bg-[#fff] dark:bg-card-foreground backdrop-blur-md w-full lg:shadow-sm flex items-center">
         <div className="w-full flex items-center justify-between lg:justify-end">
           <MobileSidebar hide={true} />
@@ -119,7 +119,7 @@ export default function page() {
       <div className="flex flex-col flex-1 sm:p-5 w-full">
         <div className="flex flex-col lg:flex-row lg:justify-between gap-5">
           <div className="w-full">
-            <div className="lg:bg-card-foreground px-2 py-5 lg:p-5 rounded-lg flex flex-col gap-8">
+            <div className="lg:bg-card-foreground px-2 py-5 lg:p-5 rounded-lg flex flex-col gap-8 border dark:border-[#2F2525]">
               <Filters
                 searchTerm={searchTerm}
                 setSearchTerm={setSearchTerm}
@@ -164,7 +164,6 @@ export default function page() {
             </div>
           </div>
 
-          {/* {chatMiniOpen && <ChatMain mini={true} />} */}
           <TabContent />
         </div>
       </div>
