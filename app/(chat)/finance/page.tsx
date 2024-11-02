@@ -9,10 +9,7 @@ export default function Page() {
   const { setTemplate } = chatStore;
 
   useEffect(() => {
-    setTemplate("finance");
-    return () => {
-      setTemplate("general");
-    };
+    setTemplate("general");
   }, []);
 
   return <ChatMain />;

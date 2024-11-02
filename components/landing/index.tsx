@@ -98,7 +98,7 @@ export const LandingPage = () => {
 
   const MobileSlider = () => {
     return (
-      <div className="flex flex-row flex-nowrap items-center justify-start gap-5 overflow-x-auto bottom-[28vh] iSE:bottom-[24vh] i13Mini:bottom-[24vh] absolute z-10 md:hidden pl-5">
+      <div className="flex flex-row flex-nowrap items-center justify-start gap-5 overflow-x-auto bottom-[28vh] iSE:bottom-[24vh] i13Mini:bottom-[24vh] absolute z-10 md:hidden pl-5 scrollbar">
         {suggestion?.map((item: any, i: number) => {
           return (
             <Link
@@ -131,8 +131,8 @@ export const LandingPage = () => {
       <NavBar />
       <div className="relative">
         {/* linear */}
-        <div className="absolute top-0 left-0 w-full h-full">
-          <div className={cn("bg-linear-m md:bg-linear-pc z-10")} />
+        <div className="absolute top-0 md:top-60 left-20 md:-left-20 w-full h-full pointer-events-none">
+          <div className={cn("bg-linear-m md:bg-linear-pc z-20 scale-125")} />
         </div>
 
         <MobileSlider />
@@ -235,7 +235,7 @@ export const LandingPage = () => {
                             />
                           </div>
                         </div>
-                        <div className="flex flex-row flex-nowrap items-center justify-center mt-10 gap-5">
+                        <div className="flex flex-row flex-nowrap items-center justify-center mt-10 gap-5 scrollbar">
                           {suggestion?.map((item: any, i: number) => {
                             return (
                               <Link
@@ -357,7 +357,7 @@ export const LandingPage = () => {
                           />
                         </div>
                       </div>
-                      <div className="flex flex-row flex-nowrap items-center justify-center mt-10 gap-5">
+                      <div className="flex flex-row flex-nowrap items-center justify-center mt-10 gap-5 scrollbar">
                         {suggestion?.map((item: any, i: number) => {
                           return (
                             <Link
@@ -478,7 +478,7 @@ export const LandingPage = () => {
 
         <div
           className={cn(
-            "absolute flex-grow-0 w-[772px] h-[689px] lg:w-[1510px] lg:h-[1140px] bg-[#464DF8] lg:bg-transparent bg-gradient-to-b from-[#464DF8] to-[#464DF8)] opacity-40 blur-[500px] rounded-[1000px] bottom-10 lg:-bottom-[10%] left-1/2 lg:left-auto lg:-right-[40%] z-50"
+            "absolute flex-grow-0 w-[772px] h-[689px] lg:w-[1510px] lg:h-[1140px] bg-[#464DF8] lg:bg-transparent bg-gradient-to-b from-[#464DF8] to-[#464DF8)] opacity-35 blur-[500px] rounded-[1000px] bottom-10 lg:-bottom-[10%] left-1/2 lg:left-auto lg:-right-[10%] z-50 scale-125"
           )}
         />
 

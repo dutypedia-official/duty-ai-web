@@ -55,8 +55,6 @@ export const TopNoti = () => {
     fetchData();
   }, []);
 
-  console.log("notifications", notifications);
-
   return (
     <>
       <DropdownMenu open={open} onOpenChange={setOpen}>

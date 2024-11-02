@@ -33,6 +33,8 @@ interface ChatStore {
   setChatMiniOpen: (chatMiniOpen: boolean) => void;
   chatMiniSlide: boolean;
   setChatMiniSlide: (chatMiniSlide: boolean) => void;
+  openGolden: boolean;
+  setOpenGolden: (openGolden: boolean) => void;
 }
 
 const useChat = create<ChatStore>((set, get) => ({
@@ -74,6 +76,8 @@ const useChat = create<ChatStore>((set, get) => ({
   setChatMiniOpen: (chatMiniOpen) => set({ chatMiniOpen }),
   chatMiniSlide: false,
   setChatMiniSlide: (chatMiniSlide) => set({ chatMiniSlide }),
+  openGolden: false,
+  setOpenGolden: (openGolden) => set({ openGolden }),
 }));
 
 export default useChat;

@@ -19,7 +19,7 @@ export const NavBar = () => {
           {/* <LOGO className="w-full h-full text-white" /> */}
         </div>
       </div>
-      <div className="flex items-center bg-[#262B32] rounded-full">
+      <div className="flex items-center bg-[#262B32] rounded-full relative z-50">
         <Link href={"/signin"}>
           <Button className="text-white bg-[#3BAFDA] hover:bg-[#3BAFDA] rounded-full">
             Login

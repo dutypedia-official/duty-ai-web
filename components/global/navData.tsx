@@ -97,13 +97,13 @@ export const navCenterItems = [
 
 export const iconbarItems = [
   {
-    icon: UimCommentAltMessage,
+    icon: StockIcon,
     active: true,
     label: "chat",
     link: "/",
   },
   {
-    icon: StockIcon,
+    icon: UimCommentAltMessage,
     active: true,
     label: "Finance",
     link: "/finance",

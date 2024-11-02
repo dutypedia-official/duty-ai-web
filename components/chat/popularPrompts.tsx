@@ -1,7 +1,9 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import { Button } from "../ui/button";
 import useChat from "@/lib/hooks/useChat";
 import { cn } from "@/lib/utils";
+import { useUser } from "@clerk/nextjs";
+import { VideoDialog } from "../goldenChoice/video-dialog";
 
 interface PopularPromptsProps {}
 
@@ -62,17 +64,17 @@ const finances = [
     question: `Should I Invest in Grameenphone BD`,
   },
   {
-    title: "💊 Should I Invest in BEXIMCO BD",
-    question: `Should I Invest in BEXIMCO BD`,
-  },
-  {
-    title: "🏦 Should I Invest in Brac Bank BD",
-    question: `Should I Invest in Brac Bank BD`,
-  },
-  {
     title: "👚 Should I Invest in FEKDIL BD",
     question: `Should I Invest in FEKDIL BD`,
   },
+  {
+    title: "▶️ Duty AI ব্যাবহার ভিডিও 06 oct 2024",
+    question: `Duty AI ব্যাবহার ভিডিও 06 oct 2024`,
+  },
+  // {
+  //   title: "⚖️ Golden choice",
+  //   question: `Golden choice`,
+  // },
 ];
 
 const forex = [
@@ -100,7 +102,9 @@ const forex = [
 
 const PopularPrompts: FunctionComponent<PopularPromptsProps> = () => {
   const chatStore = useChat();
-  const { setPrompt, setSubmitPrompt, template } = chatStore;
+  const { setPrompt, setSubmitPrompt, template, setOpenGolden } = chatStore;
+  const { user } = useUser();
+  const [videoModal, setVideoModal] = useState(false);
 
   const topPrompts =
     template == "general"
@@ -112,34 +116,45 @@ const PopularPrompts: FunctionComponent<PopularPromptsProps> = () => {
       : [];
 
   const onPromptClick = (query: string) => {
-    setPrompt(query);
-    setSubmitPrompt(true);
+    if (query === "Duty AI ব্যাবহার ভিডিও 06 oct 2024") {
+      setVideoModal(true);
+    } else if (query === "Golden choice") {
+      setOpenGolden(true);
+    } else {
+      setPrompt(query);
+      setSubmitPrompt(true);
+    }
   };
 
   return (
     <div className="px-4 pb-8">
       <h1 className="text-xl sm:text-3xl font-semibold">
-        Popular prompts for you
+        Hello, {user?.firstName + " " + user?.lastName}
       </h1>
       <p className="text-muted-foreground sm:mt-2">
-        Start with presets or input prompt below
+        {template === "finance"
+          ? "Let's chat about stocks!"
+          : "How can I help you today?"}
       </p>
       <div
         className={cn(
           "mt-8 grid gap-4 bg-card-foreground shadow p-6 rounded-xl",
           template == "general" && "sm:grid-cols-2"
         )}>
-        {topPrompts.map((prompt, i) => (
-          <Button
-            onClick={() => onPromptClick(prompt.question)}
-            size="lg"
-            key={i}
-            className="rounded-md bg-card hover:bg-card"
-            variant="outline">
-            <span className="line-clamp-1">{prompt.title}</span>
-          </Button>
-        ))}
+        {topPrompts.map((prompt, i) => {
+          return (
+            <Button
+              onClick={() => onPromptClick(prompt.question)}
+              size="lg"
+              key={i}
+              className="rounded-md bg-card hover:bg-card"
+              variant="outline">
+              <span className="line-clamp-1">{prompt.title}</span>
+            </Button>
+          );
+        })}
       </div>
+      <VideoDialog open={videoModal} setOpen={setVideoModal} />
     </div>
   );
 };
