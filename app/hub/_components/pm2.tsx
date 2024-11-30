@@ -39,6 +39,9 @@ const Pm2 = () => {
       >
         Restart All
       </Button>
+      <Button className="bg-fuchsia-500" onClick={() => restart("transfer")}>
+        Transfer Database
+      </Button>
     </div>
   );
 };
