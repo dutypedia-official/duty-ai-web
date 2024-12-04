@@ -26,6 +26,62 @@ export async function POST(
       console.log(data);
       return NextResponse.json({ success: true });
     }
+    if (path == "tv-all") {
+      const res = await fetch(
+        `http://ncsowwksks0g8gg4gscw0w0o.195.26.252.202.sslip.io/scrape/all-stock-tv`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await res.json();
+      console.log(data);
+      return NextResponse.json({ success: true });
+    }
+    if (path == "tv-mover") {
+      const res = await fetch(
+        `http://ncsowwksks0g8gg4gscw0w0o.195.26.252.202.sslip.io/scrape/preset-tv`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await res.json();
+      console.log(data);
+      return NextResponse.json({ success: true });
+    }
+    if (path == "tv-index") {
+      const res = await fetch(
+        `http://ncsowwksks0g8gg4gscw0w0o.195.26.252.202.sslip.io/scrape/index-tv`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await res.json();
+      console.log(data);
+      return NextResponse.json({ success: true });
+    }
+    if (path == "tv-sectors") {
+      const res = await fetch(
+        `http://ncsowwksks0g8gg4gscw0w0o.195.26.252.202.sslip.io/scrape/sectors-tv`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await res.json();
+      console.log(data);
+      return NextResponse.json({ success: true });
+    }
 
     const res = await fetch(`http://158.220.101.235/pm2/api/restart/${path}`, {
       method: "POST",
