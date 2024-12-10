@@ -78,10 +78,10 @@ const finances = [
     title: "🔍 Stock Scanner",
     question: "Stock Scanner",
   },
-  // {
-  //   title: "⚖️ Golden choice",
-  //   question: `Golden choice`,
-  // },
+  {
+    title: "⚖️ Golden choice",
+    question: `Golden choice`,
+  },
 ];
 
 const forex = [

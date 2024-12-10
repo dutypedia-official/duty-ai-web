@@ -122,7 +122,7 @@ export const SetAlarm = ({
                     maxLength={120}
                     spellCheck={false}
                     autoComplete="off"
-                    placeholder="If market go 50% above the moving avarage give em signal also if this stock perform so goodthen  give em signal"
+                    placeholder="Notify me when this stock P/E ratio crosses 20"
                     className="focus-visible:ring-offset-0 focus-visible:ring-0 dark:bg-[#2C2C2E] dark:border-[#3A3A3C] h-11 text-left max-h-[25dvh] resize-none"
                     value={inputText || `${currentAiAlerm?.prompt || ""}`}
                     onChange={(e) => setInputText(e.target.value)}
@@ -130,16 +130,17 @@ export const SetAlarm = ({
                   />
                   {error && <p className="text-xs text-red-500">{error}</p>}
                   <p className="text-xs dark:text-[#D1D1D1]">
-                    If market go 50% above the moving avarage give em signal
-                    also"Write what you want the AI to do{" "}
+                    Kindly provide clear, stock-related instructions{" "}
                     <span
                       className={cn(
                         inputText?.length === 120 && "text-red-500"
                       )}>
-                      (max 120 characters)
+                      within 120 characters
                     </span>
-                    . Clear instructions help the AI understand better. The AI
-                    will watch your stock 24/7 and notify you.{" "}
+                    . The AI will monitor your stock continuously and notify you
+                    once your specified condition is met. Ensure your
+                    instructions focus exclusively on stock-related events to
+                    receive accurate and timely alerts.
                   </p>
                 </label>
               </div>
