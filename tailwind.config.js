@@ -13,6 +13,7 @@ module.exports = {
       padding: "2rem",
       screens: {
         "2xl": "1400px",
+        "3xl": "1920px",
       },
     },
     extend: {
@@ -22,6 +23,7 @@ module.exports = {
         i14: "390px",
         i14P: "428px",
         i16: "430px",
+        "3xl": "1920px",
       },
       colors: {
         border: "hsl(var(--border))",

@@ -1,8 +1,11 @@
-import { FunctionComponent, useState } from "react";
-import { Button } from "../ui/button";
 import useChat from "@/lib/hooks/useChat";
+import useStockData from "@/lib/hooks/useStockData";
+import useVipSignal from "@/lib/hooks/useVipSignal";
 import { cn } from "@/lib/utils";
 import { useUser } from "@clerk/nextjs";
+import { FunctionComponent, useState } from "react";
+import { Button } from "../ui/button";
+import { toast } from "../ui/use-toast";
 import { VideoDialog } from "../goldenChoice/video-dialog";
 
 interface PopularPromptsProps {}
@@ -61,15 +64,19 @@ const finances = [
   },
   {
     title: "📱 Should I Invest in GP BD",
-    question: `Should I Invest in Grameenphone BD`,
+    question: `Should I Invest in GP BD`,
   },
   {
-    title: "👚 Should I Invest in FEKDIL BD",
-    question: `Should I Invest in FEKDIL BD`,
+    title: "📊 আজকের ইনডেক্স সম্পর্কে বল",
+    question: `আজকের ইনডেক্স সম্পর্কে বল`,
   },
   {
-    title: "▶️ Duty AI ব্যাবহার ভিডিও 06 oct 2024",
-    question: `Duty AI ব্যাবহার ভিডিও 06 oct 2024`,
+    title: "▶️ Duty AI ব্যাবহার ভিডিও",
+    question: `Duty AI ব্যাবহার ভিডিও`,
+  },
+  {
+    title: "🔍 Stock Scanner",
+    question: "Stock Scanner",
   },
   // {
   //   title: "⚖️ Golden choice",
@@ -100,26 +107,74 @@ const forex = [
   },
 ];
 
+const scanner = [
+  {
+    title: "📅 আগামীকাল কোন সেক্টর ভালো পারফর্ম করবে?",
+    question: "আগামীকাল কোন সেক্টর ভালো পারফর্ম করবে?",
+  },
+  {
+    title: "💰 কোন শেয়ারগুলো সর্বোচ্চ ডিভিডেন্ড দেয়?",
+    question: "কোন শেয়ারগুলো সর্বোচ্চ ডিভিডেন্ড দেয়?",
+  },
+  {
+    title: "💸 কম দামে ভালো পটেনশিয়াল স্টক খুঁজে দাও।",
+    question: "কম দামে ভালো পটেনশিয়াল স্টক খুঁজে দাও।",
+  },
+  {
+    title: "📊 এখন কোন শেয়ার কেনা উচিত?",
+    question: "এখন কোন শেয়ার কেনা উচিত?",
+  },
+  {
+    title: "🔥 আজকের শীর্ষ পারফর্মিং শেয়ারগুলো কী?",
+    question: "আজকের শীর্ষ পারফর্মিং শেয়ারগুলো কী?",
+  },
+  {
+    title: "⏳ কিছু শর্ট টার্ম স্টক খুঁজে দাও।",
+    question: "কিছু শর্ট টার্ম স্টক খুঁজে দাও।",
+  },
+];
+
 const PopularPrompts: FunctionComponent<PopularPromptsProps> = () => {
   const chatStore = useChat();
-  const { setPrompt, setSubmitPrompt, template, setOpenGolden } = chatStore;
+  const { marketData } = useStockData();
+  const {
+    setPrompt,
+    setSubmitPrompt,
+    template,
+    setTemplate,
+    setOpenGolden,
+    setVideoModal,
+  } = chatStore;
   const { user } = useUser();
-  const [videoModal, setVideoModal] = useState(false);
+  const [videoOpen, setVideoOpen] = useState(false);
 
   const topPrompts =
-    template == "general"
+    template === "general"
       ? prompts
-      : template == "finance"
+      : template === "finance"
       ? finances
-      : template == "forex"
+      : template === "forex"
       ? forex
+      : template === "scanner"
+      ? scanner
       : [];
 
   const onPromptClick = (query: string) => {
-    if (query === "Duty AI ব্যাবহার ভিডিও 06 oct 2024") {
-      setVideoModal(true);
+    if (query === "Duty AI ব্যাবহার ভিডিও") {
+      setVideoOpen(true);
     } else if (query === "Golden choice") {
-      setOpenGolden(true);
+      if (marketData.length > 0) {
+        setOpenGolden(true);
+      } else {
+        toast({
+          title: "Data not available",
+          description: "Please try again later",
+          variant: "destructive",
+          duration: 3000,
+        });
+      }
+    } else if (query === "Stock Scanner") {
+      setTemplate("scanner");
     } else {
       setPrompt(query);
       setSubmitPrompt(true);
@@ -128,18 +183,26 @@ const PopularPrompts: FunctionComponent<PopularPromptsProps> = () => {
 
   return (
     <div className="px-4 pb-8">
-      <h1 className="text-xl sm:text-3xl font-semibold">
+      <h1
+        className={cn(
+          "text-xl sm:text-3xl font-semibold",
+          template === "scanner" && "text-[#6EA8D5]"
+        )}>
         Hello, {user?.firstName + " " + user?.lastName}
       </h1>
       <p className="text-muted-foreground sm:mt-2">
         {template === "finance"
           ? "Let's chat about stocks!"
+          : template === "scanner"
+          ? "🎯 Let’s find the best stocks!"
           : "How can I help you today?"}
       </p>
       <div
         className={cn(
           "mt-8 grid gap-4 bg-card-foreground shadow p-6 rounded-xl",
-          template == "general" && "sm:grid-cols-2"
+          template == "general" && "sm:grid-cols-2",
+          template === "scanner" &&
+            "p-0 shadow-none rounded-none bg-transparent"
         )}>
         {topPrompts.map((prompt, i) => {
           return (
@@ -147,14 +210,22 @@ const PopularPrompts: FunctionComponent<PopularPromptsProps> = () => {
               onClick={() => onPromptClick(prompt.question)}
               size="lg"
               key={i}
-              className="rounded-md bg-card hover:bg-card"
+              className={cn(
+                "rounded-md bg-card hover:bg-card",
+                template === "scanner" &&
+                  "border-[1.5px] border-[#8AB4C9] dark:border-[#3A7CA5] bg-[#E8ECEF] hover:bg-[#E8ECEF] dark:bg-[#2D2F34] hover:dark:bg-[#2D2F34] text-left justify-start px-3"
+              )}
               variant="outline">
               <span className="line-clamp-1">{prompt.title}</span>
             </Button>
           );
         })}
       </div>
-      <VideoDialog open={videoModal} setOpen={setVideoModal} />
+      <VideoDialog
+        open={videoOpen}
+        setOpen={setVideoOpen}
+        url={"https://www.youtube.com/embed/c6fZbt9zaOM?autoplay=1"}
+      />
     </div>
   );
 };

@@ -4,8 +4,10 @@ import { create } from "zustand";
 interface ChatStore {
   llm?: "gpt-4" | "gpt-3.5";
   setLlm?: (llm: "gpt-4" | "gpt-3.5") => void;
-  template: "general" | "scenario" | "finance" | "forex";
-  setTemplate: (template: "general" | "scenario" | "finance" | "forex") => void;
+  template: "general" | "scenario" | "finance" | "forex" | "scanner";
+  setTemplate: (
+    template: "general" | "scenario" | "finance" | "forex" | "scanner"
+  ) => void;
   prompt: string;
   setPrompt: (prompt: string) => void;
   promptCompanyName: string;
@@ -35,6 +37,14 @@ interface ChatStore {
   setChatMiniSlide: (chatMiniSlide: boolean) => void;
   openGolden: boolean;
   setOpenGolden: (openGolden: boolean) => void;
+  processingModal: boolean;
+  setProcessingModal: (processingModal: boolean) => void;
+  winModal: boolean;
+  setWinModal: (winModal: boolean) => void;
+  viewMore: boolean;
+  setViewMore: (viewMore: boolean) => void;
+  videoModal: boolean;
+  setVideoModal: (videoModal: boolean) => void;
 }
 
 const useChat = create<ChatStore>((set, get) => ({
@@ -78,6 +88,14 @@ const useChat = create<ChatStore>((set, get) => ({
   setChatMiniSlide: (chatMiniSlide) => set({ chatMiniSlide }),
   openGolden: false,
   setOpenGolden: (openGolden) => set({ openGolden }),
+  processingModal: false,
+  setProcessingModal: (processingModal) => set({ processingModal }),
+  winModal: false,
+  setWinModal: (winModal) => set({ winModal }),
+  viewMore: false,
+  setViewMore: (viewMore) => set({ viewMore }),
+  videoModal: false,
+  setVideoModal: (videoModal) => set({ videoModal }),
 }));
 
 export default useChat;

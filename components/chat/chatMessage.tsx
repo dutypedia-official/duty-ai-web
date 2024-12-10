@@ -14,6 +14,7 @@ import useChat from "@/lib/hooks/useChat";
 import RelatedPrompts from "./relatedPrompts";
 import remarkGfm from "remark-gfm";
 import { toast } from "sonner";
+import { MiniChatSlide } from "./mini-chat-slide";
 export interface ChatMessageProps {
   role: "system" | "user";
   query?: string;
@@ -44,7 +45,17 @@ interface CProps {
 
 export const ChatMessage = ({ isLast, message }: CProps) => {
   const chatStore = useChat();
-  const { setPrompt, promptInputRef } = chatStore;
+  const {
+    setPrompt,
+    promptInputRef,
+    template,
+    setTemplate,
+    setChatMiniSlide,
+    setChatMiniOpen,
+    setSubmitPrompt,
+    setPromptCompanyName,
+    setActiveConversationId,
+  } = chatStore;
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
   const [isBusy, setIsBusy] = useState(false);
   const [currentReact, setCurrentReact] = useState<"like" | "dislike" | null>(
@@ -82,6 +93,15 @@ export const ChatMessage = ({ isLast, message }: CProps) => {
     }
   };
 
+  const askAiFn = () => {
+    setTemplate("scanner");
+    setActiveConversationId(null);
+    setPromptCompanyName("Grameenphone");
+    setPrompt(`Grameenphone`);
+    setSubmitPrompt(true);
+    setChatMiniOpen(true);
+    setChatMiniSlide(true);
+  };
   return (
     <>
       <div
@@ -95,7 +115,13 @@ export const ChatMessage = ({ isLast, message }: CProps) => {
             message.user?.name === "human" &&
               "bg-card-foreground rounded-t-xl font-medium",
             message.user?.name !== "human" &&
-              "bg-card-foreground rounded-xl rounded-t-none shadow"
+              "bg-card-foreground rounded-xl rounded-t-none shadow",
+            template === "scanner" &&
+              message.user?.name !== "human" &&
+              "bg-[#F5F6F8] dark:bg-[#2A2D35] border-[#DADCE0] dark:border-[#33353A]",
+            template === "scanner" &&
+              message.user?.name === "human" &&
+              "bg-[#DAE8F3] dark:bg-[#3A7CA5] border-[#B4C7D6] dark:border-[#5CAFE0]"
           )}>
           {message.user?.name === "human" ? (
             <div className="">
@@ -188,6 +214,15 @@ export const ChatMessage = ({ isLast, message }: CProps) => {
                 className={"text-foreground"}>
                 {message.text!}
               </ReactMarkdown>
+              <div className="float-right">
+                <Button
+                  className=""
+                  onClick={askAiFn}
+                  size="sm"
+                  variant="ghost">
+                  Ask Ai
+                </Button>
+              </div>
               {isLast && <ChatEnhance message={message} />}
             </>
           )}

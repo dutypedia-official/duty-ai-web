@@ -6,7 +6,7 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
   const Logo = (className: any) => {
     return (
-      <div className="w-24 lg:w-40 aspect-[76.57/22.57] lg:aspect-[202/60] relative mx-auto">
+      <div className="w-24 lg:w-40 aspect-[76.57/22.57] lg:aspect-[202/60] relative mx-auto lg:mx-0">
         <Image
           src={"/duty-ai.svg"}
           alt="logo"
@@ -42,7 +42,7 @@ export const Footer = () => {
             All Right Reserved Duty {currentYear}
           </div>
         </div>
-        <div className="hidden lg:grid grid-cols-3 gap-2 container mx-auto max-w-screen-xl">
+        <div className="hidden lg:grid grid-cols-3 gap-2 mx-auto max-w-screen-xl">
           <div className="flex justify-start">
             <Logo />
           </div>

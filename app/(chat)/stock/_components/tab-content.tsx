@@ -10,7 +10,7 @@ import useUi from "@/lib/hooks/useUi";
 import useChat from "@/lib/hooks/useChat";
 import { cn } from "@/lib/utils";
 
-export const TabContent = ({ open, setOpen }: any) => {
+export const TabContent = () => {
   const isLargerScreen = useMediaQuery("(min-width: 1536px)");
   const { chatMiniSlide, setChatMiniSlide } = useChat();
   const { activeTab, setActiveTab } = useUi();

@@ -30,7 +30,7 @@
     --accent: 220 14.3% 95.9%; /* Teal Accent Color */
     --accent-foreground: 220.9 39.3% 11%; /* Teal Accent Foreground Color */
 
-    --destructive: 0 84.2% 60.2%; /* Teal Destructive Color */
+    --destructive: 0 100% 49%; /* Teal Destructive Color */
     --destructive-foreground: 210 20% 98%; /* Teal Destructive Foreground Color */
 
     --ring: 224 71.4% 4.1%; /* Teal Ring Color */
@@ -73,7 +73,7 @@
     --accent: 215 27.9% 16.9%; /* Teal Dark Accent Color */
     --accent-foreground: 210 20% 98%; /* Teal Dark Accent Foreground Color */
 
-    --destructive: 0 62.8% 30.6%; /* Teal Dark Destructive Color */
+    --destructive: 0 100% 49%; /* Teal Dark Destructive Color */
     --destructive-foreground: 210 20% 98%; /* Teal Dark Destructive Foreground Color */
 
     --ring: 216 12.2% 83.9%; /* Teal Dark Ring Color */
@@ -278,4 +278,25 @@ body {
 ._toolbarButtonSelectTrigger_uazmk_306[data-state="open"],
 ._selectTrigger_uazmk_307[data-state="open"] {
   @apply !bg-background;
+}
+
+.gradient-border-mask {
+  position: relative;
+  padding: 1rem;
+}
+
+.gradient-border-mask::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 1.5rem 0rem 0rem 1.5rem;
+  border: 1rem solid transparent;
+  background: linear-gradient(244.53deg, #827293 25.27%, #d1c4e9 74.73%)
+    border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
 }

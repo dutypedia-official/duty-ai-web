@@ -33,6 +33,7 @@ import { useAuth, useUser } from "@clerk/nextjs";
 import { fetchEventSource } from "@microsoft/fetch-event-source";
 import { useRouter } from "next/navigation";
 import useUi from "@/lib/hooks/useUi";
+import Image from "next/image";
 
 export default function ChatMain({
   mini = false,
@@ -168,12 +169,21 @@ export default function ChatMain({
         );
       }
 
+      // const url =
+      //   template == "general"
+      //     ? `${process.env.NEXT_PUBLIC_API_URL}/chat/pro`
+      //     : template == "forex"
+      //     ? `${process.env.NEXT_PUBLIC_API_URL}/chat/forex`
+      //     : `${process.env.NEXT_PUBLIC_API_URL}/chat/finance`;
+
       const url =
-        template == "general"
-          ? `${process.env.NEXT_PUBLIC_API_URL}/chat/pro`
+        template == "finance"
+          ? `${process.env.NEXT_PUBLIC_API_URL}/chat/finance`
           : template == "forex"
           ? `${process.env.NEXT_PUBLIC_API_URL}/chat/forex`
-          : `${process.env.NEXT_PUBLIC_API_URL}/chat/finance`;
+          : template == "scanner"
+          ? `${process.env.NEXT_PUBLIC_API_URL}/chat/screener`
+          : `${process.env.NEXT_PUBLIC_API_URL}/chat/pro`;
 
       addMessage(botMessage);
 
@@ -322,13 +332,19 @@ export default function ChatMain({
 
   return (
     <>
-      {!mini && (
+      {!mini && template !== "scanner" && (
         <div
-          className={`hidden h-screen sticky top-0 pb-4 flex-shrink-0 lg:block duration-300 border-r shadow-sm bg-background dark:bg-[#1E1E1E]  ${
+          className={cn(
+            `hidden h-screen sticky top-0 pb-4 flex-shrink-0 lg:block duration-300 border-r shadow-sm bg-background dark:bg-[#1E1E1E]`,
             isShowNav ? "w-80" : "w-0"
-          }`}>
+            // template === "scanner" && "bg-transparent dark:bg-transparent"
+          )}>
           <div className={`h-full rounded-md overflow-hidden`}>
-            <div className="px-3 shadow-sm h-16 flex items-center justify-between bg-card-foreground">
+            <div
+              className={cn(
+                "px-3 shadow-sm h-16 flex items-center justify-between bg-card-foreground"
+                // template === "scanner" && "bg-transparent"
+              )}>
               <h1 className="text-base font-medium">
                 Chat -{" "}
                 <span className="text-muted-foreground capitalize text-sm font-normal">
@@ -341,7 +357,10 @@ export default function ChatMain({
                 onClick={newChat}
                 size="lg"
                 variant="outline"
-                className="rounded-md gap-2 w-full bg-card-foreground">
+                className={cn(
+                  "rounded-md gap-2 w-full bg-card-foreground"
+                  // template === "scanner" && "bg-transparent"
+                )}>
                 <ListPlus />
                 New Chat
               </Button>
@@ -362,7 +381,8 @@ export default function ChatMain({
             ? slide
               ? "bg-card-foreground rounded-lg w-full lg:w-[28rem] overflow-auto h-full"
               : "bg-card-foreground rounded-lg w-full lg:w-[28rem] overflow-auto h-[calc(100vh-6.5rem)]"
-            : "flex-1"
+            : "flex-1",
+          template === "scanner" && "bg-transparent"
         )}>
         {!mini && <TopSidebar />}
         <div className="w-full flex">
@@ -372,7 +392,9 @@ export default function ChatMain({
                 "w-full max-w-screen-md mx-auto",
                 mini
                   ? slide
-                    ? "min-h-[calc(100vh-10.5rem)]"
+                    ? template === "scanner"
+                      ? "min-h-[calc(100vh-5.5rem)]"
+                      : "min-h-[calc(100vh-10.5rem)]"
                     : "min-h-[calc(100vh-12rem)]"
                   : "min-h-[calc(100vh-64px)]"
               )}>
@@ -410,9 +432,15 @@ export default function ChatMain({
               onSubmit={handleSubmit}
               ref={formRef}
               className={cn(
-                "pb-5 px-4 sticky bottom-0 bg-transparent backdrop-blur-sm backdrop-saturate-200 w-full mx-auto"
+                "pb-5 px-4 sticky bottom-0 bg-transparent backdrop-blur-sm w-full mx-auto",
+                template === "scanner" && ""
               )}>
-              <div className="flex w-full bg-card-foreground p-1.5 border border-brand rounded-[26px] gap-1.5 max-w-screen-md mx-auto">
+              <div
+                className={cn(
+                  "flex w-full bg-card-foreground p-1.5 border border-brand rounded-[26px] gap-1.5 max-w-screen-md mx-auto",
+                  template === "scanner" &&
+                    "bg-white dark:bg-[#2C2F33] border-0"
+                )}>
                 <div className="flex flex-1 items-end gap-1.5 md:gap-2">
                   {isSubmiting && (
                     <Loader2 className="w-10 h-10 p-2.5 text-muted-foreground animate-spin" />
@@ -445,7 +473,11 @@ export default function ChatMain({
                   />
                   {!isSubmiting && (
                     <Button
-                      className="rounded-full w-10 h-10 p-0 flex-shrink-0 text-background bg-brand hover:bg-brand/70 hover:text-white"
+                      className={cn(
+                        "rounded-full w-10 h-10 p-0 flex-shrink-0 text-background bg-brand hover:bg-brand/70 hover:text-white transition-all duration-300",
+                        template === "scanner" &&
+                          "bg-transparent text-[#00D2FF] rotate-45"
+                      )}
                       variant="ghost"
                       type="submit"
                       disabled={isSubmiting}>
@@ -455,7 +487,10 @@ export default function ChatMain({
                   {isSubmiting && (
                     <Button
                       onClick={handelAbort}
-                      className="rounded-full w-10 h-10 p-0 flex-shrink-0"
+                      className={cn(
+                        "rounded-full w-10 h-10 p-0 flex-shrink-0",
+                        template === "scanner" && "bg-[#00D2FF] text-white"
+                      )}
                       type="button"
                       disabled={!isSubmiting}>
                       <X className="w-4 h-4" />

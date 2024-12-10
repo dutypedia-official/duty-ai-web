@@ -17,7 +17,8 @@ const IconBar = ({ isMobile = false }) => {
   const pathname = usePathname();
   const dashboardStore = useDashboard();
   const { showMobileSidebar } = dashboardStore;
-  const { setActiveConversationId, setMessages, setPrompt } = useChat();
+  const { setActiveConversationId, setMessages, setPrompt, setTemplate } =
+    useChat();
 
   return (
     <div
@@ -36,7 +37,13 @@ const IconBar = ({ isMobile = false }) => {
             <TooltipProvider key={item.label}>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Link href={item.link}>
+                  <Link
+                    href={item.link}
+                    onClick={() => {
+                      if (item?.link === "/") {
+                        setTemplate("finance");
+                      }
+                    }}>
                     <Button
                       onClick={() => {
                         setActiveConversationId(null);

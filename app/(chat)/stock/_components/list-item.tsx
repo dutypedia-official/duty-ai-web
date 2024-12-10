@@ -1,20 +1,19 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/use-toast";
 import { apiClient } from "@/lib/api";
 import useChat from "@/lib/hooks/useChat";
-import useUi from "@/lib/hooks/useUi";
-import { useAuth } from "@clerk/nextjs";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { FaCaretDown, FaCaretUp, FaHeart, FaRegHeart } from "react-icons/fa";
-import { MdOutlineShowChart } from "react-icons/md";
-import { toast } from "@/components/ui/use-toast";
-import { BellPlus } from "lucide-react";
-import { PiMagicWandFill } from "react-icons/pi";
-import { cn, useColorScheme } from "@/lib/utils";
-import { SetAlarm } from "./set-alarm";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useMediaQuery from "@/lib/hooks/useMediaQuery";
+import useUi from "@/lib/hooks/useUi";
+import { cn, useColorScheme } from "@/lib/utils";
+import { useAuth } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { FaCaretDown, FaCaretUp, FaHeart, FaRegHeart } from "react-icons/fa";
+import { MdOutlineEditNotifications, MdOutlineShowChart } from "react-icons/md";
+import { PiMagicWandFill } from "react-icons/pi";
+import { SetAlarm } from "./set-alarm";
+import { BellPlus } from "lucide-react";
 
 export const ListItem = ({
   name,
@@ -24,26 +23,37 @@ export const ListItem = ({
   logoUrl,
   volume,
   alerms,
+  aiAlarms,
   changePer,
   favs,
   onFavList,
   trading,
+  inputText,
+  setInputText,
+  activeTab,
+  setActiveTab,
+  handelSetAiAlerm,
+  error,
+  setError,
+  currentAlarm,
+  currentAiAlerm,
+  setCompanyName,
+  targetPrice,
 }: any) => {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === "dark";
   const isPositive = !change?.startsWith("-");
   const isPositivePer = !changePer?.startsWith("-");
-  const [loading, setLoading] = useState(false);
-  const [visible, setVisible] = useState(false);
+
   const router = useRouter();
   const {
     activeF,
     setRefreashFav,
     refreashFav,
-    refreash,
-    setRefreash,
     mainServerAvailable,
-    setActiveTab,
+    setSelectedAlarmShit,
+    setSelectedStock,
+    setAlarmSheet,
   } = useUi();
   const { setIsAskingAi, setChatMiniOpen, setChatMiniSlide } = useChat();
   const {
@@ -58,11 +68,9 @@ export const ListItem = ({
   } = useChat();
   const { getToken } = useAuth();
   const client = apiClient();
-  const currentAlerm = alerms?.find((alerm: any) => alerm.symbol === name);
+
   const isFav = favs?.find((fav: any) => fav.symbol == name);
-  const [targetPrice, setTargetPrice] = useState(
-    currentAlerm ? `${currentAlerm.price}` : ""
-  );
+
   const [isFavorite, setIsFavorite] = useState(
     onFavList ? true : isFav ? true : activeF == "favorite" ? true : false
   );
@@ -96,67 +104,6 @@ export const ListItem = ({
     }
 
     // Optionally, you can add logic to update the favorite status in your backend or state management
-  };
-
-  const handelSetAlerm = async () => {
-    try {
-      setLoading(true);
-      const token = await getToken();
-      if (+price?.replace(",", "") === parseFloat(targetPrice)) {
-        return toast({
-          title: "Price is same as current price!",
-        });
-      }
-      await client.post(
-        "/noti/create-alerm",
-        {
-          price: parseFloat(targetPrice),
-          symbol: name,
-          condition:
-            parseFloat(targetPrice) > +price?.replace(",", "") ? "Up" : "Down",
-        },
-        token,
-        mainServerAvailable
-      );
-
-      toast({
-        title: "Alarm set successfully",
-      });
-      if (onFavList) {
-        setRefreashFav(!refreashFav);
-      } else {
-        setRefreash(!refreash);
-      }
-      setVisible(false);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handelDeleteAlerm = async () => {
-    try {
-      setLoading(true);
-      const token = await getToken();
-      await client.delete(
-        `/noti/delete-alerm/${currentAlerm.id}`,
-        token,
-        {},
-        //@ts-ignore
-        mainServerAvailable
-      );
-      toast({
-        title: "Alarm deleted successfully",
-      });
-      setRefreash(!refreash);
-      setRefreashFav(!refreashFav);
-      setVisible(false);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
   };
 
   const askAiFn = () => {
@@ -228,8 +175,7 @@ export const ListItem = ({
                 className={cn(
                   "text-[#2ECC71] text-sm",
                   !isPositive && "text-[#FF000F]"
-                )}
-              >
+                )}>
                 {change}
               </p>
             </div>
@@ -248,8 +194,7 @@ export const ListItem = ({
                 className={cn(
                   "text-[#2ECC71] text-sm",
                   !isPositive && "text-[#FF000F]"
-                )}
-              >
+                )}>
                 {changePer}
               </p>
             </div>
@@ -266,8 +211,7 @@ export const ListItem = ({
                 className={cn(
                   "text-[#2ECC71] text-sm",
                   !isPositive && "text-[#FF000F]"
-                )}
-              >
+                )}>
                 {change}
               </p>
             </div>
@@ -305,30 +249,42 @@ export const ListItem = ({
         <a
           href={`https://www.tradingview.com/chart/?symbol=DSEBD:${name}&utm_source=www.tradingview.com&utm_medium=widget&utm_campaign=chart&utm_term=DSEBD:${name}&theme=${colorScheme}`}
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           <Button className="hover:bg-[#EAEDED] bg-[#EAEDED] hover:dark:bg-[#333333] dark:bg-[#333333] border border-[#EAEDED] dark:border-[#333333] text-[#757575] dark:text-white font-normal min-w-max text-[10px] sm:text-sm h-0 w-0 p-4">
             <MdOutlineShowChart className="w-4 h-4 text-[#5188D4] dark:text-white mr-0.5" />
             Chart
           </Button>
         </a>
 
-        <SetAlarm
-          targetPrice={targetPrice}
-          setTargetPrice={setTargetPrice}
-          currentAlerm={currentAlerm}
-          loading={loading}
-          handelSetAlerm={handelSetAlerm}
-          visible={visible}
-          setVisible={setVisible}
-          handelDeleteAlerm={handelDeleteAlerm}
-        />
+        <Button
+          onClick={() => {
+            setAlarmSheet(true);
+            setSelectedAlarmShit(currentAlarm);
+            setSelectedStock({
+              name,
+              price,
+              value,
+              change,
+              logoUrl,
+              volume,
+              changePer,
+            });
+            setCompanyName(name);
+          }}
+          className="hover:bg-[#EAEDED] bg-[#EAEDED] hover:dark:bg-[#333333] dark:bg-[#333333] border border-[#EAEDED] dark:border-[#333333] text-[#757575] dark:text-white font-normal min-w-max text-[10px] sm:text-sm h-0 w-0 p-4">
+          {currentAlarm || currentAiAlerm ? (
+            <MdOutlineEditNotifications className="w-4 h-4 text-red-500 mr-0.5" />
+          ) : (
+            <BellPlus className="w-4 h-4 text-[#5188D4] mr-0.5" />
+          )}
+
+          {currentAlarm || currentAiAlerm ? "Edit Alerm" : "Set Alarm"}
+        </Button>
 
         <Button
           onClick={askAiFn}
           disabled={isSubmiting}
-          className="disabled:bg-gray-100 hover:bg-[#EAEDED] bg-[#EAEDED] hover:dark:bg-[#333333] dark:bg-[#333333] border border-[#EAEDED] dark:border-[#333333] text-[#757575] dark:text-white font-normal min-w-max text-[10px] sm:text-sm h-0 w-0 p-4"
-        >
+          className="disabled:bg-gray-100 hover:bg-[#EAEDED] bg-[#EAEDED] hover:dark:bg-[#333333] dark:bg-[#333333] border border-[#EAEDED] dark:border-[#333333] text-[#757575] dark:text-white font-normal min-w-max text-[10px] sm:text-sm h-0 w-0 p-4">
           <PiMagicWandFill className="w-4 h-4 text-[#5188D4]mr-0.5" />
           Ask AI
         </Button>

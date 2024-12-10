@@ -14,8 +14,10 @@ import { Textarea } from "../ui/textarea";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import useUi from "@/lib/hooks/useUi";
 
 export const LandingPage = () => {
+  const { setOpenAuthModal } = useUi();
   const router = useRouter();
   const isLG = useMediaQuery("(min-width: 1024px)");
   const isBig = useMediaQuery("(min-width: 1537px)");
@@ -101,12 +103,14 @@ export const LandingPage = () => {
       <div className="flex flex-row flex-nowrap items-center justify-start gap-5 overflow-x-auto bottom-[28vh] iSE:bottom-[24vh] i13Mini:bottom-[24vh] absolute z-10 md:hidden pl-5 scrollbar">
         {suggestion?.map((item: any, i: number) => {
           return (
-            <Link
+            <button
               key={i}
-              href={"/signin"}
+              onClick={() => {
+                setOpenAuthModal(true);
+              }}
               className="cursor-pointer text-sm p-3 rounded-md border border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
               {item}
-            </Link>
+            </button>
           );
         })}
       </div>
@@ -463,6 +467,7 @@ export const LandingPage = () => {
               </div>
             </div>
           </div>
+          <div className="w-full h-20 absolute bg-[#020007]/30 z-20 bottom-0 shadow-xl"></div>
         </div>
 
         {!isLG && (
@@ -478,23 +483,30 @@ export const LandingPage = () => {
 
         <div
           className={cn(
-            "absolute flex-grow-0 w-[772px] h-[689px] lg:w-[1510px] lg:h-[1140px] bg-[#464DF8] lg:bg-transparent bg-gradient-to-b from-[#464DF8] to-[#464DF8)] opacity-35 blur-[500px] rounded-[1000px] bottom-10 lg:-bottom-[10%] left-1/2 lg:left-auto lg:-right-[10%] z-50 scale-125"
+            "absolute flex-grow-0 w-[772px] h-[689px] lg:w-[1510px] lg:h-[1140px] bg-[#464DF8] lg:bg-transparent bg-gradient-to-b from-[#464DF8] to-[#464DF8)] opacity-35 blur-[500px] rounded-[1000px] bottom-10 lg:-bottom-[10%] left-1/2 lg:left-auto lg:-right-[10%] z-10 scale-125 pointer-events-none"
           )}
         />
 
         <div
           id="apps"
           className="relative -scroll-mt-16 bg-[#000] px-3 pt-8 pb-10 lg:py-40 flex flex-col gap-10">
-          <h1 className="text-xl md:text-3xl font-bold max-w-60 md:max-w-96 md:leading-10 mx-auto text-center lg:hidden">
-            Stay ahead with real-time updates—download our app now!
+          <h1 className="text-xl md:text-3xl font-bold max-w-60 md:max-w-96 md:leading-10 mx-auto text-center lg:hidden z-10">
+            Stay ahead with real-time updates{" "}
+            <span className="text-[#6B70FF]">download our app now!</span>
           </h1>
+          <Image
+            src={"/app-store-pc-bg.svg"}
+            alt="bg"
+            fill
+            className="absolute object-cover w-full h-full"
+          />
           <div className="px-5 grid lg:grid-cols-2 lg:gap-16 container mx-auto w-full max-w-screen-xl relative">
-            <Image
+            {/* <Image
               src={"/app-store-pc-bg.svg"}
               alt="bg"
               fill
               className="absolute object-cover w-full h-full"
-            />
+            /> */}
             <div className="relative w-full aspect-[266.74/240.26] max-w-xl lg:max-w-none mx-auto lg:ml-0">
               <Image
                 src={"/mobile-app.svg"}
@@ -503,9 +515,10 @@ export const LandingPage = () => {
                 className="absolute object-contain w-full h-full"
               />
             </div>
-            <div className="hidden lg:flex flex-col gap-10 relative z-50">
+            <div className="hidden lg:flex flex-col gap-10 relative">
               <h2 className="text-[3.13rem] font-bold max-w-xl">
-                Stay ahead with real-time updates—download our app now!
+                Stay ahead with real-time updates{" "}
+                <span className="text-[#6B70FF]">download our app now!</span>
               </h2>
               <div className="w-full flex items-center gap-4">
                 <Link
@@ -575,32 +588,44 @@ export const LandingPage = () => {
               fill
               className="absolute object-contain w-full h-full"
             />
-            <div className="flex items-center justify-center">
-              <div className="flex items-center absolute bottom-5">
-                <Link
-                  target="_blank"
-                  href={"https://www.facebook.com/dutyai.duty/"}>
-                  <div className="relative w-10 aspect-[48/48]">
-                    <Image
-                      src={"/cta-facebook.svg"}
-                      alt="facebook"
-                      fill
-                      className="absolute object-contain w-full h-full"
-                    />
-                  </div>
-                </Link>
-                <Link
-                  target="_blank"
-                  href={"https://www.facebook.com/share/g/zFRzbYwCWMAnnFsQ/"}>
-                  <div className="relative w-36 aspect-[179/48]">
-                    <Image
-                      src={"/cta-connect.svg"}
-                      alt="group"
-                      fill
-                      className="absolute object-contain w-full h-full"
-                    />
-                  </div>
-                </Link>
+            <div className="flex flex-col items-center justify-center h-full gap-3">
+              <div className="relative flex flex-col gap-3 items-center">
+                <h1 className="text-xs md:text-base font-bold text-center px-5 md:px-10">
+                  Stay up to date with the latest stock market insights{" "}
+                  <span className="text-[#1B85FF]">join us today!</span>
+                </h1>
+                <p className="text-xs md:text-sm text-[#A0A0A0] px-5 md:px-14 text-center">
+                  Stay Up To Date With Us The Latest Stock Market Update Stay Up
+                  To Date With Us The Latest Stock Market Update
+                </p>
+              </div>
+              <div className="flex items-center justify-center">
+                <div className="flex items-center">
+                  <Link
+                    target="_blank"
+                    href={"https://www.facebook.com/dutyai.duty/"}>
+                    <div className="relative w-10 aspect-[48/48]">
+                      <Image
+                        src={"/cta-facebook.svg"}
+                        alt="facebook"
+                        fill
+                        className="absolute object-contain w-full h-full"
+                      />
+                    </div>
+                  </Link>
+                  <Link
+                    target="_blank"
+                    href={"https://www.facebook.com/share/g/zFRzbYwCWMAnnFsQ/"}>
+                    <div className="relative w-36 aspect-[179/48]">
+                      <Image
+                        src={"/cta-connect.svg"}
+                        alt="group"
+                        fill
+                        className="absolute object-contain w-full h-full"
+                      />
+                    </div>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -615,8 +640,8 @@ export const LandingPage = () => {
           <div className="absolute w-full h-full left-0 top-0 p-5 xl:p-10">
             <div className="relative flex flex-col justify-center items-center gap-5 xl:gap-8 w-full lg:scale-90 xl:scale-100">
               <h1 className="font-black text-[2.5rem] text-center leading-[4rem] max-w-screen-md">
-                Stay up-to-date with the latest stock market insights—join us
-                today!
+                Stay up to date with the latest stock market insights{" "}
+                <span className="text-[#1B85FF]">join us today!</span>
               </h1>
               <p className="text-muted-foreground text-base max-w-screen-md text-center">
                 Join our Facebook group for real-time app updates, exclusive

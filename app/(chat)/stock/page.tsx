@@ -19,10 +19,24 @@ import { StockChatMini } from "./_components/stock-chat-mini";
 import useMediaQuery from "@/lib/hooks/useMediaQuery";
 import { TabContent } from "./_components/tab-content";
 import { TopNoti } from "./_components/top-noti";
+import { toast } from "@/components/ui/use-toast";
 
 export default function page() {
-  const { refreash, mainServerAvailable, setActiveF } = useUi();
+  const {
+    setActiveF,
+    refreash,
+    setRefreash,
+    screenRefresh,
+    setScreenRefresh,
+    mainServerAvailable,
+    setRefreashFav,
+    refreashFav,
+    selectedStock,
+    // selectedAlarmShit,
+  } = useUi();
+  const [visible, setVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(false);
   const [isLoading2, setIsLoading2] = useState(true);
   const [isLoading3, setIsLoading3] = useState(true);
 
@@ -30,6 +44,10 @@ export default function page() {
 
   const [activeFilter, setActiveFilter] = useState("");
   const [alerms, setAlerms] = useState([]);
+  const [aiAlerms, setAiAlerms] = useState([]);
+  const [activeTab, setActiveTab] = useState("priceAlarm");
+  const [inputText, setInputText] = useState("");
+  const [error, setError] = useState(null);
   const { getToken } = useAuth();
   const client = apiClient();
 
@@ -46,7 +64,8 @@ export default function page() {
         //@ts-ignore
         mainServerAvailable
       );
-      setAlerms(data);
+      setAlerms(data?.alerms);
+      setAiAlerms(data?.aiAlerms);
     } catch (error) {
       console.log(error);
     } finally {
@@ -152,12 +171,26 @@ export default function page() {
                     favorites={favorites}
                     alerms={alerms}
                     onFavList={true}
+                    aiAlarms={aiAlerms}
+                    setInputText={setInputText}
+                    inputText={inputText}
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
+                    error={error}
+                    setError={setError}
                   />
                 ) : (
                   <StockList
                     filteredStocks={filteredStocks}
                     favorites={favorites}
                     alerms={alerms}
+                    aiAlarms={aiAlerms}
+                    inputText={inputText}
+                    setInputText={setInputText}
+                    activeTab={activeTab}
+                    setActiveTab={setActiveTab}
+                    error={error}
+                    setError={setError}
                   />
                 )}
               </div>

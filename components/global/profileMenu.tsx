@@ -57,7 +57,7 @@ const ProfileMenu = ({ link }: { link?: boolean }) => {
         <DropdownMenuItem
           onClick={() => {
             signOut();
-            router.replace("/signin");
+            router.replace("/");
           }}>
           Log out
         </DropdownMenuItem>

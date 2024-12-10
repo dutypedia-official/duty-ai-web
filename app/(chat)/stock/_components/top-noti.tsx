@@ -20,9 +20,11 @@ import { apiClient } from "@/lib/api";
 import { usePathname } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
 
 export const TopNoti = () => {
   const pathname = usePathname();
+  const [count, setCount] = useState(0);
   const [notifications, setNotifications] = useState([]);
   const { refreash, setRefreash, mainServerAvailable } = useUi();
   const [loading, setLoading] = useState<boolean>(true);
@@ -41,7 +43,7 @@ export const TopNoti = () => {
         {}
         // mainServerAvailable
       );
-      console.log(data);
+      console.log("notifications:-------------", data);
       setRefreash(!refreash);
       setNotifications(data);
     } catch (error) {
@@ -55,12 +57,42 @@ export const TopNoti = () => {
     fetchData();
   }, []);
 
+  const getUnreadNotiCount = async () => {
+    try {
+      const token = await getToken();
+      const { data } = await client.get(
+        "/noti/get-unread-count",
+        token,
+        {},
+        //@ts-ignore
+        mainServerAvailable
+      );
+      setCount(data.count);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getUnreadNotiCount();
+  }, [refreash]);
+
+  console.log("count:-------------", count);
   return (
     <>
       <DropdownMenu open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
-          <div className="w-10 h-10 flex flex-col items-center justify-center cursor-pointer">
+          <div className="w-10 h-10 flex flex-col items-center justify-center cursor-pointer relative rounded-full bg-card border border-input">
             <Bell className="w-5 h-5 text-foreground" />
+            {count > 0 ? (
+              <div className="absolute -top-1 -right-1">
+                <div className="relative flex items-center justify-center w-5 h-5 bg-destructive/80 rounded-full">
+                  <p className="text-[10px] text-white">
+                    {count > 10 ? "10+" : count > 0 ? count : undefined}
+                  </p>
+                </div>
+              </div>
+            ) : undefined}
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent
