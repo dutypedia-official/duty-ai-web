@@ -21,38 +21,59 @@ const Pm2 = () => {
   };
   return (
     <div className="flex gap-8 justify-center flex-wrap">
-      <Button onClick={() => restart("market")}>Restart Market</Button>
-      <Button onClick={() => restart("market-data")} className="bg-amber-500">
+      <Button disabled={loading == "market"} onClick={() => restart("market")}>
+        {loading == "market" && (
+          <Loader2 className="animate-spin size-4 mr-1" />
+        )}
+        Restart Market
+      </Button>
+      <Button
+        disabled={loading == "market-data"}
+        onClick={() => restart("market-data")}
+        className="bg-amber-500">
+        {loading == "market-data" && (
+          <Loader2 className="animate-spin size-4 mr-1" />
+        )}
         Restart Data
       </Button>
       <Button
+        disabled={loading == "market-category"}
         className="bg-emerald-500"
-        onClick={() => restart("market-category")}
-      >
+        onClick={() => restart("market-category")}>
+        {loading == "market-category" && (
+          <Loader2 className="animate-spin size-4 mr-1" />
+        )}
         Restart Category
       </Button>
       <Button
+        disabled={loading == "ind"}
         className="bg-sky-500"
         onClick={() => restart("ind")}
-        variant="destructive"
-      >
+        variant="destructive">
+        {loading == "ind" && <Loader2 className="animate-spin size-4 mr-1" />}
         Restart Index
       </Button>
       <Button
+        disabled={loading == "all"}
         className="bg-rose-500"
         onClick={() => restart("all")}
-        variant="destructive"
-      >
+        variant="destructive">
+        {loading == "all" && <Loader2 className="animate-spin size-4 mr-1" />}
         Restart All
       </Button>
-      <Button className="bg-fuchsia-500" onClick={() => restart("transfer")}>
+      <Button
+        disabled={loading == "transfer"}
+        className="bg-fuchsia-500"
+        onClick={() => restart("transfer")}>
+        {loading == "transfer" && (
+          <Loader2 className="animate-spin size-4 mr-1" />
+        )}
         Transfer Database
       </Button>
       <Button
         disabled={loading == "tv-all"}
         className="bg-indigo-500"
-        onClick={() => restart("tv-all")}
-      >
+        onClick={() => restart("tv-all")}>
         {loading == "tv-all" && (
           <Loader2 className="animate-spin size-4 mr-1" />
         )}
@@ -61,8 +82,7 @@ const Pm2 = () => {
       <Button
         disabled={loading == "tv-mover"}
         className="bg-indigo-500"
-        onClick={() => restart("tv-mover")}
-      >
+        onClick={() => restart("tv-mover")}>
         {loading == "tv-mover" && (
           <Loader2 className="animate-spin size-4 mr-1" />
         )}
@@ -71,8 +91,7 @@ const Pm2 = () => {
       <Button
         disabled={loading == "tv-index"}
         className="bg-indigo-500"
-        onClick={() => restart("tv-index")}
-      >
+        onClick={() => restart("tv-index")}>
         {loading == "tv-index" && (
           <Loader2 className="animate-spin size-4 mr-1" />
         )}
@@ -81,8 +100,7 @@ const Pm2 = () => {
       <Button
         disabled={loading == "tv-sectors"}
         className="bg-indigo-500"
-        onClick={() => restart("tv-sectors")}
-      >
+        onClick={() => restart("tv-sectors")}>
         {loading == "tv-sectors" && (
           <Loader2 className="animate-spin size-4 mr-1" />
         )}
