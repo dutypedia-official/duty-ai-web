@@ -1,9 +1,11 @@
+import useUi from "@/lib/hooks/useUi";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { setOpenAuthModal } = useUi();
   const Logo = (className: any) => {
     return (
       <div className="w-24 lg:w-40 aspect-[76.57/22.57] lg:aspect-[202/60] relative mx-auto lg:mx-0">
@@ -25,9 +27,12 @@ export const Footer = () => {
             <Logo />
           </div>
           <div className="flex justify-center text-sm font-normal relative z-10">
-            <Link href="signin">
-              <p className="text-gradient cursor-pointer px-2">Login</p>
-            </Link>
+            <p
+              onClick={() => setOpenAuthModal(true)}
+              className="text-gradient cursor-pointer px-2">
+              Login
+            </p>
+
             <Link href="/about">
               <p className="text-gradient cursor-pointer px-2">About Us</p>
             </Link>
@@ -53,9 +58,12 @@ export const Footer = () => {
           </div>
           <div className="flex justify-end">
             <div className="flex justify-center items-center text-sm font-normal relative z-10">
-              <Link href="signin">
-                <p className="text-gradient cursor-pointer px-2">Login</p>
-              </Link>
+              <p
+                onClick={() => setOpenAuthModal(true)}
+                className="text-gradient cursor-pointer px-2">
+                Login
+              </p>
+
               <Link href="/about">
                 <p className="text-gradient cursor-pointer px-2">About Us</p>
               </Link>

@@ -233,7 +233,7 @@ export const LandingPage = () => {
                           <div className="absolute right-5 top-0 h-full flex items-center justify-end">
                             <IoMdSend
                               onClick={() => {
-                                router.push("/signin");
+                                setOpenAuthModal(true);
                               }}
                               className="relative z-50 text-2xl text-[#3BAFDA] cursor-pointer"
                             />
@@ -242,12 +242,14 @@ export const LandingPage = () => {
                         <div className="flex flex-row flex-nowrap items-center justify-center mt-10 gap-5 scrollbar">
                           {suggestion?.map((item: any, i: number) => {
                             return (
-                              <Link
+                              <p
                                 key={i}
-                                href={"/signin"}
+                                onClick={() => {
+                                  setOpenAuthModal(true);
+                                }}
                                 className="cursor-pointer text-sm p-3 rounded-md border border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
                                 {item}
-                              </Link>
+                              </p>
                             );
                           })}
                         </div>
@@ -281,7 +283,7 @@ export const LandingPage = () => {
                           <div className="absolute right-5 -top-4 h-full flex items-end justify-end">
                             <IoMdSend
                               onClick={() => {
-                                router.push("/signin");
+                                setOpenAuthModal(true);
                               }}
                               className="text-2xl text-[#3BAFDA] z-10 cursor-pointer"
                             />
@@ -355,7 +357,7 @@ export const LandingPage = () => {
                         <div className="absolute right-5 top-0 h-full flex items-center justify-end">
                           <IoMdSend
                             onClick={() => {
-                              router.push("/signin");
+                              setOpenAuthModal(true);
                             }}
                             className="relative z-50 text-2xl text-[#3BAFDA] cursor-pointer"
                           />
@@ -364,12 +366,12 @@ export const LandingPage = () => {
                       <div className="flex flex-row flex-nowrap items-center justify-center mt-10 gap-5 scrollbar">
                         {suggestion?.map((item: any, i: number) => {
                           return (
-                            <Link
+                            <p
                               key={i}
-                              href={"/signin"}
+                              onClick={() => setOpenAuthModal(true)}
                               className="cursor-pointer text-sm p-3 rounded-md border border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
                               {item}
-                            </Link>
+                            </p>
                           );
                         })}
                       </div>
