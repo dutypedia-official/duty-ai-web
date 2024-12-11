@@ -27,6 +27,9 @@ export const SetAlarm = ({
   error,
   handelSetAlerm,
   loading,
+  loadingDeleteAlarm,
+  loadingAiAlarm,
+  loadingDeleteAiAlarm,
   handelDeleteAlerm,
   handelSetAiAlerm,
   handelDeleteAiAlerm,
@@ -42,6 +45,9 @@ export const SetAlarm = ({
   error: any;
   handelSetAlerm: () => void;
   loading: any;
+  loadingDeleteAlarm: any;
+  loadingAiAlarm: any;
+  loadingDeleteAiAlarm: any;
   handelDeleteAlerm: () => void;
   handelSetAiAlerm: () => void;
   handelDeleteAiAlerm: () => void;
@@ -50,7 +56,7 @@ export const SetAlarm = ({
     useUi();
   const colorscheme = useColorScheme();
   const isDark = colorscheme === "dark";
-  console.log(currentAlarm);
+
   return (
     <AlertDialog open={alarmSheet} onOpenChange={setAlarmSheet}>
       <AlertDialogContent className="py-10 bg-gradient-to-b from-[#FFFFFF] dark:from-[#1C1C1E] to-[#F3F4F6] dark:to-[#2A2A2D] border-t border-t-[#CFCFCF] dark:border-t-[#3A3A3C] !rounded-2xl h-full max-h-[calc(100vh-30vh)]">
@@ -171,10 +177,10 @@ export const SetAlarm = ({
                   onClick={() => {
                     handelDeleteAlerm();
                   }}
-                  disabled={loading}
+                  disabled={loadingDeleteAlarm}
                   size={"lg"}
                   className="text-white font-bold rounded-xl bg-gradient-to-b from-[#EF9A9A] dark:from-[#D64B4B] to-[#D32F2F] dark:to-[#8F2B2B] w-full">
-                  {loading ? "Please wait..." : "Delete Alarm"}
+                  {loadingDeleteAlarm ? "Please wait..." : "Delete Alarm"}
                 </Button>
               )}
             </div>
@@ -189,23 +195,23 @@ export const SetAlarm = ({
                 disabled={
                   inputText?.length === 0 || currentAiAlerm?.prompt
                     ? true
-                    : false
+                    : false || loadingAiAlarm
                 }
                 className={cn(
                   "text-white font-bold rounded-xl bg-gradient-to-b from-[#64B5F6] dark:from-[#6C63FF] to-[#1976D2] dark:to-[#3D4DB7] w-full",
                   inputText?.length > 0 ? "opacity-100" : "opacity-50"
                 )}>
-                {loading ? "Please wait..." : "Set Alarm"}
+                {loadingAiAlarm ? "Please wait..." : "Set Alarm"}
               </Button>
               {currentAiAlerm && (
                 <Button
                   onClick={() => {
                     handelDeleteAiAlerm();
                   }}
-                  disabled={loading}
+                  disabled={loadingDeleteAiAlarm}
                   size={"lg"}
                   className="text-white font-bold rounded-xl bg-gradient-to-b from-[#EF9A9A] dark:from-[#D64B4B] to-[#D32F2F] dark:to-[#8F2B2B] w-full">
-                  {loading ? "Please wait..." : "Delete Alarm"}
+                  {loadingDeleteAiAlarm ? "Please wait..." : "Delete Alarm"}
                 </Button>
               )}
             </div>

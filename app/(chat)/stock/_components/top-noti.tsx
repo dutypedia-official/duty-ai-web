@@ -77,6 +77,7 @@ export const TopNoti = () => {
   useEffect(() => {
     if (open) {
       fetchData();
+      setCount(0);
     }
   }, [open]);
 
@@ -127,7 +128,7 @@ export const TopNoti = () => {
                 <DropdownMenuLabel
                   key={i}
                   onClick={() => {
-                    if (item?.type === "analysis") {
+                    if (item?.type === "analysis" || item?.type == "AI") {
                       setSlideOpen(true);
                       setId(item?.entityId);
                     }

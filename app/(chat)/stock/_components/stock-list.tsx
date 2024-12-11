@@ -234,9 +234,19 @@ export const StockList = ({
   return (
     <div className="flex flex-col gap-5 lg:gap-0 lg:divide-y max-h-[calc(100vh-13.5rem)] overflow-y-auto">
       {filteredStocks?.map((item: any, i: number) => {
+        const currentAlarm = alerms?.find(
+          (alerm: any) => alerm.symbol === item.symbol
+        );
+
+        const currentAiAlerm = aiAlarms?.find(
+          (alerm: any) => alerm.symbol === item.symbol
+        );
+
         return (
           <ListItem
             key={i}
+            currentAlarm={currentAlarm}
+            currentAiAlerm={currentAiAlerm}
             changePer={item.changePer}
             name={item.symbol}
             price={getPrice(item)}
@@ -282,6 +292,9 @@ export const StockList = ({
         error={error}
         handelSetAlerm={handelSetAlerm}
         loading={loading}
+        loadingDeleteAlarm={loadingDeleteAlarm}
+        loadingAiAlarm={loadingAiAlarm}
+        loadingDeleteAiAlarm={loadingDeleteAiAlarm}
         handelDeleteAlerm={handelDeleteAlerm}
         handelSetAiAlerm={handelSetAiAlerm}
         handelDeleteAiAlerm={handelDeleteAiAlerm}

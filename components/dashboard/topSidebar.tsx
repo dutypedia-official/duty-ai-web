@@ -20,7 +20,7 @@ export const TopSidebar = () => {
           "bg-transparent dark:bg-transparent backdrop-blur-0 shadow-none"
       )}>
       <div className="w-full flex items-center justify-between">
-        <MobileSidebar />
+        {template !== "scanner" && <MobileSidebar />}
 
         <div className="">
           {template === "scanner" ? (
@@ -30,7 +30,7 @@ export const TopSidebar = () => {
                 setActiveConversationId(null);
               }}
               className={cn(
-                "w-7 h-7 cursor-pointer hidden lg:flex bg-[#00A6A6] text-white rounded-full"
+                "w-7 h-7 cursor-pointer flex bg-[#00A6A6] text-white rounded-full"
               )}
             />
           ) : (

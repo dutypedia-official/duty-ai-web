@@ -74,9 +74,6 @@ export const ListItem = ({
   const [isFavorite, setIsFavorite] = useState(
     onFavList ? true : isFav ? true : activeF == "favorite" ? true : false
   );
-  console.log(isFavorite, "onFavList");
-
-  const isLargerScreen = useMediaQuery("(min-width: 1536px)");
 
   const toggleFavorite = async () => {
     try {
@@ -278,7 +275,7 @@ export const ListItem = ({
             <BellPlus className="w-4 h-4 text-[#5188D4] mr-0.5" />
           )}
 
-          {currentAlarm || currentAiAlerm ? "Edit Alerm" : "Set Alarm"}
+          {currentAlarm || currentAiAlerm ? "Edit Alarm" : "Set Alarm"}
         </Button>
 
         <Button
