@@ -216,7 +216,7 @@ const PopularPrompts: FunctionComponent<PopularPromptsProps> = () => {
                 template === "scanner" &&
                   "border-[1.5px] border-[#8AB4C9] dark:border-[#3A7CA5] bg-[#E8ECEF] hover:bg-[#E8ECEF] dark:bg-[#2D2F34] hover:dark:bg-[#2D2F34] text-left justify-start px-3",
                 prompt.question === "Stock Scanner" &&
-                  "bg-gradient-to-r from-[#91C6F0] dark:from-[#121212] to-[#F0F2F5] dark:to-[#000000] text-[#8B7500] dark:text-[#FFD700] hover:text-[#8B7500] hover:dark:text-[#FFD700]",
+                  "bg-gradient-to-r dark:bg-gradient-to-b from-[#91C6F0] dark:from-[#121212] to-[#F0F2F5] dark:to-[#000000] text-[#8B7500] dark:text-[#FFD700] hover:text-[#8B7500] hover:dark:text-[#FFD700]",
                 prompt.question === "Golden choice" &&
                   "bg-[#FFD700] hover:bg-[#FFD700] text-[#8B7500] dark:bg-gradient-to-b from-[#121212] to-[#000000] dark:text-[#FFD700] hover:text-[#8B7500] hover:dark:text-[#FFD700]"
               )}
