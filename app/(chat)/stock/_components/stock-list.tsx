@@ -5,7 +5,7 @@ import { ListItem } from "./list-item";
 import useStockData from "@/lib/hooks/useStockData";
 import { Button } from "@/components/ui/button";
 import { SetAlarm } from "./set-alarm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 import { apiClient } from "@/lib/api";
 import { toast } from "@/components/ui/use-toast";
@@ -62,6 +62,9 @@ export const StockList = ({
   const client = apiClient();
   const { hasMore, currentPage, setCurrentPage } = useStockData();
   const [loading, setLoading] = useState(false);
+  const [loadingDeleteAlarm, setLoadingDeleteAlarm] = useState(false);
+  const [loadingAiAlarm, setLoadingAiAlarm] = useState(false);
+  const [loadingDeleteAiAlarm, setLoadingDeleteAiAlarm] = useState(false);
   const [companyName, setCompanyName] = useState(null);
 
   const currentAlarm: any = alerms?.find(
@@ -76,11 +79,18 @@ export const StockList = ({
   );
 
   const handelSetAlerm = async () => {
+    if (!selectedStock) {
+      return toast({
+        variant: "destructive",
+        title: "Select a stock first!",
+      });
+    }
     try {
       setLoading(true);
       const token = await getToken();
       if (+selectedStock?.price?.replace(",", "") === parseFloat(targetPrice)) {
         return toast({
+          variant: "destructive",
           title: "Price is same as current price!",
         });
       }
@@ -88,24 +98,28 @@ export const StockList = ({
         "/noti/create-alerm",
         {
           price: parseFloat(targetPrice),
-          symbol: selectedStock.name,
+          symbol: selectedStock?.name,
           condition:
             parseFloat(targetPrice) > +selectedStock?.price?.replace(",", "")
               ? "Up"
               : "Down",
         },
         token,
+        {},
+        //@ts-ignore
         mainServerAvailable
       );
-      setAlarmSheet(false);
+
       toast({
+        variant: "default",
         title: "Alarm set successfully",
       });
-      if (onFavList) {
-        setRefreashFav(!refreashFav);
-      } else {
-        setRefreash(!refreash);
-      }
+
+      setRefreash(!refreash);
+      setRefreashFav(!refreashFav);
+
+      // hideModal();
+      setAlarmSheet(false);
     } catch (error) {
       console.log(error);
     } finally {
@@ -115,16 +129,15 @@ export const StockList = ({
 
   const handelSetAiAlerm = async () => {
     if (!selectedStock) {
-      toast({
+      return toast({
         variant: "destructive",
         title: "Select a stock first!",
       });
     }
     try {
       setError(null);
-      setLoading(true);
+      setLoadingAiAlarm(true);
       const token = await getToken();
-      console.log(selectedStock?.name);
       await client.post(
         "/noti/create-ai-alerm",
         {
@@ -139,19 +152,23 @@ export const StockList = ({
         variant: "default",
         title: "Alarm set successfully",
       });
-      setAlarmSheet(false);
+
       setRefreash(!refreash);
+      setRefreashFav(!refreashFav);
+
+      // hideModal();
+      setAlarmSheet(false);
     } catch (error: any) {
       console.log(error.response?.data);
       setError(error.response?.data?.detail);
     } finally {
-      setLoading(false);
+      setLoadingAiAlarm(false);
     }
   };
 
   const handelDeleteAlerm = async () => {
     try {
-      setLoading(true);
+      setLoadingDeleteAlarm(true);
       const token = await getToken();
       await client.delete(
         `/noti/delete-alerm/${currentAlarm.id}`,
@@ -161,21 +178,26 @@ export const StockList = ({
         mainServerAvailable
       );
       toast({
+        variant: "destructive",
         title: "Alarm deleted successfully",
       });
       setRefreash(!refreash);
       setRefreashFav(!refreashFav);
+      // hideModal();
       setAlarmSheet(false);
     } catch (error) {
       console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Error deleting alarm",
+      });
     } finally {
-      setLoading(false);
+      setLoadingDeleteAlarm(false);
     }
   };
-
   const handelDeleteAiAlerm = async () => {
     try {
-      setLoading(true);
+      setLoadingDeleteAiAlarm(true);
       const token = await getToken();
       await client.delete(
         `/noti/delete-ai-alerm/${selectedStock.name}`,
@@ -199,7 +221,7 @@ export const StockList = ({
         title: "Error deleting alarm",
       });
     } finally {
-      setLoading(false);
+      setLoadingDeleteAiAlarm(false);
     }
   };
 

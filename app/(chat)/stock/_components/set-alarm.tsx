@@ -86,8 +86,8 @@ export const SetAlarm = ({
                   activeTab === "aiAlarm"
                     ? "/magicActive.svg"
                     : isDark
-                    ? "/magicInActiveDark.svg"
-                    : "/magicInActiveLight.svg"
+                    ? "/magicDark.svg"
+                    : "/magicLight.svg"
                 }
                 width={20}
                 height={20}
