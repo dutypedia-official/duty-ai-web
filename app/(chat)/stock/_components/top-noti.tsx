@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Bell } from "lucide-react";
+import { Bell, Loader, Loader2 } from "lucide-react";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { formatDate, setDate } from "date-fns";
@@ -21,6 +21,7 @@ import { usePathname } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const TopNoti = () => {
   const pathname = usePathname();
@@ -101,7 +102,20 @@ export const TopNoti = () => {
           className="w-80 max-h-96 overflow-y-scroll bg-card p-3 rounded-xl gap-[10px]"
           align="end"
           forceMount>
-          {notifications.length == 0 ? (
+          {loading ? (
+            <div className="h-full w-full flex flex-col gap-2">
+              {Array.from(Array(10).keys()).map((item, i) => {
+                return (
+                  <div key={i} className="flex gap-3">
+                    <Skeleton className="h-8 w-8 bg-card-foreground rounded-full" />
+                    <div className="flex-1 flex gap-1 flex-col">
+                      <Skeleton className="h-7 w-full bg-card-foreground" />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          ) : notifications.length == 0 ? (
             <div className="">
               <p className="text-sm text-center text-[#D3D3D3]">
                 No notifications
