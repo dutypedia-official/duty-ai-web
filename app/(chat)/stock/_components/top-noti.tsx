@@ -53,10 +53,6 @@ export const TopNoti = () => {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   const getUnreadNotiCount = async () => {
     try {
       const token = await getToken();
@@ -75,7 +71,13 @@ export const TopNoti = () => {
 
   useEffect(() => {
     getUnreadNotiCount();
-  }, [refreash]);
+  }, []);
+
+  useEffect(() => {
+    if (open) {
+      fetchData();
+    }
+  }, [open]);
 
   console.log("count:-------------", count);
   return (

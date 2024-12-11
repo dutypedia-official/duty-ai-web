@@ -4,7 +4,7 @@ import { Form } from "@/components/ui/form";
 
 import useUi from "@/lib/hooks/useUi";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ChevronRight, Eye, LoaderCircle } from "lucide-react";
+import { ChevronRight, Eye, EyeOff, LoaderCircle } from "lucide-react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -93,14 +93,18 @@ export const LoginForm = () => {
                 <FormInput
                   control={form.control}
                   name={"password"}
-                  type="password"
                   placeholder={"Password"}
+                  type={showPass ? "text" : "password"}
                   icon={
                     <button
                       type="button"
                       onClick={() => setShowPass(!showPass)}
                       className="relative cursor-pointer">
-                      <Eye className="w-4 xl:w-5 h-4 xl:h-5" />
+                      {!showPass ? (
+                        <Eye className="w-4 xl:w-5 h-4 xl:h-5" />
+                      ) : (
+                        <EyeOff className="w-4 xl:w-5 h-4 xl:h-5" />
+                      )}
                     </button>
                   }
                 />

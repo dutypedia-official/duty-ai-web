@@ -40,7 +40,7 @@ export const GoogleBtn = () => {
       }}
       className={btnStyle}>
       <div className="mr-2 w-6 h-6">
-        <Image src={`/google.svg`} alt="apple" width={50} height={50} />
+        <Image src={`/Google.svg`} alt="google" width={50} height={50} />
       </div>
       Login with Google
     </Button>

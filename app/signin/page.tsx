@@ -56,7 +56,7 @@ const SigniPage = () => {
  hover:border-blue-400 focus:bg-blue-50 active:bg-blue-100">
                   <div className="relative flex items-center space-x-4 justify-center">
                     <img
-                      src="https://tailus.io/sources/blocks/social/preview/images/google.svg"
+                      src="/Google.svg"
                       className="absolute left-0 w-5"
                       alt="google logo"
                     />

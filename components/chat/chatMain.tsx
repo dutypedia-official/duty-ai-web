@@ -169,13 +169,6 @@ export default function ChatMain({
         );
       }
 
-      // const url =
-      //   template == "general"
-      //     ? `${process.env.NEXT_PUBLIC_API_URL}/chat/pro`
-      //     : template == "forex"
-      //     ? `${process.env.NEXT_PUBLIC_API_URL}/chat/forex`
-      //     : `${process.env.NEXT_PUBLIC_API_URL}/chat/finance`;
-
       const url =
         template == "finance"
           ? `${process.env.NEXT_PUBLIC_API_URL}/chat/finance`

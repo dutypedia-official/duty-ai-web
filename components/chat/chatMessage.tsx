@@ -214,15 +214,17 @@ export const ChatMessage = ({ isLast, message }: CProps) => {
                 className={"text-foreground"}>
                 {message.text!}
               </ReactMarkdown>
-              <div className="float-right">
-                <Button
-                  className=""
-                  onClick={askAiFn}
-                  size="sm"
-                  variant="ghost">
-                  Ask Ai
-                </Button>
-              </div>
+              {template !== "scanner" && (
+                <div className="float-right">
+                  <Button
+                    className=""
+                    onClick={askAiFn}
+                    size="sm"
+                    variant="ghost">
+                    Ask Ai
+                  </Button>
+                </div>
+              )}
               {isLast && <ChatEnhance message={message} />}
             </>
           )}

@@ -102,12 +102,7 @@ export const iconbarItems = [
     label: "chat",
     link: "/",
   },
-  {
-    icon: UimCommentAltMessage,
-    active: true,
-    label: "Finance",
-    link: "/finance",
-  },
+
   {
     icon: FaRegChartBar,
     active: true,
@@ -119,6 +114,12 @@ export const iconbarItems = [
     active: true,
     label: "Forex",
     link: "/forex",
+  },
+  {
+    icon: UimCommentAltMessage,
+    active: true,
+    label: "Finance",
+    link: "/finance",
   },
 ];
 

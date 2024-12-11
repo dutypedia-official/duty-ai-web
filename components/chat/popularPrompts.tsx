@@ -7,6 +7,7 @@ import { FunctionComponent, useState } from "react";
 import { Button } from "../ui/button";
 import { toast } from "../ui/use-toast";
 import { VideoDialog } from "../goldenChoice/video-dialog";
+import Image from "next/image";
 
 interface PopularPromptsProps {}
 
@@ -211,12 +212,25 @@ const PopularPrompts: FunctionComponent<PopularPromptsProps> = () => {
               size="lg"
               key={i}
               className={cn(
-                "rounded-md bg-card hover:bg-card",
+                "rounded-md bg-card hover:bg-card relative",
                 template === "scanner" &&
-                  "border-[1.5px] border-[#8AB4C9] dark:border-[#3A7CA5] bg-[#E8ECEF] hover:bg-[#E8ECEF] dark:bg-[#2D2F34] hover:dark:bg-[#2D2F34] text-left justify-start px-3"
+                  "border-[1.5px] border-[#8AB4C9] dark:border-[#3A7CA5] bg-[#E8ECEF] hover:bg-[#E8ECEF] dark:bg-[#2D2F34] hover:dark:bg-[#2D2F34] text-left justify-start px-3",
+                prompt.question === "Stock Scanner" &&
+                  "bg-gradient-to-r from-[#91C6F0] dark:from-[#333333] to-[#F0F2F5] dark:to-[#0F0F0F] text-[#8B7500] dark:text-[#FFD700]",
+                prompt.question === "Golden choice" &&
+                  "bg-[#FFD700] text-[#8B7500] dark:bg-gradient-to-b from-[#121212] to-[#000000] dark:text-[#FFD700]"
               )}
               variant="outline">
               <span className="line-clamp-1">{prompt.title}</span>
+              {prompt.question === "Stock Scanner" && (
+                <Image
+                  src={"/magicActive.svg"}
+                  width={18}
+                  height={18}
+                  alt="icon"
+                  className="absolute right-2"
+                />
+              )}
             </Button>
           );
         })}
