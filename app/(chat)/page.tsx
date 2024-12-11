@@ -44,7 +44,6 @@ export default function Page() {
   return isSignedIn ? (
     <>
       <ChatMain />
-      {template === "scanner" && <MiniChatSlide />}
       <VideoDialog open={videoModal} setOpen={setVideoModal} />
       {openGolden && <GoldenChoice />}
       {processingModal && <ProcessingDialog />}
