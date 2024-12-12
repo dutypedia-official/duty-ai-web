@@ -7,7 +7,6 @@ import { getAuth } from "@clerk/nextjs/server";
 
 const publicRoutes = [
   "/",
-  "/signin",
   "/legal/terms-and-conditions",
   "/legal/privacy-policy",
 ];
@@ -20,8 +19,8 @@ export default authMiddleware({
     const isPublicRoute = publicRoutes.includes(pathname);
 
     if (!userId && !isPublicRoute) {
-      // If not logged in and trying to access a non-public route, redirect to /signin
-      return NextResponse.redirect(new URL("/signin", req.url));
+      // If not logged in and trying to access a non-public route, redirect to /
+      return NextResponse.redirect(new URL("/", req.url));
     }
 
     if (pathname === "/hub") {

@@ -13,7 +13,7 @@ export const Footer = () => {
           src={"/duty-ai.svg"}
           alt="logo"
           fill
-          className="object-contain absolute w-full h-full"
+          className="object-contain absolute w-full h-full pointer-events-none"
         />
       </div>
     );
@@ -27,11 +27,11 @@ export const Footer = () => {
             <Logo />
           </div>
           <div className="flex justify-center text-sm font-normal relative z-10">
-            <p
+            <button
               onClick={() => setOpenAuthModal(true)}
-              className="text-gradient cursor-pointer px-2">
+              className="relative z-30 text-gradient cursor-pointer px-2">
               Login
-            </p>
+            </button>
 
             <Link href="/about">
               <p className="text-gradient cursor-pointer px-2">About Us</p>
@@ -58,11 +58,11 @@ export const Footer = () => {
           </div>
           <div className="flex justify-end">
             <div className="flex justify-center items-center text-sm font-normal relative z-10">
-              <p
+              <button
                 onClick={() => setOpenAuthModal(true)}
-                className="text-gradient cursor-pointer px-2">
+                className="relative z-30 text-gradient cursor-pointer px-2">
                 Login
-              </p>
+              </button>
 
               <Link href="/about">
                 <p className="text-gradient cursor-pointer px-2">About Us</p>

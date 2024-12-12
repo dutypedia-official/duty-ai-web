@@ -108,7 +108,7 @@ export const LandingPage = () => {
               onClick={() => {
                 setOpenAuthModal(true);
               }}
-              className="cursor-pointer text-sm p-3 rounded-md border border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
+              className="cursor-pointer relative z-30 text-sm p-3 rounded-md border border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
               {item}
             </button>
           );
@@ -136,7 +136,11 @@ export const LandingPage = () => {
       <div className="relative">
         {/* linear */}
         <div className="absolute top-0 md:top-60 left-20 md:-left-20 w-full h-full pointer-events-none">
-          <div className={cn("bg-linear-m md:bg-linear-pc z-20 scale-125")} />
+          <div
+            className={cn(
+              "bg-linear-m md:bg-linear-pc z-20 scale-125 pointer-events-none"
+            )}
+          />
         </div>
 
         <MobileSlider />
@@ -151,7 +155,7 @@ export const LandingPage = () => {
                       src={"/apps-rating.svg"}
                       alt="rating"
                       fill
-                      className="absolute object-contain w-full h-full"
+                      className="absolute object-contain w-full h-full pointer-events-auto"
                     />
                   </div>
                 </div>
@@ -163,7 +167,7 @@ export const LandingPage = () => {
                         src={"/apps-rating.svg"}
                         alt="rating"
                         fill
-                        className="absolute object-contain w-full h-full"
+                        className="absolute object-contain w-full h-full pointer-events-none"
                       />
                     </div>
                   </div>
@@ -222,7 +226,7 @@ export const LandingPage = () => {
                             src={"/accurate.svg"}
                             alt="accurate"
                             fill
-                            className="absolute object-contain w-full h-full"
+                            className="absolute object-contain w-full h-full pointer-events-none"
                           />
                         </div>
                         <div className="relative">
@@ -247,7 +251,7 @@ export const LandingPage = () => {
                                 onClick={() => {
                                   setOpenAuthModal(true);
                                 }}
-                                className="cursor-pointer text-sm p-3 rounded-md border border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
+                                className="relative z-30 cursor-pointer text-sm p-3 rounded-md border border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
                                 {item}
                               </p>
                             );
@@ -273,7 +277,7 @@ export const LandingPage = () => {
                               src={"/accurate-mb.svg"}
                               alt="accurate"
                               fill
-                              className="absolute object-contain w-full h-full"
+                              className="absolute object-contain w-full h-full pointer-events-none"
                             />
                           </div>
                           <Textarea
@@ -285,7 +289,7 @@ export const LandingPage = () => {
                               onClick={() => {
                                 setOpenAuthModal(true);
                               }}
-                              className="text-2xl text-[#3BAFDA] z-10 cursor-pointer"
+                              className="text-2xl text-[#3BAFDA] relative z-10 cursor-pointer"
                             />
                           </div>
                         </div>
@@ -296,13 +300,13 @@ export const LandingPage = () => {
               </div>
 
               <div className="relative aspect-[1280/547.74] hidden xl:block">
-                <div className="absolute right-10">
+                <div className="absolute right-10 pointer-events-none">
                   <div className="w-72 relative aspect-[314/41] lg:bottom-3 xl:bottom-2 2xl:bottom-0">
                     <Image
                       src={"/apps-rating.svg"}
                       alt="rating"
                       fill
-                      className="absolute object-contain w-full h-full"
+                      className="absolute object-contain w-full h-full pointer-events-none"
                     />
                   </div>
                 </div>
@@ -310,7 +314,7 @@ export const LandingPage = () => {
                   src={"/hero-pc.svg"}
                   alt="hero"
                   fill
-                  className="absolute object-contain w-full h-full"
+                  className="absolute object-contain w-full h-full pointer-events-none"
                 />
 
                 <div
@@ -346,7 +350,7 @@ export const LandingPage = () => {
                           src={"/accurate.svg"}
                           alt="accurate"
                           fill
-                          className="absolute object-contain w-full h-full"
+                          className="absolute object-contain w-full h-full pointer-events-none"
                         />
                       </div>
                       <div className="relative">
@@ -369,7 +373,7 @@ export const LandingPage = () => {
                             <p
                               key={i}
                               onClick={() => setOpenAuthModal(true)}
-                              className="cursor-pointer text-sm p-3 rounded-md border border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
+                              className="relative z-30 cursor-pointer text-sm p-3 rounded-md border border-[#3BAFDA] inline-flex shrink-0 text-center bg-[#2B2B2B]">
                               {item}
                             </p>
                           );
@@ -384,7 +388,7 @@ export const LandingPage = () => {
         </div>
       </div>
       <div className="my-10 lg:my-0 relative">
-        <div className="h-full w-full absolute top-0 left-0 lg:py-10">
+        <div className="h-full w-full absolute top-0 left-0 lg:py-10 pointer-events-none">
           <div className="h-full w-full bg-[#101519]"></div>
         </div>
         <div className="grid grid-cols-3 lg:gap-9 lg:p-3 relative container mx-auto w-full max-w-screen-xl">

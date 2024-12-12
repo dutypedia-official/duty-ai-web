@@ -129,7 +129,7 @@ export const navRightItems = [
   },
   {
     com: (
-      <Link href={"/signin"}>
+      <Link href={"/"}>
         <Avatar className="w-7 h-7">
           <AvatarImage src="https://github.com/shadcn.png" />
           <AvatarFallback>CN</AvatarFallback>
