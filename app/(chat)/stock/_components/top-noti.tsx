@@ -81,7 +81,6 @@ export const TopNoti = () => {
     }
   }, [open]);
 
-  console.log("count:-------------", count);
   return (
     <>
       <DropdownMenu open={open} onOpenChange={setOpen}>

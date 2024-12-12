@@ -61,7 +61,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     setIsSubmiting(false);
   }, [pathname]);
 
-  console.log("template:--------------------", template);
   return (
     <div className="relative w-full">
       {isSignedIn ? (
