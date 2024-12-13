@@ -29,7 +29,7 @@ const IconBar = ({ isMobile = false }) => {
       <div className="px-2 flex-1 flex flex-col justify-between gap-2">
         <div className="flex items-center justify-center">
           <Link href={"/"}>
-            <img src="/logo.png" alt="logo" className="w-10 h-10" />
+            <img src="/logo.png" alt="logo" className="w-8 h-8" />
           </Link>
         </div>
         <div className="flex flex-col gap-2">
