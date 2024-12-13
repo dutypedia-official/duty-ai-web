@@ -24,14 +24,14 @@ import {
 } from "@mdxeditor/editor";
 import "@mdxeditor/editor/style.css";
 import { motion } from "framer-motion";
-import { BarChart2, Bell, Hash } from "lucide-react";
+import { BarChart2, Bell, Hash, Wrench } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import InitializedMDXEditor from "./initializedMDXEditor";
 
 export default function SendNoti() {
   const [activeForm, setActiveForm] = useState<
-    "notification" | "analysis" | "index"
+    "notification" | "analysis" | "index" | "maintenance"
   >("notification"); // default form
 
   return (
@@ -72,6 +72,16 @@ export default function SendNoti() {
               <Hash className="text-xl" />
               <span>Dsebd Index</span>
             </button>
+            <button
+              className={`flex items-center space-x-2 py-2 px-4 rounded ${
+                activeForm === "maintenance"
+                  ? "bg-cyan-400"
+                  : "bg-gray-200 dark:bg-gray-700 text-black dark:text-white"
+              }`}
+              onClick={() => setActiveForm("maintenance")}>
+              <Wrench className="text-xl" />
+              <span>Maintenance</span>
+            </button>
           </div>
 
           {/* Form with Animation */}
@@ -81,13 +91,10 @@ export default function SendNoti() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.5 }}>
-            {activeForm === "notification" ? (
-              <NotificationForm />
-            ) : activeForm === "analysis" ? (
-              <DailyAnalysisForm />
-            ) : (
-              <IndexForm />
-            )}
+            {activeForm === "notification" && <NotificationForm />}
+            {activeForm === "analysis" && <DailyAnalysisForm />}
+            {activeForm === "index" && <IndexForm />}
+            {activeForm === "maintenance" && <MaintenanceForm />}
           </motion.div>
         </div>
       </div>
@@ -403,6 +410,45 @@ function IndexForm() {
       >
         {isLoading ? "Please wait" : "Update"}
       </button>
+    </div>
+  );
+}
+
+function MaintenanceForm() {
+  const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState("");
+  const [isRunning, setIsRunning] = useState(false);
+
+  return (
+    <div className="space-y-4">
+      <textarea
+        placeholder="Maintenance Notice"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        className="w-full p-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-black dark:text-white rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-400 h-64"
+      />
+      <div className="flex flex-row max-w-52 mx-auto">
+        <button
+          onClick={() => {
+            setIsRunning(false);
+            // setIsLoading("start");
+          }}
+          className={`px-3 py-2 rounded-l-lg w-full ${
+            !isRunning ? "bg-cyan-400" : "bg-[#5B5B5B]"
+          } text-white`}>
+          {isLoading === "start" ? "Please wait" : "Start"}
+        </button>
+        <button
+          onClick={() => {
+            setIsRunning(true);
+            // setIsLoading("stop");
+          }}
+          className={`px-3 py-2 rounded-r-lg w-full ${
+            isRunning ? "bg-cyan-400" : "bg-[#5B5B5B]"
+          } text-white`}>
+          {isLoading === "stop" ? "Please wait" : "Stop"}
+        </button>
+      </div>
     </div>
   );
 }

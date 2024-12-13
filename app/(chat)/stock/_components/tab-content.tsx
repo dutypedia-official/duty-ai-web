@@ -74,7 +74,7 @@ export const TabContent = () => {
             <FaCaretRight className="text-white" />
           </div>
         </div>
-        <ScrollArea className="h-screen overflow-y-auto">
+        <div className="h-screen overflow-y-auto">
           <div className="bg-card-foreground h-full rounded-lg w-full">
             <div className="flex justify-center py-5 sticky top-0 bg-card-foreground z-10">
               {tabs.map((tab, index) => (
@@ -100,7 +100,7 @@ export const TabContent = () => {
               </div>
             </div>
           </div>
-        </ScrollArea>
+        </div>
       </SheetContent>
     </Sheet>
   );
