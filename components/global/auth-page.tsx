@@ -98,7 +98,7 @@ export default function AuthPage() {
                       </h2>
                     </div>
                     <Image
-                      src={"/auth-logo.svg"}
+                      src={"/duty-ai.svg"}
                       alt="duty-ai"
                       width={200}
                       height={100}
