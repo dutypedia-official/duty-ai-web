@@ -47,7 +47,6 @@ export const ListItem = ({
 
   const router = useRouter();
   const {
-    activeF,
     setRefreashFav,
     refreashFav,
     mainServerAvailable,
@@ -72,7 +71,7 @@ export const ListItem = ({
   const isFav = favs?.find((fav: any) => fav.symbol == name);
 
   const [isFavorite, setIsFavorite] = useState(
-    onFavList ? true : isFav ? true : activeF == "favorite" ? true : false
+    onFavList ? true : isFav ? true : false
   );
 
   const toggleFavorite = async () => {
@@ -124,7 +123,7 @@ export const ListItem = ({
   const Fav = () => {
     return (
       <button onClick={toggleFavorite} className="flex items-center">
-        {isFavorite || activeF == "favorite" ? (
+        {isFavorite ? (
           <FaHeart className="text-[#CE1300] w-5 h-5" />
         ) : (
           <FaRegHeart className="text-[#CE1300] w-5 h-5" />

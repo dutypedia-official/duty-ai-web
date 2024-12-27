@@ -47,7 +47,6 @@ export const StockList = ({
   setError,
 }: any) => {
   const {
-    activeF,
     setRefreashFav,
     refreashFav,
     refreash,

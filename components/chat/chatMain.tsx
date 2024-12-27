@@ -34,6 +34,7 @@ import { fetchEventSource } from "@microsoft/fetch-event-source";
 import { useRouter } from "next/navigation";
 import useUi from "@/lib/hooks/useUi";
 import Image from "next/image";
+import { MdOutlinePostAdd } from "react-icons/md";
 
 export default function ChatMain({
   mini = false,
@@ -435,9 +436,17 @@ export default function ChatMain({
                     "bg-white dark:bg-[#2C2F33] border-0"
                 )}>
                 <div className="flex flex-1 items-end gap-1.5 md:gap-2">
-                  {isSubmiting && (
-                    <Loader2 className="w-10 h-10 p-2.5 text-muted-foreground animate-spin" />
-                  )}
+                  <Button
+                    className={cn(
+                      "rounded-full w-10 h-10 p-0 flex-shrink-0 text-white bg-transparent hover:bg-transparent hover:text-white transition-all duration-300",
+                      template === "scanner" && "bg-transparent text-[#00D2FF]"
+                    )}
+                    variant="ghost"
+                    type="button"
+                    onClick={newChat}
+                    disabled={isSubmiting}>
+                    <MdOutlinePostAdd className="w-6 h-6" />
+                  </Button>
 
                   <Textarea
                     ref={inputRef}

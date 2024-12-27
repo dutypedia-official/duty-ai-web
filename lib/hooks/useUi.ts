@@ -12,8 +12,6 @@ interface Store {
   setSelectedStock: (selectedStock: any) => void;
   activeTab: any;
   setActiveTab: (activeTab: any) => void;
-  activeF: string;
-  setActiveF: (activeF: any) => void;
   selectedAlarmShit: any;
   setSelectedAlarmShit: (selectedAlarmShit: any) => void;
   openAuthModal: boolean;
@@ -40,8 +38,6 @@ const useUi = create<Store>((set, get) => ({
   setSelectedStock: (selectedStock: any) => set({ selectedStock }),
   activeTab: "index",
   setActiveTab: (activeTab: string) => set({ activeTab }),
-  activeF: "",
-  setActiveF: (activeF: string) => set({ activeF }),
   selectedAlarmShit: null,
   setSelectedAlarmShit: (selectedAlarmShit: any) => set({ selectedAlarmShit }),
   openAuthModal: false,

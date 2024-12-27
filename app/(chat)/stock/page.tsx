@@ -23,7 +23,6 @@ import { toast } from "@/components/ui/use-toast";
 
 export default function page() {
   const {
-    setActiveF,
     refreash,
     setRefreash,
     screenRefresh,
@@ -120,8 +119,6 @@ export default function page() {
     };
   }, []);
 
-  const isLargerScreen = useMediaQuery("(min-width: 1536px)");
-
   return (
     <div className="w-full bg-card-foreground dark:bg-[#1E1E1E]">
       <div className="sticky top-0 h-16 z-20 px-4 bg-[#fff] dark:bg-card-foreground backdrop-blur-md w-full lg:shadow-sm flex items-center">
@@ -145,7 +142,6 @@ export default function page() {
                 activeFilter={activeFilter}
                 setActiveFilter={(data: string) => {
                   setActiveFilter(data);
-                  setActiveF(data);
                 }}
               />
               <div
